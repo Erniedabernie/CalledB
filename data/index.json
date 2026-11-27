@@ -1,0 +1,178 @@
+{
+ "format": 1,
+ "updated": "2026-11-27",
+ "hospitals": [
+  {
+   "id": "ahnh",
+   "abbr": "AHNH",
+   "name": "Alice Ho Miu Ling Nethersole Hospital",
+   "cluster": "New Territories East"
+  },
+  {
+   "id": "cmc",
+   "abbr": "CMC",
+   "name": "Caritas Medical Centre",
+   "cluster": "Kowloon West"
+  },
+  {
+   "id": "gh",
+   "abbr": "GH",
+   "name": "Grantham Hospital",
+   "cluster": "Hong Kong Island"
+  },
+  {
+   "id": "hkeh",
+   "abbr": "HKEH",
+   "name": "Hong Kong Eye Hospital",
+   "cluster": "Kowloon Central"
+  },
+  {
+   "id": "kth",
+   "abbr": "KTH",
+   "name": "Kai Tak Hospital",
+   "cluster": "Kowloon Central"
+  },
+  {
+   "id": "kwh",
+   "abbr": "KWH",
+   "name": "Kwong Wah Hospital",
+   "cluster": "Kowloon Central"
+  },
+  {
+   "id": "ndh",
+   "abbr": "NDH",
+   "name": "North District Hospital",
+   "cluster": "New Territories East"
+  },
+  {
+   "id": "pyneh",
+   "abbr": "PYNEH",
+   "name": "Pamela Youde Nethersole Eastern Hospital",
+   "cluster": "Hong Kong Island"
+  },
+  {
+   "id": "pwh",
+   "abbr": "PWH",
+   "name": "Prince of Wales Hospital",
+   "cluster": "New Territories East"
+  },
+  {
+   "id": "pmh",
+   "abbr": "PMH",
+   "name": "Princess Margaret Hospital",
+   "cluster": "Kowloon West"
+  },
+  {
+   "id": "qmh",
+   "abbr": "QMH",
+   "name": "Queen Mary Hospital",
+   "cluster": "Hong Kong Island"
+  },
+  {
+   "id": "rh",
+   "abbr": "RH",
+   "name": "Ruttonjee Hospital",
+   "cluster": "Hong Kong Island"
+  },
+  {
+   "id": "tkoh",
+   "abbr": "TKOH",
+   "name": "Tseung Kwan O Hospital",
+   "cluster": "Kowloon East"
+  },
+  {
+   "id": "tmh",
+   "abbr": "TMH",
+   "name": "Tuen Mun Hospital",
+   "cluster": "New Territories West"
+  },
+  {
+   "id": "twh",
+   "abbr": "TWH",
+   "name": "Tung Wah Hospital",
+   "cluster": "Hong Kong Island"
+  },
+  {
+   "id": "ych",
+   "abbr": "YCH",
+   "name": "Yan Chai Hospital",
+   "cluster": "Kowloon West"
+  }
+ ],
+ "departments": [
+  {
+   "id": "medical",
+   "name": "Medical"
+  },
+  {
+   "id": "surgery",
+   "name": "Surgery"
+  },
+  {
+   "id": "radiology",
+   "name": "Radiology"
+  },
+  {
+   "id": "ophthalmology",
+   "name": "Ophthalmology"
+  }
+ ],
+ "holidays": {
+  "2026-01-01": "The first day of January",
+  "2026-02-17": "Lunar New Year's Day",
+  "2026-02-18": "Second day of Lunar New Year",
+  "2026-02-19": "Third day of Lunar New Year",
+  "2026-04-03": "Good Friday",
+  "2026-04-04": "Day after Good Friday",
+  "2026-04-06": "Day after Ching Ming Festival",
+  "2026-04-07": "Day after Easter Monday",
+  "2026-05-01": "Labour Day",
+  "2026-05-25": "Day after the Birthday of the Buddha",
+  "2026-06-19": "Tuen Ng Festival",
+  "2026-07-01": "HKSAR Establishment Day",
+  "2026-09-26": "Day after Mid-Autumn Festival",
+  "2026-10-01": "National Day",
+  "2026-10-19": "Day after Chung Yeung Festival",
+  "2026-12-25": "Christmas Day",
+  "2026-12-26": "First weekday after Christmas",
+  "2027-01-01": "The first day of January",
+  "2027-02-06": "Lunar New Year's Day",
+  "2027-02-08": "Third day of Lunar New Year",
+  "2027-02-09": "Fourth day of Lunar New Year",
+  "2027-03-26": "Good Friday",
+  "2027-03-27": "Day after Good Friday",
+  "2027-03-29": "Easter Monday",
+  "2027-04-05": "Ching Ming Festival",
+  "2027-05-01": "Labour Day",
+  "2027-05-13": "The Birthday of the Buddha",
+  "2027-06-09": "Tuen Ng Festival",
+  "2027-07-01": "HKSAR Establishment Day",
+  "2027-09-16": "Day after Mid-Autumn Festival",
+  "2027-10-01": "National Day",
+  "2027-10-08": "Chung Yeung Festival",
+  "2027-12-25": "Christmas Day",
+  "2027-12-27": "First weekday after Christmas"
+ },
+ "lists": {
+  "ych/surgery": {
+   "months": {
+    "2026-11": {
+     "file": "data/ych/surgery/2026-11.json",
+     "rev": "02/11/2026",
+     "added": "2026-11-27"
+    }
+   },
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "Aofs5Wqs8yf1zn7G7iWObw==",
+    "kid": "fcef7307",
+    "check": {
+     "iv": "nWxrkyMVTpjOLba4",
+     "ct": "EalQ3GXmmBDYptKmvmOsTrcc0SPzwO8="
+    }
+   },
+   "changeover": "08:00"
+  }
+ }
+}

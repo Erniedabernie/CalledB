@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>CalledB — EDB</title>
+<meta name="eds-version" content="2.4.0">
+<meta name="description" content="Who is on call, by department.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#050a0e" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#edf3ff" media="(prefers-color-scheme: light)">
+<meta name="apple-mobile-web-app-title" content="CalledB">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cmVjdCB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgcng9Ijk2IiBmaWxsPSIjMDAzMzY2Ii8+PHN2ZyB4PSIxMTQiIHk9Ijg2IiB3aWR0aD0iMjg0IiBoZWlnaHQ9IjM0MCIgdmlld0JveD0iMjAgMzUgMTMyIDE1OCIgZmlsbD0iI2VkZjNmZiI+PGRlZnM+PG1hc2sgaWQ9ImVkYnN0ZW0iIG1hc2tVbml0cz0idXNlclNwYWNlT25Vc2UiIHg9Ii0yMCIgeT0iLTIwIiB3aWR0aD0iNzAwIiBoZWlnaHQ9IjI2MCI+PHJlY3QgeD0iLTIwIiB5PSItMjAiIHdpZHRoPSI3MDAiIGhlaWdodD0iMjYwIiBmaWxsPSIjZmZmIj48L3JlY3Q+PHJlY3QgeD0iLTEwIiB5PSIxOCIgd2lkdGg9IjcyIiBoZWlnaHQ9IjE5NiIgZmlsbD0iIzAwMCI+PC9yZWN0PjwvbWFzaz48L2RlZnM+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCwwKSI+PGcgbWFzaz0idXJsKCNlZGJzdGVtKSI+PHBhdGggdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCwxOTApIHNjYWxlKDAuMiwtMC4yKSIgZD0iTTcyNiAyMTRRNzM1IDIwOSA3MzUgMjAzUTczNSAxOTkgNzMyIDE5M0w2MzggLTVRNjM0IC0xNCA2MjYgLTE0UTYyMSAtMTQgNjE3IC0xMEw2MTIgLTVRNjA3IDAgNTkyIDBMNDUgMFEzMCAwIDMwIDE1TDMwIDQ1UTMwIDYwIDQ1IDYwTDQ3IDYwUTExOSA2MCAxMTkgMTU1TDExOSA1OTRRMTE5IDY4OSA0NiA2ODlMNDUgNjg5UTMwIDY4OSAzMCA3MDRMMzAgNzM0UTMwIDc1MCA0NSA3NTBMNTQ2IDc1MFE1NTkgNzUwIDU2NSA3NTVMNTcxIDc2MFE1NzQgNzYzIDU3OSA3NjNRNTg3IDc2MyA1OTIgNzU1TDY3MSA2MTlRNjc0IDYxNSA2NzQgNjEwUTY3NCA2MDMgNjY2IDU5OEw2MjYgNTc2UTYxOSA1NzIgNjE1IDU3MlE2MDggNTcyIDYwMyA1ODFMNjAwIDU4NlE1NjkgNjM4IDUzMy41IDY1OC41UTQ5OCA2NzkgNDQwIDY3OUwyNzggNjc5TDI3OCA0NDRMMzY2IDQ0NFE0MTEgNDQ0IDQzNiA0NjFRNDYxIDQ3OCA0NjEgNTExTDQ2MSA1MThRNDYxIDUzMyA0NzYgNTMzTDUwNiA1MzNRNTIxIDUzMyA1MjEgNTE4TDUyMSAyOTFRNTIxIDI3NiA1MDYgMjc2TDQ3NiAyNzZRNDYxIDI3NiA0NjEgMjkxTDQ2MSAyOTdRNDYxIDMzMSA0MzYuNSAzNDcuNVE0MTIgMzY0IDM2NiAzNjRMMjc4IDM2NEwyNzggMTY2UTI3OCA3MSAzNDcgNzFMNDEyIDcxUTQ4NiA3MSA1MzIuNSA4NVE1NzkgOTkgNjEwLjUgMTMyUTY0MiAxNjUgNjcwIDIyMUw2NzMgMjI3UTY3OCAyMzUgNjg2IDIzNVE2OTEgMjM1IDY5NCAyMzNMNzI2IDIxNFoiPjwvcGF0aD48L2c+PHBhdGggdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjAsMzgpIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik00NiAyIEw0NiAxNTIgTDEwIDE1MiBMMTAgMTQ5IEMxMiAxNDcgMTQgMTQ0IDE0IDEzOCBMMTQgNzQgQzE0IDcwIDEyIDY4IDEwIDYyIEM2IDUxIDMgNDUgMyAzOCBDMyAyMCAxMiAxIDQ2IDIgWiBNMjMgMjIgYTQgNCAwIDAgMSA4IDAgdjIwIGgtOCBaIE0yMC41IDQyIGgxMyB2NyBhMyAzIDAgMCAxIC0zIDMgaC03IGEzIDMgMCAwIDEgLTMgLTMgWiBNMjguNyA3OCBoMi42IHY2MCBoLTIuNiBaIj48L3BhdGg+PC9nPjwvc3ZnPjwvc3ZnPg==">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fira+Mono:wght@400;500&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./edb-brand.css">
+<style>
+/* CalledB — app layer. Tokens and components come from edb-brand.css. */
+html,body{height:100%}
+body{overflow:hidden;overscroll-behavior:none}
+[hidden]{display:none!important}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.app{height:100vh;height:100dvh;max-width:560px;margin:0 auto;display:flex;flex-direction:column}
+.view{flex:1;min-height:0;display:flex;flex-direction:column}
+.cap{font-size:11px;line-height:1.3;color:var(--muted-text);letter-spacing:.02em}
+.plain{background:none;border:0;padding:0;margin:0;color:inherit;font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.plain:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+
+/* title bar and tabs */
+.top{flex:none;display:flex;align-items:flex-end;justify-content:space-between;gap:8px;padding:calc(10px + var(--safe-top)) max(12px,var(--safe-right)) 8px max(16px,var(--safe-left))}
+.top-l{display:flex;flex-direction:column;gap:5px;min-width:0}
+.dept{display:inline-flex;align-items:center;gap:4px;align-self:flex-start;min-height:24px;color:var(--muted-text)}
+.top h1{font-size:23px;font-weight:600;letter-spacing:-.01em;line-height:1.1;white-space:nowrap}
+.top-r{display:flex;align-items:center;gap:4px;margin-bottom:-4px}
+.nb{width:36px;height:44px;display:inline-flex;align-items:center;justify-content:center;color:var(--muted-text)}
+.nb:disabled{opacity:.35;cursor:default}
+.tabs{flex:none;padding:0 12px}
+.tabs .tab{padding:10px 12px;min-height:44px}
+.pane{flex:1;min-height:0}
+.foot-cap{position:fixed;right:max(16px,var(--safe-right));bottom:calc(12px + var(--safe-bottom));height:18px;line-height:18px;max-width:calc(100% - 96px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right;pointer-events:none;z-index:var(--z-sig)}
+
+/* month: the whole month and the card on one screen */
+.month{display:flex;flex-direction:column;gap:8px;overflow:hidden;padding:10px max(6px,var(--safe-right)) calc(38px + var(--safe-bottom)) max(6px,var(--safe-left))}
+.month .cal{flex:1;min-height:0;grid-template-rows:auto repeat(var(--rows,5),minmax(0,1fr))}
+.month.roomy{overflow:auto}
+.month.roomy .cal{flex:none;grid-template-rows:auto repeat(var(--rows,5),64px)}
+.cal .wd{padding:0 0 4px;line-height:14px}
+.cal .d{min-height:0;justify-content:flex-start;gap:0;padding:3px 1px;overflow:hidden;width:100%;font:inherit;color:inherit;text-align:left;cursor:pointer;appearance:none;-webkit-appearance:none;-webkit-tap-highlight-color:transparent}
+.cal .d.off{cursor:default}
+.cal .d.we{background:var(--surface-high)}
+.cal .d.sel{border-color:var(--success-text);box-shadow:inset 0 0 0 1px var(--success-text)}
+.cal .d:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+.d .dtop{flex:none;display:flex;align-items:center;justify-content:space-between;height:14px;padding:0 3px}
+.cal .dn{color:var(--muted-text);line-height:14px}
+.cal .d.today .dn{color:var(--text);font-weight:500}
+.d .phm{font-size:11px;font-weight:600;line-height:14px}
+.cal .d.ph .dn,.d .phm{color:var(--cat-text)}
+.box{flex:1;min-height:0;min-width:0;width:100%;display:flex;flex-direction:column;justify-content:space-evenly}
+.nm{display:block;min-height:0;height:15px;line-height:15px;padding:0 2px;overflow:hidden;white-space:nowrap;font-size:11px;letter-spacing:-.1px;color:var(--text)}
+.nm .in,.tn .in{display:inline-block;transform-origin:0 50%;white-space:nowrap}
+.nm i{font-style:normal;color:var(--muted-text)}
+.nm u{text-decoration:none;color:var(--muted-text);margin-left:1px}
+.nm.cut .in,.tn.cut .in{display:block;overflow:hidden;text-overflow:ellipsis}
+.nm .in.cat{padding:0 5px;border:0;font-size:11px;font-weight:600;line-height:15px;letter-spacing:0}
+.nm .in.cat i{color:inherit}
+.month-empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;color:var(--muted-text);padding:24px}
+.month-empty p{margin:0;max-width:34ch}
+
+/* the card under the month */
+.tc{flex:none;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:10px 12px}
+.th{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:8px}
+.th .cap{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.th .hol{color:var(--cat-text)}
+.tg{display:grid;gap:6px;min-height:55px}
+.tg>div{display:flex;flex-direction:column;gap:3px;min-width:0}
+.tn{display:block;height:17px;line-height:17px;overflow:hidden;white-space:nowrap;font-size:14px;font-weight:600}
+.tn .in.cat{padding:0 7px;border:0;font-size:13px;line-height:17px}
+.month.tight .tc{padding:6px 10px}
+.month.tight .th{margin-bottom:4px}
+.month.tight .tg{min-height:0}
+
+/* list */
+.list{overflow:auto;-webkit-overflow-scrolling:touch;padding:0 max(12px,var(--safe-right)) calc(44px + var(--safe-bottom)) max(12px,var(--safe-left))}
+.tb{margin-top:12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg)}
+.r{display:grid;grid-template-columns:50px repeat(var(--cols,3),minmax(0,1fr));align-items:center;min-height:44px;padding:6px 10px;border-top:1px solid var(--border)}
+.r.h{position:sticky;top:0;z-index:1;min-height:28px;padding-top:0;padding-bottom:0;border-top:0;border-bottom:1px solid var(--border);margin-bottom:-1px;background:var(--surface);color:var(--muted-text);border-radius:var(--radius-lg) var(--radius-lg) 0 0}
+.r.x{grid-template-rows:auto auto;row-gap:5px;align-content:center;min-height:62px}
+.r.x .dc{grid-row:1 / span 2}
+.r.we{background:var(--surface-high)}
+.r.td{box-shadow:inset 0 0 0 1px var(--accent-text)}
+.r:last-child{border-radius:0 0 var(--radius-lg) var(--radius-lg)}
+.dc{display:flex;flex-direction:column;gap:3px}
+.dc .num{font-size:15px;line-height:1}
+.r.ph .dc .cap,.r.ph .dc .num{color:var(--cat-text)}
+.n{display:flex;flex-direction:column;align-items:flex-start;min-width:0;font-size:14px;line-height:1.2}
+.n.lead{font-weight:600}
+.n.two{font-size:13px;line-height:1.25}
+.n>span{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.n .cat{padding:3px 9px;border:0;font-size:13px}
+.sub{grid-column:2 / -1;font-size:11px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sub em{font-style:normal;color:var(--muted-text);margin-right:3px}
+.sub s{text-decoration:none;color:var(--muted-text);margin:0 5px}
+
+/* department */
+#v-dept{padding-top:var(--safe-top)}
+.dp-head{flex:none;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:20px max(16px,var(--safe-right)) 12px max(16px,var(--safe-left))}
+.dp-head h1{font-size:30px;font-weight:700;letter-spacing:-.02em;line-height:1.1}
+.dp-search{flex:none;padding:0 16px 12px}
+.dp-list{flex:1;min-height:0;overflow:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:8px;padding:0 16px 16px}
+.gl{font-size:12px;font-weight:600;color:var(--muted-text);margin-top:4px}
+details.hs{flex:none}
+details.hs summary{justify-content:space-between;gap:12px;min-height:48px;padding:10px 12px 10px 16px}
+details.hs summary:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+details.hs .hn{flex:1;min-width:0}
+details.hs summary .tag,details.hs summary .icon{flex:none;color:var(--muted-text)}
+details.hs summary .icon{transition:transform var(--duration-base) var(--ease-standard)}
+details.hs[open] summary .icon{transform:rotate(180deg)}
+details.hs .acc-body{display:flex;flex-direction:column;gap:6px;padding:8px;color:var(--text)}
+.dr{display:flex;align-items:center;gap:6px}
+.dr .opt{flex:1;min-width:0}
+.dr .opt .on{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dr .opt .cap{flex:none}
+.dr .pin{flex:none;width:44px;height:44px;border-color:transparent;color:var(--muted-text)}
+.dr .pin[aria-pressed="true"]{color:var(--accent-text)}
+.dp-none{color:var(--muted-text);text-align:center;padding:32px 16px}
+.dp-foot{flex:none;border-top:1px solid var(--border);padding:12px max(16px,var(--safe-right)) calc(42px + var(--safe-bottom)) max(16px,var(--safe-left))}
+.dp-foot .btn{width:100%;justify-content:center;min-height:44px}
+
+/* sheets: --kb lifts a sheet above the on-screen keyboard */
+.sheet{display:flex;flex-direction:column;gap:16px;bottom:var(--kb,0px)}
+.sheet .grab{flex:none;margin-bottom:-4px}
+.sheet-h{margin-bottom:0}
+.sheet p{margin:0;color:var(--muted-text)}
+.sheet form{display:flex;flex-direction:column;gap:16px}
+.sheet .btn-primary{justify-content:center;min-height:44px}
+.field .lab{font-size:12px;color:var(--muted-text)}
+.hint{display:flex;align-items:center;gap:6px;min-height:18px;font-size:12px;color:var(--muted-text)}
+.hint.ok{color:var(--success-text)}
+.set-row{display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid var(--border);padding-top:12px}
+.set-row>div{display:flex;flex-direction:column;gap:2px;min-width:0}
+.set-row .btn{flex:none;min-height:44px}
+.about{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:11px;color:var(--muted-text)}
+.about .mark{display:inline-flex;height:14px;color:var(--text);opacity:.72}
+.about .mark svg{height:14px;width:auto}
+.page-state{flex:1;min-height:0}
+@media (prefers-reduced-motion: reduce){details.hs summary .icon{transition:none}}
+</style>
+<script>
+/* Theme before first paint. try/catch: storage can be unavailable. */
+(function(){try{var t=localStorage.getItem('eds-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);else if(t==='system')document.documentElement.removeAttribute('data-theme')}catch(e){}})();
+</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><g id="edb-mark" fill="currentColor">
+<defs><mask id="edb-stem" maskUnits="userSpaceOnUse" x="-20" y="-20" width="700" height="260"><rect x="-20" y="-20" width="700" height="260" fill="#fff"></rect><rect x="-10" y="18" width="72" height="196" fill="#000"></rect></mask></defs>
+<g transform="translate(0,0)"><g mask="url(#edb-stem)"><path transform="translate(0,190) scale(0.2,-0.2)" d="M726 214Q735 209 735 203Q735 199 732 193L638 -5Q634 -14 626 -14Q621 -14 617 -10L612 -5Q607 0 592 0L45 0Q30 0 30 15L30 45Q30 60 45 60L47 60Q119 60 119 155L119 594Q119 689 46 689L45 689Q30 689 30 704L30 734Q30 750 45 750L546 750Q559 750 565 755L571 760Q574 763 579 763Q587 763 592 755L671 619Q674 615 674 610Q674 603 666 598L626 576Q619 572 615 572Q608 572 603 581L600 586Q569 638 533.5 658.5Q498 679 440 679L278 679L278 444L366 444Q411 444 436 461Q461 478 461 511L461 518Q461 533 476 533L506 533Q521 533 521 518L521 291Q521 276 506 276L476 276Q461 276 461 291L461 297Q461 331 436.5 347.5Q412 364 366 364L278 364L278 166Q278 71 347 71L412 71Q486 71 532.5 85Q579 99 610.5 132Q642 165 670 221L673 227Q678 235 686 235Q691 235 694 233L726 214Z"></path></g><path transform="translate(20,38)" fill-rule="evenodd" d="M46 2 L46 152 L10 152 L10 149 C12 147 14 144 14 138 L14 74 C14 70 12 68 10 62 C6 51 3 45 3 38 C3 20 12 1 46 2 Z M23 22 a4 4 0 0 1 8 0 v20 h-8 Z M20.5 42 h13 v7 a3 3 0 0 1 -3 3 h-7 a3 3 0 0 1 -3 -3 Z M28.7 78 h2.6 v60 h-2.6 Z"></path></g><g transform="translate(155,0)"><path transform="translate(0,190) scale(0.2,-0.2)" d="M353 750Q473 750 563.5 705Q654 660 704.5 576Q755 492 755 376Q755 257 709 172.5Q663 88 579 44Q495 0 381 0L45 0Q30 0 30 15L30 45Q30 60 45 60L52 60Q85 60 102 85Q119 110 119 155L119 595Q119 690 46 690L45 690Q30 690 30 705L30 735Q30 750 45 750L353 750ZM278 150Q278 111 291 88Q304 65 352 65Q471 65 537 139Q603 213 603 376Q603 521 535 605.5Q467 690 325 690L278 690L278 150Z"></path></g><g transform="translate(311,0)"><path transform="translate(0,190) scale(0.2,-0.2)" d="M367 750Q437 750 492.5 726Q548 702 581 661Q614 620 614 569Q614 526 588 490Q562 454 513 429Q591 407 635 351.5Q679 296 679 221Q679 156 645 106Q611 56 551 28Q491 0 412 0L45 0Q30 0 30 15L30 45Q30 60 45 60Q119 60 119 155L119 595Q119 690 45 690Q30 690 30 705L30 735Q30 750 45 750L367 750ZM335 448Q397 448 430.5 480Q464 512 464 569Q464 626 431 658Q398 690 339 690L278 690L278 448L335 448ZM369 60Q445 60 487 102.5Q529 145 529 221Q529 377 336 377L278 377L278 155Q278 109 295 84.5Q312 60 344 60L369 60Z"></path></g>
+</g></defs></svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="ph-bookmark-simple" viewBox="0 0 256 256"><path d="M184,32H72A16,16,0,0,0,56,48V224a8,8,0,0,0,12.24,6.78L128,193.43l59.77,37.35A8,8,0,0,0,200,224V48A16,16,0,0,0,184,32Zm0,177.57-51.77-32.35a8,8,0,0,0-8.48,0L72,209.57V48H184Z"/></symbol><symbol id="ph-caret-down" viewBox="0 0 256 256"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></symbol><symbol id="ph-caret-left" viewBox="0 0 256 256"><path d="M165.66,202.34a8,8,0,0,1-11.32,11.32l-80-80a8,8,0,0,1,0-11.32l80-80a8,8,0,0,1,11.32,11.32L91.31,128Z"/></symbol><symbol id="ph-caret-right" viewBox="0 0 256 256"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></symbol><symbol id="ph-check" viewBox="0 0 256 256"><path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z"/></symbol><symbol id="ph-check-circle" viewBox="0 0 256 256"><path d="M173.66,98.34a8,8,0,0,1,0,11.32l-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35A8,8,0,0,1,173.66,98.34ZM232,128A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"/></symbol><symbol id="ph-gear" viewBox="0 0 256 256"><path d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Zm88-29.84q.06-2.16,0-4.32l14.92-18.64a8,8,0,0,0,1.48-7.06,107.21,107.21,0,0,0-10.88-26.25,8,8,0,0,0-6-3.93l-23.72-2.64q-1.48-1.56-3-3L186,40.54a8,8,0,0,0-3.94-6,107.71,107.71,0,0,0-26.25-10.87,8,8,0,0,0-7.06,1.49L130.16,40Q128,40,125.84,40L107.2,25.11a8,8,0,0,0-7.06-1.48A107.6,107.6,0,0,0,73.89,34.51a8,8,0,0,0-3.93,6L67.32,64.27q-1.56,1.49-3,3L40.54,70a8,8,0,0,0-6,3.94,107.71,107.71,0,0,0-10.87,26.25,8,8,0,0,0,1.49,7.06L40,125.84Q40,128,40,130.16L25.11,148.8a8,8,0,0,0-1.48,7.06,107.21,107.21,0,0,0,10.88,26.25,8,8,0,0,0,6,3.93l23.72,2.64q1.49,1.56,3,3L70,215.46a8,8,0,0,0,3.94,6,107.71,107.71,0,0,0,26.25,10.87,8,8,0,0,0,7.06-1.49L125.84,216q2.16.06,4.32,0l18.64,14.92a8,8,0,0,0,7.06,1.48,107.21,107.21,0,0,0,26.25-10.88,8,8,0,0,0,3.93-6l2.64-23.72q1.56-1.48,3-3L215.46,186a8,8,0,0,0,6-3.94,107.71,107.71,0,0,0,10.87-26.25,8,8,0,0,0-1.49-7.06Zm-16.1-6.5a73.93,73.93,0,0,1,0,8.68,8,8,0,0,0,1.74,5.48l14.19,17.73a91.57,91.57,0,0,1-6.23,15L187,173.11a8,8,0,0,0-5.1,2.64,74.11,74.11,0,0,1-6.14,6.14,8,8,0,0,0-2.64,5.1l-2.51,22.58a91.32,91.32,0,0,1-15,6.23l-17.74-14.19a8,8,0,0,0-5-1.75h-.48a73.93,73.93,0,0,1-8.68,0,8,8,0,0,0-5.48,1.74L100.45,215.8a91.57,91.57,0,0,1-15-6.23L82.89,187a8,8,0,0,0-2.64-5.1,74.11,74.11,0,0,1-6.14-6.14,8,8,0,0,0-5.1-2.64L46.43,170.6a91.32,91.32,0,0,1-6.23-15l14.19-17.74a8,8,0,0,0,1.74-5.48,73.93,73.93,0,0,1,0-8.68,8,8,0,0,0-1.74-5.48L40.2,100.45a91.57,91.57,0,0,1,6.23-15L69,82.89a8,8,0,0,0,5.1-2.64,74.11,74.11,0,0,1,6.14-6.14A8,8,0,0,0,82.89,69L85.4,46.43a91.32,91.32,0,0,1,15-6.23l17.74,14.19a8,8,0,0,0,5.48,1.74,73.93,73.93,0,0,1,8.68,0,8,8,0,0,0,5.48-1.74L155.55,40.2a91.57,91.57,0,0,1,15,6.23L173.11,69a8,8,0,0,0,2.64,5.1,74.11,74.11,0,0,1,6.14,6.14,8,8,0,0,0,5.1,2.64l22.58,2.51a91.32,91.32,0,0,1,6.23,15l-14.19,17.74A8,8,0,0,0,199.87,123.66Z"/></symbol><symbol id="ph-x" viewBox="0 0 256 256"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"/></symbol></svg>
+
+<div class="app" id="app">
+
+  <section class="view" id="v-dept" aria-labelledby="dp-h" hidden>
+    <header class="dp-head">
+      <h1 id="dp-h">Department</h1>
+      <button class="icon-btn" id="dp-close" aria-label="Close" hidden><svg class="icon" aria-hidden="true"><use href="#ph-x"/></svg></button>
+    </header>
+    <div class="dp-search field">
+      <label class="vh" for="dp-q">Search hospitals and departments</label>
+      <input class="input" id="dp-q" type="search" placeholder="Hospital or department" autocomplete="off" autocapitalize="none" spellcheck="false">
+    </div>
+    <div class="dp-list" id="dp-list"></div>
+    <div class="dp-foot"><button class="btn btn-primary" id="dp-open" disabled>Open call list</button></div>
+  </section>
+
+  <section class="view" id="v-main" hidden>
+    <header class="top">
+      <div class="top-l">
+        <button class="plain dept" id="dept-btn" aria-label="Change department"><span class="tag" id="dept-tag"></span><svg class="icon sm" aria-hidden="true"><use href="#ph-caret-down"/></svg></button>
+        <h1 id="month-title"></h1>
+      </div>
+      <div class="top-r">
+        <button class="plain nb" id="prev" aria-label="Previous month"><svg class="icon" aria-hidden="true"><use href="#ph-caret-left"/></svg></button>
+        <button class="plain nb" id="next" aria-label="Next month"><svg class="icon" aria-hidden="true"><use href="#ph-caret-right"/></svg></button>
+        <button class="icon-btn" id="gear" aria-label="Settings" aria-haspopup="dialog"><svg class="icon" aria-hidden="true"><use href="#ph-gear"/></svg></button>
+      </div>
+    </header>
+    <nav class="tabs" role="tablist" aria-label="Views">
+      <button class="tab active" id="tab-month" role="tab" aria-selected="true" aria-controls="p-month">Month</button>
+      <button class="tab" id="tab-list" role="tab" aria-selected="false" aria-controls="p-list">List</button>
+    </nav>
+    <div class="pane month" id="p-month" role="tabpanel" aria-labelledby="tab-month">
+      <div class="cal" id="cal"></div>
+      <div class="month-empty" id="month-empty" hidden></div>
+      <div class="tc" id="card" aria-live="polite"></div>
+    </div>
+    <div class="pane list" id="p-list" role="tabpanel" aria-labelledby="tab-list" hidden><div class="tb" id="list"></div></div>
+    <div class="page-state" id="p-state" hidden></div>
+    <div class="cap foot-cap" id="foot-cap"></div>
+  </section>
+
+</div>
+
+<div class="scrim" id="scrim" hidden></div>
+
+<div class="sheet" id="sheet-pass" role="dialog" aria-modal="true" aria-labelledby="pass-h" hidden>
+  <div class="grab"></div>
+  <div class="sheet-h"><h2 id="pass-h">Passcode</h2><button class="icon-btn" data-close aria-label="Close"><svg class="icon" aria-hidden="true"><use href="#ph-x"/></svg></button></div>
+  <p id="pass-p"></p>
+  <form id="pass-form" novalidate>
+    <div class="field">
+      <label for="pc">Passcode</label>
+      <input class="input" id="pc" type="text" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="From your department">
+      <span class="error-msg" id="pc-err" role="alert" hidden></span>
+    </div>
+    <button class="btn btn-primary" id="pc-go" type="submit">Unlock</button>
+  </form>
+</div>
+
+<div class="sheet" id="sheet-set" role="dialog" aria-modal="true" aria-labelledby="set-h" hidden>
+  <div class="grab"></div>
+  <div class="sheet-h"><h2 id="set-h">Settings</h2><button class="icon-btn" data-close aria-label="Close"><svg class="icon" aria-hidden="true"><use href="#ph-x"/></svg></button></div>
+  <div class="field">
+    <label for="me">Your name, as the list prints it</label>
+    <input class="input" id="me" type="text" list="me-list" autocomplete="off" autocapitalize="words" autocorrect="off" spellcheck="false" placeholder="For example, Chan TM">
+    <datalist id="me-list"></datalist>
+    <span class="hint" id="me-msg"></span>
+  </div>
+  <div class="field">
+    <span class="lab" id="theme-lab">Theme</span>
+    <div class="segmented" role="group" aria-labelledby="theme-lab" style="align-self:flex-start"><button data-mode="system">System</button><button data-mode="light">Light</button><button data-mode="dark">Dark</button></div>
+  </div>
+  <div class="set-row"><div><span class="cap">Department</span><span id="set-dept"></span></div><button class="btn btn-ghost" id="set-change">Change</button></div>
+  <div class="set-row" id="set-list-row"><div><span class="cap">This list</span><span id="set-list"></span></div></div>
+  <div class="about"><span class="mark"><svg viewBox="20 35 434 158" aria-hidden="true"><use href="#edb-mark"/></svg></span><span class="num">v0.1.0</span><span>© Ernest Tung</span><span id="about-off"></span></div>
+</div>
+
+<div class="sig" aria-label="EDB"><svg viewBox="20 35 434 158" aria-hidden="true"><use href="#edb-mark"/></svg></div>
+
+<script>
+(function(){
+'use strict';
+var VERSION='0.1.0';
+var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+var WD3=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'], WD1=['S','M','T','W','T','F','S'];
+function $(id){return document.getElementById(id)}
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function pad(n){return (n<10?'0':'')+n}
+function iso(y,m,d){return y+'-'+pad(m)+'-'+pad(d)}
+function icon(n,c){return '<svg class="icon'+(c?' '+c:'')+'" aria-hidden="true"><use href="#ph-'+n+'"/></svg>'}
+var store={
+  get:function(k,d){try{var v=localStorage.getItem('calledb:'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},
+  set:function(k,v){try{localStorage.setItem('calledb:'+k,JSON.stringify(v))}catch(e){}}
+};
+
+var S={index:null,dept:store.get('dept',null),pins:store.get('pins',[]),tab:'month',ym:null,sel:null,months:{},key:null,pick:null,q:'',wasMain:false};
+
+/* ── dates ── */
+function ymOf(d){return d.slice(0,7)}
+function dmy(d){return d.slice(8)+'/'+d.slice(5,7)+'/'+d.slice(0,4)}
+function dowOf(d){return new Date(+d.slice(0,4),+d.slice(5,7)-1,+d.slice(8)).getDay()}
+function monthName(ym){return MONTHS[+ym.slice(5)-1]+' '+ym.slice(0,4)}
+function dateISO(dt){return iso(dt.getFullYear(),dt.getMonth()+1,dt.getDate())}
+function todayISO(){return dateISO(new Date())}
+function changeover(){var l=listInfo(S.dept),c=(l&&l.changeover)||'00:00';return +c.slice(0,2)*60+(+c.slice(3))}
+/* A call day starts at the department's changeover (08:00 at YCH), so 02:00 still belongs to yesterday's list. */
+function callDayISO(){return dateISO(new Date(Date.now()-changeover()*60000))}
+
+/* ── index ── */
+function listInfo(id){return S.index&&S.index.lists?S.index.lists[id]:null}
+function hosp(id){var h=id.split('/')[0];return S.index.hospitals.filter(function(x){return x.id===h})[0]}
+function depn(id){var d=id.split('/')[1];return S.index.departments.filter(function(x){return x.id===d})[0]}
+function known(id){return !!(id&&hosp(id)&&depn(id))}
+function shortLabel(id){return hosp(id).abbr+' · '+depn(id).name}
+function fullLabel(id){return hosp(id).name+' · '+depn(id).name}
+function latestMonth(id){var l=listInfo(id),k=l?Object.keys(l.months).sort():[];return k.length?k[k.length-1]:null}
+function reach(){var l=listInfo(S.dept),a=l?Object.keys(l.months):[],t=ymOf(todayISO());if(a.indexOf(t)<0)a.push(t);return a.sort()}
+function getJSON(u){return fetch(u,{cache:'no-cache'}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()})}
+
+/* ── lock ── */
+var te=new TextEncoder(),td=new TextDecoder();
+function b64d(s){var b=atob(s),u=new Uint8Array(b.length);for(var i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return u}
+function b64e(u){var s='';for(var i=0;i<u.length;i++)s+=String.fromCharCode(u[i]);return btoa(s)}
+function normPass(p){return p.trim().toLowerCase().replace(/\s+/g,' ')}
+function deriveRaw(pass,lock){
+  return crypto.subtle.importKey('raw',te.encode(normPass(pass)),'PBKDF2',false,['deriveBits']).then(function(km){
+    return crypto.subtle.deriveBits({name:'PBKDF2',hash:'SHA-256',salt:b64d(lock.salt),iterations:lock.iter},km,256)}).then(function(b){return new Uint8Array(b)})}
+function importKey(raw){return crypto.subtle.importKey('raw',raw,'AES-GCM',false,['decrypt'])}
+function unseal(key,box,aad){
+  return crypto.subtle.decrypt({name:'AES-GCM',iv:b64d(box.iv),additionalData:te.encode(aad)},key,b64d(box.ct)).then(function(pt){return td.decode(pt)})}
+function checkKey(id,key){return unseal(key,listInfo(id).lock.check,'calledb|'+id+'|check').then(function(t){return t==='calledb'},function(){return false})}
+function storedKey(id){
+  var l=listInfo(id),k=store.get('key:'+id,null);
+  if(!l||!l.lock||!k||k.kid!==l.lock.kid)return Promise.resolve(null);
+  return importKey(b64d(k.k)).then(function(key){return checkKey(id,key).then(function(ok){return ok?key:null})},function(){return null})}
+
+/* ── sheets ── */
+var openSheet=null,lastFocus=null,passDone=null;
+function showSheet(el,focusEl){
+  lastFocus=document.activeElement;openSheet=el;$('scrim').hidden=false;el.hidden=false;
+  requestAnimationFrame(function(){el.classList.add('open');if(focusEl)focusEl.focus()})}
+function hideSheet(){
+  var el=openSheet;if(!el)return;openSheet=null;el.classList.remove('open');$('scrim').hidden=true;
+  setTimeout(function(){if(openSheet!==el)el.hidden=true},360);
+  if(lastFocus&&lastFocus.focus)lastFocus.focus();
+  if(el.id==='sheet-pass'&&passDone){var f=passDone;passDone=null;f(null)}}
+function askPasscode(id){
+  return new Promise(function(res){
+    passDone=res;$('pass-p').textContent=fullLabel(id)+' is locked. Enter the passcode your department shared.';
+    $('pc').value='';$('pc').classList.remove('invalid');$('pc-err').hidden=true;$('pc-go').disabled=false;$('pc-go').textContent='Unlock';
+    $('pass-form').dataset.dept=id;showSheet($('sheet-pass'),$('pc'))})}
+function submitPass(ev){
+  ev.preventDefault();var id=$('pass-form').dataset.dept,l=listInfo(id),v=$('pc').value;if(!normPass(v))return;
+  $('pc-go').disabled=true;$('pc-go').textContent='Checking';
+  deriveRaw(v,l.lock).then(function(raw){return importKey(raw).then(function(key){return checkKey(id,key).then(function(ok){
+    if(!ok)throw new Error('wrong');store.set('key:'+id,{kid:l.lock.kid,k:b64e(raw)});var f=passDone;passDone=null;hideSheet();if(f)f(key)})})
+  }).catch(function(){
+    $('pc-go').disabled=false;$('pc-go').textContent='Unlock';$('pc').classList.add('invalid');
+    $('pc-err').textContent='That passcode did not open this list. Check it with your department and try again.';$('pc-err').hidden=false;$('pc').focus()})}
+
+/* ── department picker ── */
+function show(view){$('v-dept').hidden=view!=='dept';$('v-main').hidden=view!=='main'}
+function showDept(){
+  S.wasMain=!$('v-main').hidden;S.pick=known(S.dept)?S.dept:null;S.q='';S.prevQ='x';$('dp-q').value='';
+  $('dp-close').hidden=!(S.wasMain&&known(S.dept));renderDept();show('dept')}
+function listNote(id){var m=latestMonth(id);return m?MONTHS[+m.slice(5)-1].slice(0,3)+' '+m.slice(0,4):'No list yet'}
+function deptRow(id,label){
+  var pinned=S.pins.indexOf(id)>=0;
+  return '<div class="dr"><button class="opt" role="radio" aria-checked="'+(S.pick===id)+'" data-dept="'+id+'"><span class="box">'+icon('check')+'</span><span class="on">'+esc(label)+'</span><span class="cap">'+esc(listNote(id))+'</span></button>'+
+    '<button class="icon-btn pin" data-pin="'+id+'" aria-pressed="'+pinned+'" aria-label="'+(pinned?'Unpin ':'Pin ')+esc(fullLabel(id))+'">'+icon('bookmark-simple')+'</button></div>'}
+function renderDept(){
+  var q=S.q.trim().toLowerCase(),h='',shown=0,keep={};
+  if(!S.prevQ)document.querySelectorAll('#dp-list details.hs').forEach(function(d){keep[d.dataset.h]=d.open});
+  S.prevQ=q;
+  var pins=S.pins.filter(known);
+  if(pins.length&&!q){h+='<span class="gl">Pinned</span><div role="radiogroup" aria-label="Pinned departments" style="display:flex;flex-direction:column;gap:6px">'+
+    pins.map(function(id){return deptRow(id,depn(id).name+' · '+hosp(id).name)}).join('')+'</div><span class="gl">All hospitals</span>'}
+  S.index.hospitals.slice().sort(function(a,b){return a.name.localeCompare(b.name)}).forEach(function(H){
+    var hm=!q||(H.name+' '+H.abbr).toLowerCase().indexOf(q)>=0;
+    var deps=S.index.departments.filter(function(D){return hm||D.name.toLowerCase().indexOf(q)>=0});
+    if(!deps.length)return;shown++;
+    var open=q?true:(H.id in keep?keep[H.id]:!!(S.pick&&S.pick.split('/')[0]===H.id));
+    h+='<details class="acc hs" data-h="'+H.id+'"'+(open?' open':'')+'><summary><span class="hn">'+esc(H.name)+'</span><span class="tag">'+esc(H.abbr)+'</span>'+icon('caret-down','sm')+'</summary>'+
+       '<div class="acc-body" role="radiogroup" aria-label="Departments, '+esc(H.name)+'">'+deps.map(function(D){return deptRow(H.id+'/'+D.id,D.name)}).join('')+'</div></details>'});
+  if(!shown)h='<p class="dp-none">Nothing matches “'+esc(S.q.trim())+'”. Try the hospital\'s initials or name.</p>';
+  $('dp-list').innerHTML=h;$('dp-open').disabled=!S.pick}
+function onDeptClick(ev){
+  var p=ev.target.closest('[data-pin]');
+  if(p){var id=p.dataset.pin,i=S.pins.indexOf(id);if(i>=0)S.pins.splice(i,1);else S.pins.push(id);store.set('pins',S.pins);renderDept();return}
+  var o=ev.target.closest('[data-dept]');if(o){S.pick=o.dataset.dept;renderDept()}}
+
+/* ── entering a department ── */
+function enter(id){
+  var l=listInfo(id);
+  var openIt=function(key){S.dept=id;store.set('dept',id);S.key=key;S.months={};S.tab='month';
+    var cd=callDayISO(),r=reach();S.ym=r.indexOf(ymOf(cd))>=0?ymOf(cd):ymOf(todayISO());S.sel=null;show('main');return loadShow()};
+  if(!l||!Object.keys(l.months).length)return openIt(null);        /* no list yet: nothing to unlock */
+  return storedKey(id).then(function(key){return key||askPasscode(id)}).then(function(key){if(key)return openIt(key)})}
+function loadMonth(ym){
+  var l=listInfo(S.dept),info=l&&l.months[ym];
+  if(!info)return Promise.resolve(null);
+  if(S.months[ym])return Promise.resolve(S.months[ym]);
+  return getJSON('./'+info.file).then(function(box){
+    return unseal(S.key,box,'calledb|'+S.dept+'|'+ym).then(JSON.parse)}).then(function(m){prep(m);S.months[ym]=m;return m})}
+function prep(m){
+  m.mains=m.tiers.filter(function(t){return t.role==='main'});m.seniors=m.tiers.filter(function(t){return t.role==='senior'});m.extras=m.tiers.filter(function(t){return t.role==='extra'});
+  var count={},people={};
+  Object.keys(m.days).forEach(function(d){var r=m.days[d];Object.keys(r).forEach(function(k){r[k].forEach(function(n){people[n]=1})})});
+  m.people=Object.keys(people).sort();
+  m.people.forEach(function(n){var s=split(n).sur;count[s]=(count[s]||0)+1});m.surCount=count}
+function split(n){var x=/^(.+)\s([A-Z]{1,3})$/.exec(n);return x?{sur:x[1],ini:x[2]}:{sur:n,ini:''}}
+
+/* ── me ── */
+function norm(s){return String(s).trim().toLowerCase().replace(/\s+/g,' ')}
+function me(){return norm(store.get('me:'+S.dept,''))}
+function isMe(n){var m=me();return !!m&&norm(n)===m}
+function myDays(m){var k=m.tiers.map(function(t){return t.id});return Object.keys(m.days).filter(function(d){return k.some(function(t){return (m.days[d][t]||[]).some(isMe)})})}
+
+/* ── main view ── */
+function loadShow(){
+  renderChrome();
+  return loadMonth(S.ym).then(function(m){
+    if(S.sel==null||ymOf(S.sel)!==S.ym){var cd=callDayISO();S.sel=ymOf(cd)===S.ym?cd:S.ym+'-01'}
+    renderChrome();renderBody(m)},function(){state('offline')})}
+function state(kind){
+  var el=$('p-state');
+  $('p-month').hidden=true;$('p-list').hidden=true;el.hidden=false;$('foot-cap').textContent='';
+  if(kind==='offline')el.innerHTML='<h2>The list did not load</h2><p>You may be offline. Open CalledB once with signal and the list is kept on this phone.</p><button class="btn btn-primary" id="st-retry">Try again</button>';
+  else el.innerHTML='<h2>No call list yet</h2><p>'+esc(fullLabel(S.dept))+' has no list on CalledB. Ask the host to add it.</p><button class="btn btn-primary" id="st-change">Change department</button>'}
+function renderChrome(){
+  var r=reach(),i=r.indexOf(S.ym);
+  $('dept-tag').textContent=shortLabel(S.dept);$('month-title').textContent=monthName(S.ym);
+  $('prev').disabled=i<=0;$('next').disabled=i<0||i>=r.length-1;
+  $('tab-month').classList.toggle('active',S.tab==='month');$('tab-list').classList.toggle('active',S.tab==='list');
+  $('tab-month').setAttribute('aria-selected',S.tab==='month');$('tab-list').setAttribute('aria-selected',S.tab==='list')}
+function renderBody(m){
+  var l=listInfo(S.dept);
+  if(!l||!Object.keys(l.months).length){state('none');return}
+  $('p-state').hidden=true;$('p-month').hidden=S.tab!=='month';$('p-list').hidden=S.tab!=='list';
+  if(S.tab==='month')renderMonth(m);else renderList(m);
+  var info=l.months[S.ym];
+  $('foot-cap').innerHTML=!m?'':S.tab==='month'?esc(m.mains.slice().reverse().map(function(t){return t.short}).join(', '))+' call, top to bottom':
+    esc(MONTHS[+S.ym.slice(5)-1].slice(0,3))+' list'+(info&&info.rev?' · rev <span class="num">'+esc(info.rev)+'</span>':'')}
+function hol(d){return S.index.holidays&&S.index.holidays[d]}
+
+function nameLine(names,m,cls){
+  var first=names.filter(isMe)[0]||names[0],p=split(first),mine=isMe(first),more=names.length>1?'<u>+</u>':'';
+  var full=esc(p.sur)+(p.ini?' <i>'+esc(p.ini)+'</i>':'')+more,short=p.ini&&m.surCount[p.sur]===1?esc(p.sur)+more:'';
+  return '<span class="'+cls+'"'+(short?' data-short="'+esc(short)+'"':'')+'><span class="in'+(mine?' cat c1':'')+'">'+full+'</span></span>'}
+function renderMonth(m){
+  var cal=$('cal'),empty=$('month-empty'),card=$('card');
+  if(!m){
+    var lm=latestMonth(S.dept);cal.hidden=true;card.hidden=true;empty.hidden=false;
+    empty.innerHTML='<span class="tag">'+esc(monthName(S.ym))+'</span><p>No list for '+esc(monthName(S.ym))+' yet. It appears here when the host adds it.</p>'+
+      (lm?'<button class="btn btn-ghost" id="go-latest" data-ym="'+lm+'">Go to '+esc(monthName(lm))+'</button>':'');return}
+  cal.hidden=false;card.hidden=false;empty.hidden=true;
+  var y=+S.ym.slice(0,4),mo=+S.ym.slice(5),first=new Date(y,mo-1,1).getDay(),n=new Date(y,mo,0).getDate(),rows=Math.ceil((first+n)/7);
+  var td=todayISO(),h=WD1.map(function(w){return '<div class="wd" aria-hidden="true">'+w+'</div>'}).join(''),i,d;
+  for(i=0;i<first;i++)h+='<div class="d off"></div>';
+  var order=m.mains.slice().reverse();
+  for(d=1;d<=n;d++){
+    var id=iso(y,mo,d),row=m.days[id]||{},dw=(first+d-1)%7,ph=hol(id);
+    var say=WD3[dw]+' '+d+' '+MONTHS[mo-1]+(ph?', public holiday':'')+': '+order.map(function(t){return t.short+' '+((row[t.id]||[]).join(' and ')||'none')}).join(', ');
+    h+='<button class="d'+(dw===0||dw===6?' we':'')+(ph?' ph c7':'')+(id===td?' today':'')+(id===S.sel?' sel':'')+'" data-d="'+id+'" aria-pressed="'+(id===S.sel)+'" aria-label="'+esc(say)+'">'+
+       '<span class="dtop"><span class="dn">'+d+'</span>'+(ph?'<span class="phm">PH</span>':'')+'</span><span class="box">'+
+       order.map(function(t){return row[t.id]?nameLine(row[t.id],m,'nm'):'<span class="nm"></span>'}).join('')+'</span></button>'}
+  for(i=(first+n)%7;i&&i<7;i++)h+='<div class="d off"></div>';
+  cal.style.setProperty('--rows',rows);cal.innerHTML=h;renderCard(m);layout()}
+function renderCard(m){
+  var d=S.sel,row=m.days[d]||{},cd=callDayISO(),td=todayISO(),ph=hol(d),l=listInfo(S.dept);
+  var title=d===cd?(cd===td?'On call today':'On call now'):'On call';
+  var when=WD3[dowOf(d)]+' <span class="num">'+dmy(d)+'</span>'+(d===cd&&cd!==td?' · until <span class="num">'+esc(l.changeover)+'</span>':'')+(ph?' · <span class="hol c7">'+esc(ph)+'</span>':'');
+  var cols=m.mains.map(function(t){return {lab:t.label,names:row[t.id]||[]}});
+  if(m.seniors.length){var on=m.seniors.filter(function(t){return row[t.id]});
+    cols.push({lab:(on.length?on:m.seniors).map(function(t){return t.label}).join(' / '),names:[].concat.apply([],on.map(function(t){return row[t.id]}))})}
+  $('card').innerHTML='<div class="th"><span class="tag">'+title+'</span><span class="cap">'+when+'</span></div><div class="tg" style="grid-template-columns:repeat('+cols.length+',minmax(0,1fr))">'+
+    cols.map(function(c){return '<div><span class="cap">'+esc(c.lab)+'</span>'+(c.names.length?c.names.map(function(n){
+      return '<span class="tn"><span class="in'+(isMe(n)?' cat c1':'')+'">'+esc(n)+'</span></span>'}).join(''):'<span class="tn">—</span>')+'</div>'}).join('')+'</div>'}
+/* Fit a name to its cell: as printed, then tightened sideways (never below 86 %), then the surname alone when
+   nobody else in the department shares it, then cut with an ellipsis. */
+function fit(el){
+  var inn=el.firstElementChild;if(!inn)return;
+  el.classList.remove('cut');inn.style.transform='';
+  var cs=getComputedStyle(el),a=el.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight),w=inn.offsetWidth;
+  if(w<=a+0.5||a<=0)return;
+  if(a/w<0.86&&el.dataset.short&&!el.dataset.shortened){el.dataset.full=inn.innerHTML;inn.innerHTML=el.dataset.short;el.dataset.shortened='1';w=inn.offsetWidth;if(w<=a+0.5)return}
+  if(a/w>=0.86)inn.style.transform='scaleX('+(a/w).toFixed(3)+')';else el.classList.add('cut')}
+function layout(){
+  var pane=$('p-month');if(pane.hidden||$('cal').hidden)return;
+  pane.classList.remove('tight','roomy');
+  var cell=$('cal').querySelector('.d[data-d]');if(!cell)return;
+  if(cell.offsetHeight<62){pane.classList.add('tight');if(cell.offsetHeight<56)pane.classList.add('roomy')}
+  pane.querySelectorAll('.nm,.tn').forEach(function(el){if(el.dataset.shortened){el.firstElementChild.innerHTML=el.dataset.full;delete el.dataset.shortened}fit(el)})}
+
+function renderList(m){
+  var el=$('list');
+  if(!m){el.innerHTML='<div class="r"><span></span><span class="cap" style="grid-column:2 / -1">No list for '+esc(monthName(S.ym))+' yet.</span></div>';el.style.setProperty('--cols',1);return}
+  var y=+S.ym.slice(0,4),mo=+S.ym.slice(5),n=new Date(y,mo,0).getDate(),td=todayISO(),cd=callDayISO(),second=m.extras.concat(m.seniors);
+  var h='<div class="r h"><span></span>'+m.mains.map(function(t){return '<span class="tag">'+esc(t.label)+'</span>'}).join('')+'</div>';
+  for(var d=1;d<=n;d++){
+    var id=iso(y,mo,d),row=m.days[id]||{},dw=dowOf(id),ph=hol(id);
+    var sub=second.filter(function(t){return row[t.id]}).map(function(t){return '<em>'+esc(t.short)+'</em>'+row[t.id].map(function(n){
+      return isMe(n)?'<span class="cat-text c1" style="font-weight:600">'+esc(n)+'</span>':esc(n)}).join(' / ')}).join('<s>·</s>');
+    h+='<div class="r'+(second.length?' x':'')+(dw===0||dw===6?' we':'')+(ph?' ph c7':'')+(id===cd?' td':'')+'" data-d="'+id+'"'+(ph?' title="'+esc(ph)+'"':'')+'>'+
+      '<span class="dc"><span class="cap">'+(id===td?'Today':WD3[dw])+(ph?' · PH':'')+'</span><span class="num">'+pad(d)+'</span></span>'+
+      m.mains.map(function(t,i){var ns=row[t.id]||[];return '<span class="n'+(i===0?' lead':'')+(ns.length>1?' two':'')+'">'+(ns.length?ns.map(function(n){
+        return '<span'+(isMe(n)?' class="cat c1"':'')+'>'+esc(n)+'</span>'}).join(''):'<span>—</span>')+'</span>'}).join('')+
+      (second.length?'<span class="sub">'+sub+'</span>':'')+'</div>'}
+  el.style.setProperty('--cols',m.mains.length);el.innerHTML=h;
+  var cur=el.querySelector('.r.td');if(cur)cur.scrollIntoView({block:'center'});else $('p-list').scrollTop=0}
+
+/* ── settings ── */
+function openSettings(){
+  var m=S.months[S.ym],l=listInfo(S.dept),info=l&&l.months[S.ym];
+  $('me').value=store.get('me:'+S.dept,'');
+  $('me-list').innerHTML=(m?m.people:[]).map(function(n){return '<option value="'+esc(n)+'">'}).join('');
+  $('set-dept').textContent=fullLabel(S.dept);
+  $('set-list-row').hidden=!info;if(info)$('set-list').innerHTML=esc(monthName(S.ym))+(info.rev?' · rev <span class="num">'+esc(info.rev)+'</span>':'')+' · added <span class="num">'+esc(dmy(info.added))+'</span>';
+  $('about-off').textContent=('serviceWorker' in navigator&&navigator.serviceWorker.controller)?'· offline ready':'';
+  meMsg();showSheet($('sheet-set'),null)}
+function meMsg(){
+  var m=S.months[S.ym],el=$('me-msg'),v=me();el.className='hint';
+  if(!v||!m){el.textContent=v?'':'Your call days are marked once your name matches the list.';return}
+  var n=myDays(m).length;
+  if(n){el.className='hint ok';el.innerHTML=icon('check-circle','sm')+'<span>On the list: <span class="num">'+n+'</span> call'+(n===1?'':'s')+' in '+esc(MONTHS[+S.ym.slice(5)-1])+'. Your days are marked.</span>'}
+  else el.textContent='Not on the '+MONTHS[+S.ym.slice(5)-1]+' list under that name. Type it exactly as the list prints it.'}
+function setTheme(mode){
+  var r=document.documentElement;if(mode==='system')r.removeAttribute('data-theme');else r.setAttribute('data-theme',mode);
+  try{localStorage.setItem('eds-theme',mode)}catch(e){}
+  document.querySelectorAll('.segmented [data-mode]').forEach(function(b){b.classList.toggle('active',b.dataset.mode===mode);b.setAttribute('aria-pressed',b.dataset.mode===mode)})}
+
+/* ── wiring ── */
+function go(ym){S.ym=ym;S.sel=null;loadShow()}
+function wire(){
+  $('dp-list').addEventListener('click',onDeptClick);
+  $('dp-q').addEventListener('input',function(){S.q=this.value;renderDept()});
+  $('dp-open').addEventListener('click',function(){if(S.pick)enter(S.pick)});
+  $('dp-close').addEventListener('click',function(){show('main')});
+  $('dept-btn').addEventListener('click',showDept);
+  $('prev').addEventListener('click',function(){var r=reach(),i=r.indexOf(S.ym);if(i>0)go(r[i-1])});
+  $('next').addEventListener('click',function(){var r=reach(),i=r.indexOf(S.ym);if(i>=0&&i<r.length-1)go(r[i+1])});
+  $('tab-month').addEventListener('click',function(){S.tab='month';renderChrome();renderBody(S.months[S.ym])});
+  $('tab-list').addEventListener('click',function(){S.tab='list';renderChrome();renderBody(S.months[S.ym])});
+  $('cal').addEventListener('click',function(ev){
+    var c=ev.target.closest('.d[data-d]');if(!c)return;S.sel=c.dataset.d;
+    $('cal').querySelectorAll('.d[data-d]').forEach(function(x){var on=x===c;x.classList.toggle('sel',on);x.setAttribute('aria-pressed',on)});
+    renderCard(S.months[S.ym]);layout()});
+  $('v-main').addEventListener('click',function(ev){
+    var t=ev.target;if(t.id==='st-retry')loadShow();else if(t.id==='st-change')showDept();else if(t.id==='st-reload')location.reload();else if(t.id==='go-latest')go(t.dataset.ym)});
+  $('gear').addEventListener('click',openSettings);
+  $('set-change').addEventListener('click',function(){hideSheet();showDept()});
+  $('me').addEventListener('input',function(){store.set('me:'+S.dept,this.value);meMsg();renderBody(S.months[S.ym])});
+  $('pass-form').addEventListener('submit',submitPass);
+  $('scrim').addEventListener('click',hideSheet);
+  document.querySelectorAll('[data-close]').forEach(function(b){b.addEventListener('click',hideSheet)});
+  document.addEventListener('keydown',function(ev){if(ev.key==='Escape'&&openSheet)hideSheet()});
+  document.querySelectorAll('.segmented [data-mode]').forEach(function(b){b.addEventListener('click',function(){setTheme(b.dataset.mode)})});
+  var saved='dark';try{saved=localStorage.getItem('eds-theme')||'dark'}catch(e){}
+  document.querySelectorAll('.segmented [data-mode]').forEach(function(b){b.classList.toggle('active',b.dataset.mode===saved);b.setAttribute('aria-pressed',b.dataset.mode===saved)});
+  var rt;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(layout,80)});
+  if(window.visualViewport){var vv=window.visualViewport,kb=function(){
+    document.documentElement.style.setProperty('--kb',Math.max(0,Math.round(window.innerHeight-vv.height-vv.offsetTop))+'px')};
+    vv.addEventListener('resize',kb);vv.addEventListener('scroll',kb)}
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(layout);
+  /* the call day rolls over while the app is open: redraw when it comes back to the front */
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden||$('v-main').hidden||!S.months[S.ym])return;
+    var cd=callDayISO();if(S.lastCD&&S.lastCD!==cd&&ymOf(cd)===S.ym)S.sel=cd;S.lastCD=cd;renderBody(S.months[S.ym])});
+}
+function boot(){
+  wire();S.lastCD=null;
+  getJSON('./data/index.json').then(function(ix){
+    S.index=ix;S.pins=S.pins.filter(known);
+    if(known(S.dept))return enter(S.dept).then(function(){S.lastCD=callDayISO();if($('v-main').hidden)showDept()});
+    S.dept=null;showDept()
+  }).catch(function(){
+    $('v-main').hidden=false;$('dept-tag').textContent='CalledB';$('month-title').textContent='';$('prev').disabled=$('next').disabled=true;
+    $('p-month').hidden=true;$('p-list').hidden=true;$('p-state').hidden=false;
+    $('p-state').innerHTML='<h2>CalledB did not load</h2><p>You may be offline. Open it once with signal and it is kept on this phone.</p><button class="btn btn-primary" id="st-reload">Try again</button>'});
+  if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost'||location.hostname==='127.0.0.1')){
+    navigator.serviceWorker.register('./sw.js').catch(function(){})}
+}
+window.CalledB={version:VERSION,state:S};
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
+})();
+</script>
+</body>
+</html>
