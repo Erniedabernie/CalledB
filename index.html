@@ -53,18 +53,12 @@ body{overflow:hidden;overscroll-behavior:none}
 .cal .wd{padding:0 0 4px;line-height:14px}
 .cal .d{min-height:0;justify-content:flex-start;gap:0;padding:3px 1px;overflow:hidden;width:100%;font:inherit;color:inherit;text-align:left;cursor:pointer;appearance:none;-webkit-appearance:none;-webkit-tap-highlight-color:transparent}
 .cal .d.off{cursor:default}
-/* weekends: one band behind each weekend column, from the S at the top to the last row; weekdays sit flat on the page */
+/* weekends are carded, weekdays sit flat on the page: Saturday and Sunday read as two columns of their own */
 :root{--wk:var(--surface-high)}
 [data-theme="light"]{--wk:var(--surface)}
 @media (prefers-color-scheme: light){:root:not([data-theme="dark"]):not([data-theme="light"]){--wk:var(--surface)}}
-.cal{position:relative}
-.cal::before,.cal::after{content:'';position:absolute;z-index:0;top:0;bottom:0;width:calc((100% - 12px) / 7);background:var(--wk);border:1px solid var(--border);border-radius:var(--radius-lg);box-sizing:border-box;pointer-events:none}
-.cal::before{left:0}
-.cal::after{right:0}
-.cal>*{position:relative;z-index:1}
 .cal .d{background:transparent}
-.cal .d.we{border-color:transparent}
-.cal .wd:nth-child(1),.cal .wd:nth-child(7){color:var(--text);font-weight:600}
+.cal .d.we{background:var(--wk)}
 .cal .d.sel{border-color:var(--success-text);box-shadow:inset 0 0 0 1px var(--success-text)}
 .cal .d:focus-visible{outline:none;box-shadow:var(--focus-ring)}
 .d .dtop{flex:none;display:flex;align-items:center;gap:2px;height:14px;padding:0 3px;overflow:hidden;white-space:nowrap}
@@ -74,7 +68,6 @@ body{overflow:hidden;overscroll-behavior:none}
 .d .phm{font-size:11px;font-weight:600;line-height:14px}
 /* today is the word Today in bold where the date would be; a holiday keeps its red */
 .cal .d.today{border-color:var(--border)}
-.cal .d.we.today{border-color:transparent}
 .cal .d.today.sel{border-color:var(--success-text)}
 .cal .d.today .dn{font-family:var(--font-ui);font-weight:700;letter-spacing:0;color:var(--text)}
 .cal .d.ph .dn,.d .phm{color:var(--cat-text)}
@@ -177,7 +170,7 @@ body{overflow:hidden;overscroll-behavior:none}
 .hl-mid{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding-bottom:22%;text-align:center}
 .hl-mid h1{font-size:40px;font-weight:700;letter-spacing:-.02em;line-height:1.05}
 .hl-mid p{margin:0;font-size:16px;color:var(--muted-text)}
-.hl-foot{flex:none}
+.hl-foot{flex:none;display:flex;flex-direction:column;gap:12px}
 .hl-foot .btn{width:100%;justify-content:center;min-height:48px;font-size:16px}
 
 /* sheets: --kb lifts a sheet above the on-screen keyboard */
@@ -193,6 +186,10 @@ body{overflow:hidden;overscroll-behavior:none}
 .set-row{display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid var(--border);padding-top:12px}
 .set-row>div{display:flex;flex-direction:column;gap:2px;min-width:0}
 .set-row .btn{flex:none;min-height:44px}
+.set-row .lk{font-family:var(--font-mono);font-size:12px;line-height:1.4;color:var(--muted-text);overflow-wrap:anywhere}
+#link-form,#sheet-link p{margin:0}
+#link-form{display:flex;flex-direction:column;gap:12px}
+#link-form .btn{justify-content:center;min-height:48px}
 .about{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:11px;color:var(--muted-text)}
 .about .mark{display:inline-flex;height:14px;color:var(--text);opacity:.72}
 .about .mark svg{height:14px;width:auto}
@@ -217,13 +214,13 @@ body{overflow:hidden;overscroll-behavior:none}
 <defs><mask id="edb-stem" maskUnits="userSpaceOnUse" x="-20" y="-20" width="700" height="260"><rect x="-20" y="-20" width="700" height="260" fill="#fff"></rect><rect x="-10" y="18" width="72" height="196" fill="#000"></rect></mask></defs>
 <g transform="translate(0,0)"><g mask="url(#edb-stem)"><path transform="translate(0,190) scale(0.2,-0.2)" d="M726 214Q735 209 735 203Q735 199 732 193L638 -5Q634 -14 626 -14Q621 -14 617 -10L612 -5Q607 0 592 0L45 0Q30 0 30 15L30 45Q30 60 45 60L47 60Q119 60 119 155L119 594Q119 689 46 689L45 689Q30 689 30 704L30 734Q30 750 45 750L546 750Q559 750 565 755L571 760Q574 763 579 763Q587 763 592 755L671 619Q674 615 674 610Q674 603 666 598L626 576Q619 572 615 572Q608 572 603 581L600 586Q569 638 533.5 658.5Q498 679 440 679L278 679L278 444L366 444Q411 444 436 461Q461 478 461 511L461 518Q461 533 476 533L506 533Q521 533 521 518L521 291Q521 276 506 276L476 276Q461 276 461 291L461 297Q461 331 436.5 347.5Q412 364 366 364L278 364L278 166Q278 71 347 71L412 71Q486 71 532.5 85Q579 99 610.5 132Q642 165 670 221L673 227Q678 235 686 235Q691 235 694 233L726 214Z"></path></g><path transform="translate(20,38)" fill-rule="evenodd" d="M46 2 L46 152 L10 152 L10 149 C12 147 14 144 14 138 L14 74 C14 70 12 68 10 62 C6 51 3 45 3 38 C3 20 12 1 46 2 Z M23 22 a4 4 0 0 1 8 0 v20 h-8 Z M20.5 42 h13 v7 a3 3 0 0 1 -3 3 h-7 a3 3 0 0 1 -3 -3 Z M28.7 78 h2.6 v60 h-2.6 Z"></path></g><g transform="translate(155,0)"><path transform="translate(0,190) scale(0.2,-0.2)" d="M353 750Q473 750 563.5 705Q654 660 704.5 576Q755 492 755 376Q755 257 709 172.5Q663 88 579 44Q495 0 381 0L45 0Q30 0 30 15L30 45Q30 60 45 60L52 60Q85 60 102 85Q119 110 119 155L119 595Q119 690 46 690L45 690Q30 690 30 705L30 735Q30 750 45 750L353 750ZM278 150Q278 111 291 88Q304 65 352 65Q471 65 537 139Q603 213 603 376Q603 521 535 605.5Q467 690 325 690L278 690L278 150Z"></path></g><g transform="translate(311,0)"><path transform="translate(0,190) scale(0.2,-0.2)" d="M367 750Q437 750 492.5 726Q548 702 581 661Q614 620 614 569Q614 526 588 490Q562 454 513 429Q591 407 635 351.5Q679 296 679 221Q679 156 645 106Q611 56 551 28Q491 0 412 0L45 0Q30 0 30 15L30 45Q30 60 45 60Q119 60 119 155L119 595Q119 690 45 690Q30 690 30 705L30 735Q30 750 45 750L367 750ZM335 448Q397 448 430.5 480Q464 512 464 569Q464 626 431 658Q398 690 339 690L278 690L278 448L335 448ZM369 60Q445 60 487 102.5Q529 145 529 221Q529 377 336 377L278 377L278 155Q278 109 295 84.5Q312 60 344 60L369 60Z"></path></g>
 </g></defs></svg>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="ph-bookmark-simple" viewBox="0 0 256 256"><path d="M184,32H72A16,16,0,0,0,56,48V224a8,8,0,0,0,12.24,6.78L128,193.43l59.77,37.35A8,8,0,0,0,200,224V48A16,16,0,0,0,184,32Zm0,177.57-51.77-32.35a8,8,0,0,0-8.48,0L72,209.57V48H184Z"/></symbol><symbol id="ph-caret-down" viewBox="0 0 256 256"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></symbol><symbol id="ph-caret-left" viewBox="0 0 256 256"><path d="M165.66,202.34a8,8,0,0,1-11.32,11.32l-80-80a8,8,0,0,1,0-11.32l80-80a8,8,0,0,1,11.32,11.32L91.31,128Z"/></symbol><symbol id="ph-caret-right" viewBox="0 0 256 256"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></symbol><symbol id="ph-check" viewBox="0 0 256 256"><path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z"/></symbol><symbol id="ph-check-circle" viewBox="0 0 256 256"><path d="M173.66,98.34a8,8,0,0,1,0,11.32l-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35A8,8,0,0,1,173.66,98.34ZM232,128A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"/></symbol><symbol id="ph-gear" viewBox="0 0 256 256"><path d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Zm88-29.84q.06-2.16,0-4.32l14.92-18.64a8,8,0,0,0,1.48-7.06,107.21,107.21,0,0,0-10.88-26.25,8,8,0,0,0-6-3.93l-23.72-2.64q-1.48-1.56-3-3L186,40.54a8,8,0,0,0-3.94-6,107.71,107.71,0,0,0-26.25-10.87,8,8,0,0,0-7.06,1.49L130.16,40Q128,40,125.84,40L107.2,25.11a8,8,0,0,0-7.06-1.48A107.6,107.6,0,0,0,73.89,34.51a8,8,0,0,0-3.93,6L67.32,64.27q-1.56,1.49-3,3L40.54,70a8,8,0,0,0-6,3.94,107.71,107.71,0,0,0-10.87,26.25,8,8,0,0,0,1.49,7.06L40,125.84Q40,128,40,130.16L25.11,148.8a8,8,0,0,0-1.48,7.06,107.21,107.21,0,0,0,10.88,26.25,8,8,0,0,0,6,3.93l23.72,2.64q1.49,1.56,3,3L70,215.46a8,8,0,0,0,3.94,6,107.71,107.71,0,0,0,26.25,10.87,8,8,0,0,0,7.06-1.49L125.84,216q2.16.06,4.32,0l18.64,14.92a8,8,0,0,0,7.06,1.48,107.21,107.21,0,0,0,26.25-10.88,8,8,0,0,0,3.93-6l2.64-23.72q1.56-1.48,3-3L215.46,186a8,8,0,0,0,6-3.94,107.71,107.71,0,0,0,10.87-26.25,8,8,0,0,0-1.49-7.06Zm-16.1-6.5a73.93,73.93,0,0,1,0,8.68,8,8,0,0,0,1.74,5.48l14.19,17.73a91.57,91.57,0,0,1-6.23,15L187,173.11a8,8,0,0,0-5.1,2.64,74.11,74.11,0,0,1-6.14,6.14,8,8,0,0,0-2.64,5.1l-2.51,22.58a91.32,91.32,0,0,1-15,6.23l-17.74-14.19a8,8,0,0,0-5-1.75h-.48a73.93,73.93,0,0,1-8.68,0,8,8,0,0,0-5.48,1.74L100.45,215.8a91.57,91.57,0,0,1-15-6.23L82.89,187a8,8,0,0,0-2.64-5.1,74.11,74.11,0,0,1-6.14-6.14,8,8,0,0,0-5.1-2.64L46.43,170.6a91.32,91.32,0,0,1-6.23-15l14.19-17.74a8,8,0,0,0,1.74-5.48,73.93,73.93,0,0,1,0-8.68,8,8,0,0,0-1.74-5.48L40.2,100.45a91.57,91.57,0,0,1,6.23-15L69,82.89a8,8,0,0,0,5.1-2.64,74.11,74.11,0,0,1,6.14-6.14A8,8,0,0,0,82.89,69L85.4,46.43a91.32,91.32,0,0,1,15-6.23l17.74,14.19a8,8,0,0,0,5.48,1.74,73.93,73.93,0,0,1,8.68,0,8,8,0,0,0,5.48-1.74L155.55,40.2a91.57,91.57,0,0,1,15,6.23L173.11,69a8,8,0,0,0,2.64,5.1,74.11,74.11,0,0,1,6.14,6.14,8,8,0,0,0,5.1,2.64l22.58,2.51a91.32,91.32,0,0,1,6.23,15l-14.19,17.74A8,8,0,0,0,199.87,123.66Z"/></symbol><symbol id="ph-magnifying-glass" viewBox="0 0 256 256"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"/></symbol><symbol id="ph-x" viewBox="0 0 256 256"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"/></symbol></svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="ph-bookmark-simple" viewBox="0 0 256 256"><path d="M184,32H72A16,16,0,0,0,56,48V224a8,8,0,0,0,12.24,6.78L128,193.43l59.77,37.35A8,8,0,0,0,200,224V48A16,16,0,0,0,184,32Zm0,177.57-51.77-32.35a8,8,0,0,0-8.48,0L72,209.57V48H184Z"/></symbol><symbol id="ph-caret-down" viewBox="0 0 256 256"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></symbol><symbol id="ph-caret-left" viewBox="0 0 256 256"><path d="M165.66,202.34a8,8,0,0,1-11.32,11.32l-80-80a8,8,0,0,1,0-11.32l80-80a8,8,0,0,1,11.32,11.32L91.31,128Z"/></symbol><symbol id="ph-caret-right" viewBox="0 0 256 256"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></symbol><symbol id="ph-check" viewBox="0 0 256 256"><path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z"/></symbol><symbol id="ph-check-circle" viewBox="0 0 256 256"><path d="M173.66,98.34a8,8,0,0,1,0,11.32l-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35A8,8,0,0,1,173.66,98.34ZM232,128A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"/></symbol><symbol id="ph-gear" viewBox="0 0 256 256"><path d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Zm88-29.84q.06-2.16,0-4.32l14.92-18.64a8,8,0,0,0,1.48-7.06,107.21,107.21,0,0,0-10.88-26.25,8,8,0,0,0-6-3.93l-23.72-2.64q-1.48-1.56-3-3L186,40.54a8,8,0,0,0-3.94-6,107.71,107.71,0,0,0-26.25-10.87,8,8,0,0,0-7.06,1.49L130.16,40Q128,40,125.84,40L107.2,25.11a8,8,0,0,0-7.06-1.48A107.6,107.6,0,0,0,73.89,34.51a8,8,0,0,0-3.93,6L67.32,64.27q-1.56,1.49-3,3L40.54,70a8,8,0,0,0-6,3.94,107.71,107.71,0,0,0-10.87,26.25,8,8,0,0,0,1.49,7.06L40,125.84Q40,128,40,130.16L25.11,148.8a8,8,0,0,0-1.48,7.06,107.21,107.21,0,0,0,10.88,26.25,8,8,0,0,0,6,3.93l23.72,2.64q1.49,1.56,3,3L70,215.46a8,8,0,0,0,3.94,6,107.71,107.71,0,0,0,26.25,10.87,8,8,0,0,0,7.06-1.49L125.84,216q2.16.06,4.32,0l18.64,14.92a8,8,0,0,0,7.06,1.48,107.21,107.21,0,0,0,26.25-10.88,8,8,0,0,0,3.93-6l2.64-23.72q1.56-1.48,3-3L215.46,186a8,8,0,0,0,6-3.94,107.71,107.71,0,0,0,10.87-26.25,8,8,0,0,0-1.49-7.06Zm-16.1-6.5a73.93,73.93,0,0,1,0,8.68,8,8,0,0,0,1.74,5.48l14.19,17.73a91.57,91.57,0,0,1-6.23,15L187,173.11a8,8,0,0,0-5.1,2.64,74.11,74.11,0,0,1-6.14,6.14,8,8,0,0,0-2.64,5.1l-2.51,22.58a91.32,91.32,0,0,1-15,6.23l-17.74-14.19a8,8,0,0,0-5-1.75h-.48a73.93,73.93,0,0,1-8.68,0,8,8,0,0,0-5.48,1.74L100.45,215.8a91.57,91.57,0,0,1-15-6.23L82.89,187a8,8,0,0,0-2.64-5.1,74.11,74.11,0,0,1-6.14-6.14,8,8,0,0,0-5.1-2.64L46.43,170.6a91.32,91.32,0,0,1-6.23-15l14.19-17.74a8,8,0,0,0,1.74-5.48,73.93,73.93,0,0,1,0-8.68,8,8,0,0,0-1.74-5.48L40.2,100.45a91.57,91.57,0,0,1,6.23-15L69,82.89a8,8,0,0,0,5.1-2.64,74.11,74.11,0,0,1,6.14-6.14A8,8,0,0,0,82.89,69L85.4,46.43a91.32,91.32,0,0,1,15-6.23l17.74,14.19a8,8,0,0,0,5.48,1.74,73.93,73.93,0,0,1,8.68,0,8,8,0,0,0,5.48-1.74L155.55,40.2a91.57,91.57,0,0,1,15,6.23L173.11,69a8,8,0,0,0,2.64,5.1,74.11,74.11,0,0,1,6.14,6.14,8,8,0,0,0,5.1,2.64l22.58,2.51a91.32,91.32,0,0,1,6.23,15l-14.19,17.74A8,8,0,0,0,199.87,123.66Z"/></symbol><symbol id="ph-link" viewBox="0 0 256 256"><path d="M240,88.23a54.43,54.43,0,0,1-16,37L189.25,160a54.27,54.27,0,0,1-38.63,16h-.05A54.63,54.63,0,0,1,96,119.84a8,8,0,0,1,16,.45A38.62,38.62,0,0,0,150.58,160h0a38.39,38.39,0,0,0,27.31-11.31l34.75-34.75a38.63,38.63,0,0,0-54.63-54.63l-11,11A8,8,0,0,1,135.7,59l11-11A54.65,54.65,0,0,1,224,48,54.86,54.86,0,0,1,240,88.23ZM109,185.66l-11,11A38.41,38.41,0,0,1,70.6,208h0a38.63,38.63,0,0,1-27.29-65.94L78,107.31A38.63,38.63,0,0,1,144,135.71a8,8,0,0,0,16,.45A54.86,54.86,0,0,0,144,96a54.65,54.65,0,0,0-77.27,0L32,130.75A54.62,54.62,0,0,0,70.56,224h0a54.28,54.28,0,0,0,38.64-16l11-11A8,8,0,0,0,109,185.66Z"/></symbol><symbol id="ph-magnifying-glass" viewBox="0 0 256 256"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"/></symbol><symbol id="ph-x" viewBox="0 0 256 256"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"/></symbol></svg>
 
 <div class="app" id="app">
 
   <section class="view" id="v-hello" aria-labelledby="hl-h" hidden>
     <div class="hl-mid"><h1 id="hl-h">CalledB</h1><p>Who is on call, by department</p></div>
-    <div class="hl-foot"><button class="btn btn-primary" id="hl-go">Choose your department</button></div>
+    <div class="hl-foot"><button class="btn btn-primary" id="hl-go">Choose your department</button><button class="btn btn-ghost" id="hl-link"><svg class="icon" aria-hidden="true"><use href="#ph-link"/></svg>I have a link</button></div>
   </section>
 
   <section class="view" id="v-dept" aria-labelledby="dp-h" hidden>
@@ -279,6 +276,20 @@ body{overflow:hidden;overscroll-behavior:none}
 
 <div class="scrim" id="scrim" hidden></div>
 
+<div class="sheet" id="sheet-link" role="dialog" aria-modal="true" aria-labelledby="link-h" hidden>
+  <div class="grab"></div>
+  <div class="sheet-h"><h2 id="link-h">Open a link</h2><button class="icon-btn" data-close aria-label="Close"><svg class="icon" aria-hidden="true"><use href="#ph-x"/></svg></button></div>
+  <p>Paste the CalledB link you were sent. It takes you to that department; the passcode comes separately.</p>
+  <form id="link-form" novalidate>
+    <div class="field">
+      <label for="lk">Link</label>
+      <input class="input" id="lk" type="url" inputmode="url" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="Paste the link here">
+      <span class="error-msg" id="lk-err" role="alert" hidden></span>
+    </div>
+    <button class="btn btn-primary" id="lk-go" type="submit">Open</button>
+  </form>
+</div>
+
 <div class="sheet" id="sheet-pass" role="dialog" aria-modal="true" aria-labelledby="pass-h" hidden>
   <div class="grab"></div>
   <div class="sheet-h"><h2 id="pass-h">Passcode</h2><button class="icon-btn" data-close aria-label="Close"><svg class="icon" aria-hidden="true"><use href="#ph-x"/></svg></button></div>
@@ -308,10 +319,11 @@ body{overflow:hidden;overscroll-behavior:none}
   </div>
   <div class="set-row"><div><span class="cap">Department</span><span id="set-dept"></span></div><button class="btn btn-ghost" id="set-change">Change</button></div>
   <div class="set-row" id="set-list-row"><div><span class="cap">This list</span><span id="set-list"></span></div></div>
+  <div class="set-row" id="share-row"><div><span class="cap">Share this department</span><span class="lk" id="share-url"></span></div><button class="btn btn-ghost" id="share-btn">Copy link</button></div>
   <div class="set-row"><div><span class="cap">Dev build</span><span id="dev-state">Off</span></div><button class="btn btn-ghost" id="dev-btn">Unlock</button></div>
   <div class="set-row" id="reset-row"><div><span class="cap">Reset</span><span>Forget everything on this phone</span></div><button class="btn btn-ghost" id="reset-btn">Reset to default</button></div>
   <div class="alert warn" id="reset-ask" role="alertdialog" aria-labelledby="reset-q" hidden><span id="reset-q" style="flex:1 1 100%">This forgets your department, passcodes, name, pins and theme on this phone. The lists themselves are not touched.</span><button class="btn btn-ghost" id="reset-no">Cancel</button><button class="btn btn-primary" id="reset-yes">Reset</button></div>
-  <div class="about"><span class="mark"><svg viewBox="20 35 434 158" aria-hidden="true"><use href="#edb-mark"/></svg></span><span class="num">v0.3.0</span><span>© Ernest Tung</span><span id="about-off"></span></div>
+  <div class="about"><span class="mark"><svg viewBox="20 35 434 158" aria-hidden="true"><use href="#edb-mark"/></svg></span><span class="num">v0.4.0</span><span>© Ernest Tung</span><span id="about-off"></span></div>
 </div>
 
 <div class="sheet" id="sheet-dev" role="dialog" aria-modal="true" aria-labelledby="dev-h" hidden>
@@ -326,7 +338,7 @@ body{overflow:hidden;overscroll-behavior:none}
 <script>
 (function(){
 'use strict';
-var VERSION='0.3.0',BUILT='27/11/2026';
+var VERSION='0.4.0',BUILT='27/11/2026';
 var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
 var WD3=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'], WD1=['S','M','T','W','T','F','S'];
 function $(id){return document.getElementById(id)}
@@ -451,6 +463,23 @@ function onDeptClick(ev){
   var p=ev.target.closest('[data-pin]');
   if(p){var id=p.dataset.pin,i=S.pins.indexOf(id);if(i>=0)S.pins.splice(i,1);else S.pins.push(id);store.set('pins',S.pins);renderDept();return}
   var o=ev.target.closest('[data-dept]');if(o){S.pick=o.dataset.dept;renderDept()}}
+
+/* ── links: #hospital/department names a department and nothing else. The passcode is never in a link. ── */
+function linkFor(id){return location.origin+location.pathname+'#'+id}
+function deptFromLink(t){
+  t=String(t||'').trim();try{t=decodeURIComponent(t)}catch(e){}
+  t=t.toLowerCase();var i=t.lastIndexOf('#');if(i>=0)t=t.slice(i+1);
+  var m=t.replace(/[\/\s]+$/,'').match(/([a-z0-9-]+)\/([a-z0-9-]+)$/),id=m?m[1]+'/'+m[2]:'';
+  return known(id)?id:null}
+function takeHash(){            /* read the link the page was opened with, then take it out of the address */
+  if(location.hash.length<2)return null;var id=deptFromLink(location.hash);
+  try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}
+  return id}
+function askLink(){$('lk').value='';$('lk').classList.remove('invalid');$('lk-err').hidden=true;showSheet($('sheet-link'),$('lk'))}
+function submitLink(ev){
+  ev.preventDefault();var id=deptFromLink($('lk').value);
+  if(!id){$('lk').classList.add('invalid');$('lk-err').textContent='That link does not name a department here. Check it with whoever sent it, or choose your department instead.';$('lk-err').hidden=false;$('lk').focus();return}
+  hideSheet();enter(id)}
 
 /* ── entering a department ── */
 function enter(id){
@@ -618,6 +647,7 @@ function openSettings(){
   $('about-off').textContent=('serviceWorker' in navigator&&navigator.serviceWorker.controller)?'· offline ready':'';
   $('dev-state').textContent=devOn()?'On':'Off';$('dev-btn').textContent=devOn()?'Open':'Unlock';$('dev-btn').hidden=!S.index.dev;
   $('reset-row').hidden=false;$('reset-ask').hidden=true;
+  $('share-url').textContent=linkFor(S.dept).replace(/^https?:\/\//,'');$('share-btn').textContent=navigator.share?'Share':'Copy link';
   meMsg();showSheet($('sheet-set'),null)}
 
 /* ── dev build: how this phone and this list are set up. A hidden panel, not a second lock: nothing secret sits behind it. ── */
@@ -669,7 +699,12 @@ function setTheme(mode){
 function go(ym){S.ym=ym;S.sel=null;loadShow()}
 function wire(){
   $('dp-list').addEventListener('click',onDeptClick);$('dp-rail').addEventListener('click',onDeptClick);
-  $('hl-go').addEventListener('click',showDept);
+  $('hl-go').addEventListener('click',showDept);$('hl-link').addEventListener('click',askLink);$('link-form').addEventListener('submit',submitLink);
+  window.addEventListener('hashchange',function(){var id=takeHash();if(id&&S.index&&id!==S.dept){hideSheet();enter(id)}});
+  $('share-btn').addEventListener('click',function(){
+    var b=this,url=linkFor(S.dept);
+    if(navigator.share){navigator.share({title:'CalledB',text:fullLabel(S.dept)+' call list',url:url}).catch(function(){});return}
+    if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(url).then(function(){b.textContent='Copied'},function(){b.textContent='Copy failed'});else b.textContent='Copy failed'});
   $('dp-find').addEventListener('click',function(){var on=$('dp-search').hidden;if(!on&&S.q){S.q='';$('dp-q').value='';renderDept()}findBar(on)});
   $('dp-q').addEventListener('input',function(){S.q=this.value;S.seek=true;renderDept()});
   $('dp-open').addEventListener('click',function(){if(S.pick)enter(S.pick)});
@@ -725,8 +760,9 @@ function boot(){
   wire();S.lastCD=null;
   getJSON('./data/index.json').then(function(ix){
     S.index=ix;S.pins=S.pins.filter(known);
-    if(known(S.dept))return enter(S.dept).then(function(){S.lastCD=callDayISO();if($('v-main').hidden)showDept()});
-    S.dept=null;show('hello')
+    var linked=takeHash();
+    var home=known(S.dept)?enter(S.dept).then(function(){S.lastCD=callDayISO();if($('v-main').hidden)showDept()}):(S.dept=null,show('hello'),Promise.resolve());
+    return home.then(function(){if(linked&&linked!==S.dept)return enter(linked)})   /* a link to another department asks for that department's passcode */
   }).catch(function(){
     $('v-main').hidden=false;$('dept-tag').textContent='CalledB';$('month-title').textContent='';$('prev').disabled=$('next').disabled=true;
     $('p-month').hidden=true;$('p-list').hidden=true;$('p-state').hidden=false;
