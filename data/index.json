@@ -21,12 +21,6 @@
    "cluster": "Hong Kong Island"
   },
   {
-   "id": "hkeh",
-   "abbr": "HKEH",
-   "name": "Hong Kong Eye Hospital",
-   "cluster": "Kowloon Central"
-  },
-  {
    "id": "kth",
    "abbr": "KTH",
    "name": "Kai Tak Hospital",
@@ -93,6 +87,12 @@
    "cluster": "Hong Kong Island"
   },
   {
+   "id": "uch",
+   "abbr": "UCH",
+   "name": "United Christian Hospital",
+   "cluster": "Kowloon East"
+  },
+  {
    "id": "ych",
    "abbr": "YCH",
    "name": "Yan Chai Hospital",
@@ -101,20 +101,28 @@
  ],
  "departments": [
   {
+   "id": "anaesthesiology",
+   "name": "Anaesthesiology"
+  },
+  {
    "id": "medical",
    "name": "Medical"
   },
   {
-   "id": "surgery",
-   "name": "Surgery"
+   "id": "ophthalmology",
+   "name": "Ophthalmology"
+  },
+  {
+   "id": "orthopaedics",
+   "name": "Orthopaedics"
   },
   {
    "id": "radiology",
    "name": "Radiology"
   },
   {
-   "id": "ophthalmology",
-   "name": "Ophthalmology"
+   "id": "surgery",
+   "name": "Surgery"
   }
  ],
  "holidays": {
@@ -153,26 +161,1277 @@
   "2027-12-25": "Christmas Day",
   "2027-12-27": "First weekday after Christmas"
  },
+ "dev": {
+  "kdf": "PBKDF2-SHA256",
+  "iter": 600000,
+  "salt": "qXqNMuZiRFalpq0FXI2zOw==",
+  "kid": "64dd382e",
+  "check": {
+   "iv": "v7FN43abo1dIVID/",
+   "ct": "RAVqSa5po67XaSOOGstC9MEgly7MYao="
+  }
+ },
  "lists": {
+  "ahnh/anaesthesiology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "Dzi/jTTVUk/xkfA4BPDm6Q==",
+    "kid": "84aa7409",
+    "check": {
+     "iv": "RESQkP985x2g7Q7J",
+     "ct": "bYak0kxd31/PbshGOxaY1loleDrEAnw="
+    }
+   }
+  },
+  "ahnh/medical": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "uHiD6CcY+O4Yh6mMQmCsIQ==",
+    "kid": "1489f9e0",
+    "check": {
+     "iv": "9swRLRXGEh/Bsi3f",
+     "ct": "Vu3A7gFYu4RsDCIfucXeid+7GCjIXO4="
+    }
+   }
+  },
+  "ahnh/ophthalmology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "zEz3kOL+rlpZT2bKAzSmAw==",
+    "kid": "afd0d0f4",
+    "check": {
+     "iv": "9Gk2nK6OPKbQ7YIe",
+     "ct": "bF9Or/C5/mVjdhAqV+6TKlsNCWAhsWo="
+    }
+   }
+  },
+  "ahnh/orthopaedics": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "PiPtpklnN1lzZdRed3UAvQ==",
+    "kid": "35100650",
+    "check": {
+     "iv": "kP4G7wnU3OgHBPMU",
+     "ct": "z5NBo+VgaU+RiV40OM10oL4EKvG9rsM="
+    }
+   }
+  },
+  "ahnh/radiology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "xtLbhx9zDk9SCwYUAXN7Fg==",
+    "kid": "2ce114e9",
+    "check": {
+     "iv": "OgTvd7lZWr3vIsHg",
+     "ct": "vCohtqeU6n5+CUkTLOmSpn2qn5QgCNQ="
+    }
+   }
+  },
+  "ahnh/surgery": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "SGLQlqpQ1MBs4Qbseio1IQ==",
+    "kid": "c59383cd",
+    "check": {
+     "iv": "/g8bPLr1QvKdMsAG",
+     "ct": "WMwuSrvwdleEb7YWeqGo6tur0JikXxs="
+    }
+   }
+  },
+  "cmc/anaesthesiology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "PRfcWzxKGRLFruy9KmUxyA==",
+    "kid": "d0cb836f",
+    "check": {
+     "iv": "ud84ooVYDDB0la7A",
+     "ct": "JEhPdJt/5trjwTUUvR681d0PIImgloI="
+    }
+   }
+  },
+  "cmc/medical": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "8dUQUFEOK8bMEhW5ZK44gg==",
+    "kid": "9fd7f9b5",
+    "check": {
+     "iv": "Zae3wjZsaZ8Xg7jR",
+     "ct": "BnljS9PYAEXJhd//pZiI6KaryGnNq7M="
+    }
+   }
+  },
+  "cmc/ophthalmology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "nYVTlmVqasdt26eIYFnHCQ==",
+    "kid": "a747a667",
+    "check": {
+     "iv": "1RpuBOxJ+vUrxTZk",
+     "ct": "rklOQb4ZDFEUTjZiOQUIcCmeaV7WTB8="
+    }
+   }
+  },
+  "cmc/orthopaedics": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "YkmbbwplTG3ujZjYy4dwSg==",
+    "kid": "2f31a373",
+    "check": {
+     "iv": "VxicjsgGDBnA3Sk6",
+     "ct": "yozrUrkPeAl9go1NZPtRigO/Zfow/mc="
+    }
+   }
+  },
+  "cmc/radiology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "HKrNtA+pyl76JK/ZFb5+qg==",
+    "kid": "364754bc",
+    "check": {
+     "iv": "MR7PrrjMmzJIG5SC",
+     "ct": "IevZxAy0aavTegiN1hmQqDSpIgfHI7E="
+    }
+   }
+  },
+  "cmc/surgery": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "J6uUEF5CLIURZAt9LHvHtA==",
+    "kid": "ceed4b59",
+    "check": {
+     "iv": "DTZLfkmzx1U8IDOi",
+     "ct": "AoC1DgWJhgqRvJEot3klQwKfJvM9T10="
+    }
+   }
+  },
+  "gh/anaesthesiology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "yu3Z+BSoepFYHAXbvdxP0Q==",
+    "kid": "38dd036b",
+    "check": {
+     "iv": "qzDWP+bePEZyXJvo",
+     "ct": "a+98q5IYmKY7s7EH93iXxy6ahG3+Swo="
+    }
+   }
+  },
+  "gh/medical": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "eIs+aeDpnoejuGlNHoDLCw==",
+    "kid": "41d4c990",
+    "check": {
+     "iv": "iFekFP+dH7J9+qXh",
+     "ct": "VFMwnnbY6G+CONqGS7GrEZfolF/OsUs="
+    }
+   }
+  },
+  "gh/ophthalmology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "wbTt9F5Uhwday9QPdO2cTQ==",
+    "kid": "4c87aa0d",
+    "check": {
+     "iv": "9iulEubhe1PrWTEu",
+     "ct": "8bUWjV+xbDSl0FwmETlnNAULVcXIMfw="
+    }
+   }
+  },
+  "gh/orthopaedics": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "wRuuQog6DcfbTSAHvUQNDQ==",
+    "kid": "bb80c4d9",
+    "check": {
+     "iv": "ayUfyF3xci+h0nvX",
+     "ct": "psEfXWlv6qEHxFU4YltBmHRZF0efBWQ="
+    }
+   }
+  },
+  "gh/radiology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "W52NZiCpty2W+0uLmABQVw==",
+    "kid": "70cfda53",
+    "check": {
+     "iv": "Fo7+4jdl2vT/XYX9",
+     "ct": "NPRIRX3TI+iFbhxHhA64gNWUoAwUAq0="
+    }
+   }
+  },
+  "gh/surgery": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "UwH0lqGYptHoVMgInK1d2Q==",
+    "kid": "69b30350",
+    "check": {
+     "iv": "QVccNX77ReZ/cLgA",
+     "ct": "W143+May1hraOoPzW6SCk7oMcumnsk4="
+    }
+   }
+  },
+  "kth/anaesthesiology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "jkq0eE0dfQMKVzyxfaaQAA==",
+    "kid": "24152e0a",
+    "check": {
+     "iv": "JvkTfyssTKcL3WRY",
+     "ct": "D9UuNcOSIsTyDNHGnh8ssiQqCxfYjeU="
+    }
+   }
+  },
+  "kth/medical": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "znmFcG2N0wQM/7eEManOZQ==",
+    "kid": "b20bc486",
+    "check": {
+     "iv": "zM4RuXRpBTot4M3s",
+     "ct": "FLPtka5+TajuSzGUZDNnhmnSl00rQ4Q="
+    }
+   }
+  },
+  "kth/ophthalmology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "iRLbDNsfLnSAjWLn6YIlNA==",
+    "kid": "2afbacd8",
+    "check": {
+     "iv": "c1sRS+VybVajWryL",
+     "ct": "9cRApeBPgbT5dKLNfmNcEGafY7hFeFA="
+    }
+   }
+  },
+  "kth/orthopaedics": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "7oy5uTkQWH8GbAKmLVngWQ==",
+    "kid": "09933971",
+    "check": {
+     "iv": "sE2Klz7QNoDvlhoH",
+     "ct": "WAs+71f8u7Wzg5quzOxqPt6vx7yhAqM="
+    }
+   }
+  },
+  "kth/radiology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "kKFLyHojODCrhj3QWrxhnQ==",
+    "kid": "322fb1a5",
+    "check": {
+     "iv": "GYZ6doqcrxaezFUR",
+     "ct": "kXp6/BLYp0yRfqNlDDWsIDos3A5g9uQ="
+    }
+   }
+  },
+  "kth/surgery": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "70ROg2iTRwEBjruc0DCBqw==",
+    "kid": "f81a1ad8",
+    "check": {
+     "iv": "KhmX9l4/zn/Mp+9d",
+     "ct": "p2m103yV6q0RH6ZSf1ZwK2CaYBiG3Jk="
+    }
+   }
+  },
+  "kwh/anaesthesiology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "ytG87pMU03Af+tzfrBBQRQ==",
+    "kid": "ab5b3a72",
+    "check": {
+     "iv": "sEfJIgpGu6rnH9jf",
+     "ct": "PLKOn60E1s1YQEg4Zur1cbs22u0HIbE="
+    }
+   }
+  },
+  "kwh/medical": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "Hn7ka02gcPiVJH1azqQhfQ==",
+    "kid": "e007f49a",
+    "check": {
+     "iv": "r2rHogdbTFiw5I7U",
+     "ct": "sq+G+l8fqdT+kAbqnqP5/0jwVp0iCyU="
+    }
+   }
+  },
+  "kwh/ophthalmology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "KBh/Vqb0REcs62TuLrmaGA==",
+    "kid": "91e4af72",
+    "check": {
+     "iv": "18AinM45mVloP70A",
+     "ct": "jLZyB3MjRsBlPMGR3M5gRqhSPH0MjqU="
+    }
+   }
+  },
+  "kwh/orthopaedics": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "xVFBkx8yPX+XUCTfPTN+7w==",
+    "kid": "2943c87a",
+    "check": {
+     "iv": "tfxTjQ0dhmg7yi1I",
+     "ct": "WFpCm2/HdcWB0DJUNycfgTsEItya/1Q="
+    }
+   }
+  },
+  "kwh/radiology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "Mk2UsK8P6nYd6XDuh7jrqA==",
+    "kid": "a37760e7",
+    "check": {
+     "iv": "SC2rK0gMjNGpoffX",
+     "ct": "7455PcFlGjjm/TF2dljBsd5CWCzdZg8="
+    }
+   }
+  },
+  "kwh/surgery": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "7sz68sw7xS/Np2n1JlhueQ==",
+    "kid": "8848c955",
+    "check": {
+     "iv": "jSKNvb640o7ZU1CR",
+     "ct": "OVVLEnRK9GJyijYLBOgDCfi6R51blFg="
+    }
+   }
+  },
+  "ndh/anaesthesiology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "EIf8z+zLp4/t4U/i55ZWEA==",
+    "kid": "90b095fd",
+    "check": {
+     "iv": "kQjIhElPT6sa8R2b",
+     "ct": "3j9uwZElpI4Sx+/2PeSQP1H/UUlKOGA="
+    }
+   }
+  },
+  "ndh/medical": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "pgW395gZMNKGcHLTfswxSA==",
+    "kid": "4d73c975",
+    "check": {
+     "iv": "UD+S4cBePB7g4evA",
+     "ct": "yj9yd0Im7j8sl2N1hyUH2i1jU8+QdHs="
+    }
+   }
+  },
+  "ndh/ophthalmology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "MiVAPJczHmPnvcXblhiPtg==",
+    "kid": "092f16f5",
+    "check": {
+     "iv": "cT7ljmZhAtlXwmDS",
+     "ct": "O+XxMVTpWNeTrKvQrxlFSq/B1PYxPRU="
+    }
+   }
+  },
+  "ndh/orthopaedics": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "C0zqC/TCJ2lFw8a1Yzx9Ew==",
+    "kid": "618a769e",
+    "check": {
+     "iv": "Us0pjEk893LIn6mD",
+     "ct": "1Y7OI9dCbSpIxf2nmvBd1vyS9FVHWeQ="
+    }
+   }
+  },
+  "ndh/radiology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "bUz3JEeHmDNOStbd614Lnw==",
+    "kid": "58579adb",
+    "check": {
+     "iv": "AS5PyWNBQBMD2TXL",
+     "ct": "5E1n7blm4xeoafYBpBua6mL3SKzRwRw="
+    }
+   }
+  },
+  "ndh/surgery": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "33wSiMYK3vJjFnUZfL2WlA==",
+    "kid": "f0476970",
+    "check": {
+     "iv": "bbkwaNKxFE6ZgMaT",
+     "ct": "QDZVBy/uMD7YfU4RPGH6y3OLy7zC/kE="
+    }
+   }
+  },
+  "pmh/anaesthesiology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "lAYjY0V0kHF8Yy6q+exMyg==",
+    "kid": "6da2f1ce",
+    "check": {
+     "iv": "1xsXWh0V+um6mb4F",
+     "ct": "IaPtFT/tbBodb8kthUJ99Ejs6Bi4NrI="
+    }
+   }
+  },
+  "pmh/medical": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "rHYzK07l/rGZHecGF2Wlng==",
+    "kid": "4c22c54c",
+    "check": {
+     "iv": "L1fokEbo9cjlsdr3",
+     "ct": "GbnNCKn3bBVLaqOkU1k7sUJ4adaYslY="
+    }
+   }
+  },
+  "pmh/ophthalmology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "OQYm9pmOERVEG816mbEB5Q==",
+    "kid": "adf61fcd",
+    "check": {
+     "iv": "bYqFSvZg4DWutcj5",
+     "ct": "E3Q3zWcccg3PRrXsVK5Nnm2NLX8yz/w="
+    }
+   }
+  },
+  "pmh/orthopaedics": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "otlURGkpxwKJPrQL7hNBDA==",
+    "kid": "7bd52a5c",
+    "check": {
+     "iv": "AF2eHvKiDKAzHCu7",
+     "ct": "3gelihZK0B9HjQ80uP4+tk/MEVAilwQ="
+    }
+   }
+  },
+  "pmh/radiology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "+Ow8RtyyG2m7iZQii8zfjA==",
+    "kid": "1df266d5",
+    "check": {
+     "iv": "iPZuyiQ2Uw/zZPFB",
+     "ct": "0fAbDe4ZZxRr8N6jMdKoHE0ildTrb1o="
+    }
+   }
+  },
+  "pmh/surgery": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "I+sRI30qnB3pImk9b/vm/w==",
+    "kid": "a86c97bd",
+    "check": {
+     "iv": "6dmYoRrpmQGwP3vt",
+     "ct": "Gv6yp1Q6bj7rXnoBhYDk1YgCh3AZS+w="
+    }
+   }
+  },
+  "pwh/anaesthesiology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "cCDdtItsEhT2MueIyReiUg==",
+    "kid": "74f8eabe",
+    "check": {
+     "iv": "K/i/0I7LVIoUh3ta",
+     "ct": "DGCNZPJwXCX/VY4J488l//y4JoN+Syc="
+    }
+   }
+  },
+  "pwh/medical": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "SfNrwmNhKHcq+GnaU7Mx8A==",
+    "kid": "766eb61b",
+    "check": {
+     "iv": "3esj+A/Z8eEZodmX",
+     "ct": "9JCTG1LxzWcmjroW3IAJ5vCA1TbRHEE="
+    }
+   }
+  },
+  "pwh/ophthalmology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "vk6LXq04YTGwakL2CJfp0w==",
+    "kid": "d4453652",
+    "check": {
+     "iv": "348/2lJaeHNe3+WO",
+     "ct": "229MUzTEE++cmU0PvM9UfPhQ8/Z1oIE="
+    }
+   }
+  },
+  "pwh/orthopaedics": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "pntVz4VsVj0oQpLyFc6DcA==",
+    "kid": "22e389c9",
+    "check": {
+     "iv": "QBv3rb7j1OqF95Ye",
+     "ct": "vhJLuLLZMBhpLv5rlgH6BtbBW7ylzsQ="
+    }
+   }
+  },
+  "pwh/radiology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "Ft3DRqR4+cVXfjFC2fGZCQ==",
+    "kid": "e3d95450",
+    "check": {
+     "iv": "HmTNH0/GE2JFDIM9",
+     "ct": "bvEd57VVmEo8+VQaOOE9Sspe8mkJnkM="
+    }
+   }
+  },
+  "pwh/surgery": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "J5n6kKeLCQ2tmjorVCG3KA==",
+    "kid": "3c15e542",
+    "check": {
+     "iv": "6whon4gmkLvcEVTm",
+     "ct": "uqdCJs1mNjycAwVQwtNcdkLQWdEfpck="
+    }
+   }
+  },
+  "pyneh/anaesthesiology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "m5ixfbJB0j6MU9IAVDlR1g==",
+    "kid": "03432c90",
+    "check": {
+     "iv": "OgcWobKXD+tvjd9S",
+     "ct": "ga1u+l0hBIsV1diMTnqy0+BaX9RhGuw="
+    }
+   }
+  },
+  "pyneh/medical": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "MNLfn/RdfvVR+QSIJwINwg==",
+    "kid": "6a16eea6",
+    "check": {
+     "iv": "MVtAiz/L2+AvJBWv",
+     "ct": "2H1gRf/tAgkt/OCO7brfvtK9ueykbJI="
+    }
+   }
+  },
+  "pyneh/ophthalmology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "QUeBdWA9f4Wlf6IDEKjMFw==",
+    "kid": "ca495889",
+    "check": {
+     "iv": "FOtrNvezY8wadfbp",
+     "ct": "IsCiDt90ybTWK9uf3UJREXINiQudimo="
+    }
+   }
+  },
+  "pyneh/orthopaedics": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "gTpfIx2dLAGfdOq/9BuEIw==",
+    "kid": "24baed4c",
+    "check": {
+     "iv": "Y0JVIRnAIcTttvo1",
+     "ct": "Dr+CK/wll5MjuAjTA59gUSLGz3u2JxI="
+    }
+   }
+  },
+  "pyneh/radiology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "6muoIUGOICRTCq4RIinPAw==",
+    "kid": "15dc1a2c",
+    "check": {
+     "iv": "p/2j2+mUc8G7m/G1",
+     "ct": "5srziWJYtSeyNv+RIb95l7wdm1/nQhU="
+    }
+   }
+  },
+  "pyneh/surgery": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "3v6xJskb3zdGvf1NBwAMGg==",
+    "kid": "fd7c040c",
+    "check": {
+     "iv": "FDuNF/bVcq0NxWeY",
+     "ct": "y0T8v5bQHjfGvXfZlukYTnNKiueApKE="
+    }
+   }
+  },
+  "qmh/anaesthesiology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "eBCxk3kWja8Cz+waWSAJ6w==",
+    "kid": "0bce076e",
+    "check": {
+     "iv": "BW2fYthchfAXMT+9",
+     "ct": "8v/jnVNUcNdTLms/gblkMM5nSkGyyhI="
+    }
+   }
+  },
+  "qmh/medical": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "ZcX/rKJClZnCDbSbOu63jg==",
+    "kid": "31bfdd5d",
+    "check": {
+     "iv": "st8LJWaRLLtD/QFV",
+     "ct": "vNM2lG3X6u3wh1z8uOxiOOsqKxKMqss="
+    }
+   }
+  },
+  "qmh/ophthalmology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "alZYAeYgH68BaNLKZNHUSw==",
+    "kid": "8ae70092",
+    "check": {
+     "iv": "M2Dob7rLHiBTq5Zy",
+     "ct": "eXoQzSRqs/093ee6WJffqYlrk6jVSJY="
+    }
+   }
+  },
+  "qmh/orthopaedics": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "mhhOtKsu1BttlgM8+XiK/g==",
+    "kid": "22ad46de",
+    "check": {
+     "iv": "qXsBYy85DCUfbUzu",
+     "ct": "9M4bPhI+uniqE9EcjDZ2dtBjIXXR6W0="
+    }
+   }
+  },
+  "qmh/radiology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "W/uq7ve50I18zAWoZzA5SA==",
+    "kid": "69b67ce1",
+    "check": {
+     "iv": "sO+TaRXJAk+YdbXw",
+     "ct": "tJpYnorxSECjyXz6oiBrWetHSq2tr8M="
+    }
+   }
+  },
+  "qmh/surgery": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "peHWV8wxiy1VALjw3Y/Rcw==",
+    "kid": "57682c51",
+    "check": {
+     "iv": "gF2xOb9E1kSeZakQ",
+     "ct": "q3WOzVaV64PjcprzOwBEl0M9FhJf/Fs="
+    }
+   }
+  },
+  "rh/anaesthesiology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "dKZw5b5wsYdJchOmK3DYeg==",
+    "kid": "99ba5b5d",
+    "check": {
+     "iv": "tDk9Klx8JWDE39Ok",
+     "ct": "2FSziiuVpxhboDSIHj0bTZCOHYO7koE="
+    }
+   }
+  },
+  "rh/medical": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "8gm1RV12xoyU7Mhdqrd9rA==",
+    "kid": "254036dd",
+    "check": {
+     "iv": "ShuHsrLjDmvYOKL+",
+     "ct": "2qVeeDUoMNX6BmbbhGoRlfH/U5Jw8rA="
+    }
+   }
+  },
+  "rh/ophthalmology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "tFBcSDo36qD+MdcbhliSZw==",
+    "kid": "8bb9d9b5",
+    "check": {
+     "iv": "ra29y5do0jOQbaBo",
+     "ct": "+1c6tOpIHNaQpE+Okec46XT8ofkzsFw="
+    }
+   }
+  },
+  "rh/orthopaedics": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "FGufbu5P1upk926hCg4D9A==",
+    "kid": "72736df2",
+    "check": {
+     "iv": "t20wH9VBPTCZskuw",
+     "ct": "NNWTZjBWqH4NUqSpOP4L0ifdtkyxkkM="
+    }
+   }
+  },
+  "rh/radiology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "hHukP33GwclhIdur8+88oA==",
+    "kid": "f4aada5f",
+    "check": {
+     "iv": "+DlDa/SVdnONqhQQ",
+     "ct": "WOxswMK62WF6Wj9sBi5rf1dG1ol8VIo="
+    }
+   }
+  },
+  "rh/surgery": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "rb3vZ6FfLXLrhoC7SuY5rw==",
+    "kid": "cb864b7b",
+    "check": {
+     "iv": "lOi8zBTdfUpvHXwE",
+     "ct": "g8YvCnJLB5aHC0dYP6eZHUGjHNVq2sA="
+    }
+   }
+  },
+  "tkoh/anaesthesiology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "wFsCA3D+nuZgVyOVJsEF4w==",
+    "kid": "8084f3f2",
+    "check": {
+     "iv": "x/80AmwIczpnjwum",
+     "ct": "UjRl8Ok7EIBj0s7R3rrOPpMi6hd/clQ="
+    }
+   }
+  },
+  "tkoh/medical": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "QMZFCREvxoelVenYr/yizA==",
+    "kid": "d51d0a88",
+    "check": {
+     "iv": "1ZfutNnvgqpVtQ9b",
+     "ct": "FxUu8BtrLYBu1w5bGMl5IxByrlccqv8="
+    }
+   }
+  },
+  "tkoh/ophthalmology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "kXeWmIXTRtv7x+uMWqThdg==",
+    "kid": "3626743f",
+    "check": {
+     "iv": "7uk4c0M/xcle4Rur",
+     "ct": "VdWFog/lkBtccG8sKJiqDSVWCncInl4="
+    }
+   }
+  },
+  "tkoh/orthopaedics": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "zuzRPVwyElj4PXW4p0KX7Q==",
+    "kid": "fadc9ec0",
+    "check": {
+     "iv": "9PpJgWxpo+F04ROZ",
+     "ct": "ZraHSXLdmu2G+/ysuCV/LsHctHWGTlQ="
+    }
+   }
+  },
+  "tkoh/radiology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "4Q0P3Ii6JtKKnLch1kPWYw==",
+    "kid": "87604ce4",
+    "check": {
+     "iv": "vqyLOK75mjBIPMk7",
+     "ct": "dfhVIY8ZP+bMhlSPL49aRyA1zkRWhi4="
+    }
+   }
+  },
+  "tkoh/surgery": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "5k5Rh3feYHg5DlbremM1KA==",
+    "kid": "402ef0ac",
+    "check": {
+     "iv": "tNzoG/NkKG6UAXUz",
+     "ct": "+8w3PW/nmA+c3W743ZOZ43Vz7KY4uI8="
+    }
+   }
+  },
+  "tmh/anaesthesiology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "UIVwkkztP7C6aW9I6TCMmw==",
+    "kid": "bd977f23",
+    "check": {
+     "iv": "meiCSf21Yh3BJj/k",
+     "ct": "OTpmLyj8piMDGNgYoeaeQm0ZfOGBrJA="
+    }
+   }
+  },
+  "tmh/medical": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "FCho3/xAQ8tLTiiwumRvbQ==",
+    "kid": "034d4d25",
+    "check": {
+     "iv": "c+3IHu1ZTZ7rTvt0",
+     "ct": "vsOi8dsXSahjB9PZCJCK+uQfi0fDtyI="
+    }
+   }
+  },
+  "tmh/ophthalmology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "BwWRxehaYABq37W+qkH+BQ==",
+    "kid": "1f2594cf",
+    "check": {
+     "iv": "NHZWHIV7HoeDGxYn",
+     "ct": "sKpFYUNJr/vXyhHBVErjLG60L5mfBX8="
+    }
+   }
+  },
+  "tmh/orthopaedics": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "3y5hvs7ar/Lygra7A42BFA==",
+    "kid": "6a11f892",
+    "check": {
+     "iv": "8vPYURaotj90F+px",
+     "ct": "NPSu0JuGp6r+sZQpAQGipl0i80dXTbQ="
+    }
+   }
+  },
+  "tmh/radiology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "FcM0yWX76bieZTXV3ZEAaQ==",
+    "kid": "96808698",
+    "check": {
+     "iv": "MEwPzO/jbCqIBIQM",
+     "ct": "/DtMi8sv0ScNtEURM77Sv/DvQ1hZNqM="
+    }
+   }
+  },
+  "tmh/surgery": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "CWpR6BhA9jPUKfX8QaYZPg==",
+    "kid": "a52e49f7",
+    "check": {
+     "iv": "9CL8sGs+QmCGgdc2",
+     "ct": "dYRXo9gzILY8MRNzV+hf4U59WL5cix8="
+    }
+   }
+  },
+  "twh/anaesthesiology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "/aewtCjrDxGwtR4iEIe5Gg==",
+    "kid": "6125be9f",
+    "check": {
+     "iv": "ejnLeEFtmyVdpMYR",
+     "ct": "6wjXjItBnbm/4bER7nP4av6pDeeBzdY="
+    }
+   }
+  },
+  "twh/medical": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "IZnjtPNyQp1v7DTRsF7YkQ==",
+    "kid": "01428e69",
+    "check": {
+     "iv": "+pQlC0frUIfNYsPL",
+     "ct": "t+YonY21Z4xeXQnZ6JvRQeqDHp+1qME="
+    }
+   }
+  },
+  "twh/ophthalmology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "3zg8FsHVslTW/BdcMKFlVQ==",
+    "kid": "79a419ff",
+    "check": {
+     "iv": "RNLJEkRHuJT+cbnW",
+     "ct": "ylfnfDj5un9YbALvedKVtW4NbBhsL8Q="
+    }
+   }
+  },
+  "twh/orthopaedics": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "aDNhu29fnUiNrq+iUglgLw==",
+    "kid": "a9736677",
+    "check": {
+     "iv": "ZTiFM9NAYDJoebRR",
+     "ct": "TK81M9TGfZgZbjQgu8rQ1x18Wc09RGg="
+    }
+   }
+  },
+  "twh/radiology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "LolsgSE9XJeAvodb6/SmZw==",
+    "kid": "c1afd580",
+    "check": {
+     "iv": "CZvoj144362FYPJp",
+     "ct": "sWfQro8NdfqcgFHw3qaslBkNAKkCLmI="
+    }
+   }
+  },
+  "twh/surgery": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "WBKjgkJcgHUIxj20RJZT0g==",
+    "kid": "d80112dd",
+    "check": {
+     "iv": "yvsADVi/ShlW+3BR",
+     "ct": "692dfNGLx8kSvubzLAh6HQJ1P5pQ3s0="
+    }
+   }
+  },
+  "uch/anaesthesiology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "thwiN6UjaZIs46qEp0KCnQ==",
+    "kid": "d23ec2dd",
+    "check": {
+     "iv": "qDeiOd48DKnF+MP+",
+     "ct": "xmUkY2fEbJXdAYSQqNqfwxa/wLoLsnY="
+    }
+   }
+  },
+  "uch/medical": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "iLscn1PMyCQb+4PJYxx2Pg==",
+    "kid": "b84eaad5",
+    "check": {
+     "iv": "VMWDeq6IMyNHWv+Y",
+     "ct": "dHvVMLx3qL9S8AJBo/Nc0Q/bLOShhZk="
+    }
+   }
+  },
+  "uch/ophthalmology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "FgzZnjFU1+6bUiSIJQDBIg==",
+    "kid": "6983470e",
+    "check": {
+     "iv": "YtosypEDL1S8h4C8",
+     "ct": "p+efSbh1jP4vIRxj35mHWDMFroEgLi8="
+    }
+   }
+  },
+  "uch/orthopaedics": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "5JcCi4Dmm5/GnANYGR6+RA==",
+    "kid": "c013123f",
+    "check": {
+     "iv": "lNNVMv49M4AfBxt/",
+     "ct": "uMamsJ+UExU3Rwe3E4vHW/fmqsqrEEs="
+    }
+   }
+  },
+  "uch/radiology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "BuEEGw0VR5IQzVDAgBmROQ==",
+    "kid": "0a99c4e9",
+    "check": {
+     "iv": "MAkoxCH9OE/TtAyB",
+     "ct": "vGftYI6bPV+QWdGfYxccw/XTY9qn3kA="
+    }
+   }
+  },
+  "uch/surgery": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "BwMrAx1n2NHE0NSgfD7NjQ==",
+    "kid": "c26ca5d5",
+    "check": {
+     "iv": "Li7TyOO6gTDSmKXD",
+     "ct": "0v/0EtWxK0djzq9jAF7vNmPvNKd8dVo="
+    }
+   }
+  },
+  "ych/anaesthesiology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "h+1h5NXCbii+qCum5fAhzg==",
+    "kid": "c172222f",
+    "check": {
+     "iv": "Lznlyv4VSmrg8TrS",
+     "ct": "SlPRtDfvX30VQEhXRPiEfeDwaCNUraA="
+    }
+   }
+  },
+  "ych/medical": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "RweWEUUJQH3LdAfCWDC69w==",
+    "kid": "a83b0596",
+    "check": {
+     "iv": "B7kDo2cSeKTFXq+7",
+     "ct": "8ccrREgnocuwoAt2cg7kjsOnRpC4KnA="
+    }
+   }
+  },
+  "ych/ophthalmology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "TgU/DAYQEVVNjVRdn1yDEQ==",
+    "kid": "e728df59",
+    "check": {
+     "iv": "q/xR9ohRXqje14oB",
+     "ct": "q0bYJEf8wpTBy2puMIZ7SoLOxhAP2Fk="
+    }
+   }
+  },
+  "ych/orthopaedics": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "JfYMLkYxpY6q/uLOqs/gwg==",
+    "kid": "e50d568c",
+    "check": {
+     "iv": "CnbkykIo0QctMRzo",
+     "ct": "O11nhfpeChRKz175oSsGAdQyHE1KM/s="
+    }
+   }
+  },
+  "ych/radiology": {
+   "months": {},
+   "lock": {
+    "kdf": "PBKDF2-SHA256",
+    "iter": 600000,
+    "salt": "b4FHSwYRdIFOqH1GBLzyTQ==",
+    "kid": "06b79938",
+    "check": {
+     "iv": "TVQCuh+Q+nmO7t60",
+     "ct": "w0SB5l5evPTWfmrxhlOe5O/bSxVba6g="
+    }
+   }
+  },
   "ych/surgery": {
    "months": {
     "2026-11": {
      "file": "data/ych/surgery/2026-11.json",
      "rev": "02/11/2026",
-     "added": "2026-11-27"
+     "added": "2026-11-27",
+     "updated": "2026-11-27"
     }
    },
    "lock": {
     "kdf": "PBKDF2-SHA256",
     "iter": 600000,
-    "salt": "Aofs5Wqs8yf1zn7G7iWObw==",
-    "kid": "fcef7307",
+    "salt": "YCFzFE8Yeu2MzHFuq7s2/w==",
+    "kid": "42cdf2f4",
     "check": {
-     "iv": "nWxrkyMVTpjOLba4",
-     "ct": "EalQ3GXmmBDYptKmvmOsTrcc0SPzwO8="
+     "iv": "3mV52S4KyhSaxcL2",
+     "ct": "/wEiAFCpOnuD6zI73J7mhmSOE1c8YdU="
     }
    },
-   "changeover": "08:00"
+   "changeover": "08:00",
+   "updates": {
+    "file": "data/ych/surgery/updates.json",
+    "n": 1,
+    "latest": "2026-11-27"
+   }
   }
  }
 }

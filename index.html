@@ -41,7 +41,7 @@ body{overflow:hidden;overscroll-behavior:none}
 .nb{width:36px;height:44px;display:inline-flex;align-items:center;justify-content:center;color:var(--muted-text)}
 .nb:disabled{opacity:.35;cursor:default}
 .tabs{flex:none;padding:0 12px}
-.tabs .tab{padding:10px 12px;min-height:44px}
+.tabs .tab{padding:10px 12px;min-height:44px;display:inline-flex;align-items:center;gap:6px}
 .pane{flex:1;min-height:0}
 .foot-cap{position:fixed;right:max(16px,var(--safe-right));bottom:calc(12px + var(--safe-bottom));height:18px;line-height:18px;max-width:calc(100% - 96px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right;pointer-events:none;z-index:var(--z-sig)}
 
@@ -56,18 +56,26 @@ body{overflow:hidden;overscroll-behavior:none}
 .cal .d.we{background:var(--surface-high)}
 .cal .d.sel{border-color:var(--success-text);box-shadow:inset 0 0 0 1px var(--success-text)}
 .cal .d:focus-visible{outline:none;box-shadow:var(--focus-ring)}
-.d .dtop{flex:none;display:flex;align-items:center;justify-content:space-between;height:14px;padding:0 3px}
+.d .dtop{flex:none;display:flex;align-items:center;gap:2px;height:14px;padding:0 3px;overflow:hidden;white-space:nowrap}
+.d.today .dtop{padding:0 2px}
+.d .dtop .dn{margin-right:auto}
 .cal .dn{color:var(--muted-text);line-height:14px}
-.cal .d.today .dn{color:var(--text);font-weight:500}
 .d .phm{font-size:11px;font-weight:600;line-height:14px}
+/* today is the word Today in bold where the date would be; a holiday keeps its red */
+.cal .d.today{border-color:var(--border)}
+.cal .d.today.sel{border-color:var(--success-text)}
+.cal .d.today .dn{font-family:var(--font-ui);font-weight:700;letter-spacing:0;color:var(--text)}
 .cal .d.ph .dn,.d .phm{color:var(--cat-text)}
+.d .mk{flex:none;padding:0 4px;border:0;font-size:11px;font-weight:600;line-height:14px;letter-spacing:0}
+.d .mk.bare{padding:0;background:none;color:var(--cat-text)}
 .box{flex:1;min-height:0;min-width:0;width:100%;display:flex;flex-direction:column;justify-content:space-evenly}
 .nm{display:block;min-height:0;height:15px;line-height:15px;padding:0 2px;overflow:hidden;white-space:nowrap;font-size:11px;letter-spacing:-.1px;color:var(--text)}
 .nm .in,.tn .in{display:inline-block;transform-origin:0 50%;white-space:nowrap}
 .nm i{font-style:normal;color:var(--muted-text)}
 .nm u{text-decoration:none;color:var(--muted-text);margin-left:1px}
 .nm.cut .in,.tn.cut .in{display:block;overflow:hidden;text-overflow:ellipsis}
-.nm .in.cat{padding:0 5px;border:0;font-size:11px;font-weight:600;line-height:15px;letter-spacing:0}
+.nm.mine{padding:0}
+.nm .in.cat{padding:0 4px;border:0;font-size:11px;font-weight:600;line-height:15px;letter-spacing:0}
 .nm .in.cat i{color:inherit}
 .month-empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;color:var(--muted-text);padding:24px}
 .month-empty p{margin:0;max-width:34ch}
@@ -84,6 +92,8 @@ body{overflow:hidden;overscroll-behavior:none}
 .month.tight .tc{padding:6px 10px}
 .month.tight .th{margin-bottom:4px}
 .month.tight .tg{min-height:0}
+.tc .tx{display:block;margin-top:6px}
+.month.tight .tc .tx{margin-top:3px}
 
 /* list */
 .list{overflow:auto;-webkit-overflow-scrolling:touch;padding:0 max(12px,var(--safe-right)) calc(44px + var(--safe-bottom)) max(12px,var(--safe-left))}
@@ -106,6 +116,18 @@ body{overflow:hidden;overscroll-behavior:none}
 .sub{grid-column:2 / -1;font-size:11px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sub em{font-style:normal;color:var(--muted-text);margin-right:3px}
 .sub s{text-decoration:none;color:var(--muted-text);margin:0 5px}
+
+/* updates */
+.ups{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.up{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:12px 14px}
+.up-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:6px}
+.up h3{font-family:var(--font-ui);font-size:16px;font-weight:600;letter-spacing:0;line-height:1.3}
+.up ul{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;border-top:1px solid var(--border)}
+.up li{display:grid;grid-template-columns:74px minmax(0,1fr);gap:8px;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;line-height:1.35}
+.up li:last-child{border-bottom:0;padding-bottom:0}
+.up li .was{color:var(--muted-text);text-decoration:line-through}
+.up .you{margin-left:6px;padding:1px 7px;border:0;font-size:11px}
+.ups .none{color:var(--muted-text);text-align:center;padding:32px 16px}
 
 /* department */
 #v-dept{padding-top:var(--safe-top)}
@@ -148,6 +170,14 @@ details.hs .acc-body{display:flex;flex-direction:column;gap:6px;padding:8px;colo
 .about{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:11px;color:var(--muted-text)}
 .about .mark{display:inline-flex;height:14px;color:var(--text);opacity:.72}
 .about .mark svg{height:14px;width:auto}
+.sheet .alert{flex-wrap:wrap;justify-content:flex-end}
+.sheet .alert .btn{min-height:44px}
+#dev-body{display:flex;flex-direction:column;gap:12px}
+#dev-body h3{font-family:var(--font-ui);font-size:12px;font-weight:600;letter-spacing:0;color:var(--muted-text)}
+#dev-body .kv>div{font-size:13px;padding:6px 0}
+#dev-body .kv dd{min-width:0;overflow-wrap:anywhere}
+.dev-acts{display:flex;flex-wrap:wrap;gap:8px}
+.dev-acts .btn{min-height:44px}
 .page-state{flex:1;min-height:0}
 @media (prefers-reduced-motion: reduce){details.hs summary .icon{transition:none}}
 </style>
@@ -167,7 +197,7 @@ details.hs .acc-body{display:flex;flex-direction:column;gap:6px;padding:8px;colo
 
   <section class="view" id="v-dept" aria-labelledby="dp-h" hidden>
     <header class="dp-head">
-      <h1 id="dp-h">Department</h1>
+      <h1 id="dp-h">CalledB</h1>
       <button class="icon-btn" id="dp-close" aria-label="Close" hidden><svg class="icon" aria-hidden="true"><use href="#ph-x"/></svg></button>
     </header>
     <div class="dp-search field">
@@ -193,6 +223,7 @@ details.hs .acc-body{display:flex;flex-direction:column;gap:6px;padding:8px;colo
     <nav class="tabs" role="tablist" aria-label="Views">
       <button class="tab active" id="tab-month" role="tab" aria-selected="true" aria-controls="p-month">Month</button>
       <button class="tab" id="tab-list" role="tab" aria-selected="false" aria-controls="p-list">List</button>
+      <button class="tab" id="tab-updates" role="tab" aria-selected="false" aria-controls="p-updates">Updates<span class="badge" id="up-badge" hidden></span></button>
     </nav>
     <div class="pane month" id="p-month" role="tabpanel" aria-labelledby="tab-month">
       <div class="cal" id="cal"></div>
@@ -200,6 +231,7 @@ details.hs .acc-body{display:flex;flex-direction:column;gap:6px;padding:8px;colo
       <div class="tc" id="card" aria-live="polite"></div>
     </div>
     <div class="pane list" id="p-list" role="tabpanel" aria-labelledby="tab-list" hidden><div class="tb" id="list"></div></div>
+    <div class="pane list" id="p-updates" role="tabpanel" aria-labelledby="tab-updates" hidden><div class="ups" id="updates"></div></div>
     <div class="page-state" id="p-state" hidden></div>
     <div class="cap foot-cap" id="foot-cap"></div>
   </section>
@@ -214,7 +246,7 @@ details.hs .acc-body{display:flex;flex-direction:column;gap:6px;padding:8px;colo
   <p id="pass-p"></p>
   <form id="pass-form" novalidate>
     <div class="field">
-      <label for="pc">Passcode</label>
+      <label for="pc" id="pc-lab">Passcode</label>
       <input class="input" id="pc" type="text" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="From your department">
       <span class="error-msg" id="pc-err" role="alert" hidden></span>
     </div>
@@ -237,7 +269,17 @@ details.hs .acc-body{display:flex;flex-direction:column;gap:6px;padding:8px;colo
   </div>
   <div class="set-row"><div><span class="cap">Department</span><span id="set-dept"></span></div><button class="btn btn-ghost" id="set-change">Change</button></div>
   <div class="set-row" id="set-list-row"><div><span class="cap">This list</span><span id="set-list"></span></div></div>
-  <div class="about"><span class="mark"><svg viewBox="20 35 434 158" aria-hidden="true"><use href="#edb-mark"/></svg></span><span class="num">v0.1.0</span><span>© Ernest Tung</span><span id="about-off"></span></div>
+  <div class="set-row"><div><span class="cap">Dev build</span><span id="dev-state">Off</span></div><button class="btn btn-ghost" id="dev-btn">Unlock</button></div>
+  <div class="set-row" id="reset-row"><div><span class="cap">Reset</span><span>Forget everything on this phone</span></div><button class="btn btn-ghost" id="reset-btn">Reset to default</button></div>
+  <div class="alert warn" id="reset-ask" role="alertdialog" aria-labelledby="reset-q" hidden><span id="reset-q" style="flex:1 1 100%">This forgets your department, passcodes, name, pins and theme on this phone. The lists themselves are not touched.</span><button class="btn btn-ghost" id="reset-no">Cancel</button><button class="btn btn-primary" id="reset-yes">Reset</button></div>
+  <div class="about"><span class="mark"><svg viewBox="20 35 434 158" aria-hidden="true"><use href="#edb-mark"/></svg></span><span class="num">v0.2.0</span><span>© Ernest Tung</span><span id="about-off"></span></div>
+</div>
+
+<div class="sheet" id="sheet-dev" role="dialog" aria-modal="true" aria-labelledby="dev-h" hidden>
+  <div class="grab"></div>
+  <div class="sheet-h"><h2 id="dev-h">Dev build</h2><button class="icon-btn" data-close aria-label="Close"><svg class="icon" aria-hidden="true"><use href="#ph-x"/></svg></button></div>
+  <div id="dev-body"></div>
+  <div class="dev-acts"><button class="btn btn-ghost" id="dev-copy">Copy diagnostics</button><button class="btn btn-ghost" id="dev-cache">Clear offline copy</button><button class="btn btn-ghost" id="dev-off">Turn off</button></div>
 </div>
 
 <div class="sig" aria-label="EDB"><svg viewBox="20 35 434 158" aria-hidden="true"><use href="#edb-mark"/></svg></div>
@@ -245,7 +287,7 @@ details.hs .acc-body{display:flex;flex-direction:column;gap:6px;padding:8px;colo
 <script>
 (function(){
 'use strict';
-var VERSION='0.1.0';
+var VERSION='0.2.0',BUILT='27/11/2026';
 var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
 var WD3=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'], WD1=['S','M','T','W','T','F','S'];
 function $(id){return document.getElementById(id)}
@@ -258,7 +300,7 @@ var store={
   set:function(k,v){try{localStorage.setItem('calledb:'+k,JSON.stringify(v))}catch(e){}}
 };
 
-var S={index:null,dept:store.get('dept',null),pins:store.get('pins',[]),tab:'month',ym:null,sel:null,months:{},key:null,pick:null,q:'',wasMain:false};
+var S={index:null,dept:store.get('dept',null),pins:store.get('pins',[]),tab:'month',ym:null,sel:null,months:{},ups:null,key:null,pick:null,q:'',wasMain:false};
 
 /* ── dates ── */
 function ymOf(d){return d.slice(0,7)}
@@ -293,11 +335,12 @@ function deriveRaw(pass,lock){
 function importKey(raw){return crypto.subtle.importKey('raw',raw,'AES-GCM',false,['decrypt'])}
 function unseal(key,box,aad){
   return crypto.subtle.decrypt({name:'AES-GCM',iv:b64d(box.iv),additionalData:te.encode(aad)},key,b64d(box.ct)).then(function(pt){return td.decode(pt)})}
-function checkKey(id,key){return unseal(key,listInfo(id).lock.check,'calledb|'+id+'|check').then(function(t){return t==='calledb'},function(){return false})}
+function checkKey(tag,lock,key){return unseal(key,lock.check,'calledb|'+tag+'|check').then(function(t){return t==='calledb'},function(){return false})}
+/* Each department has its own salt, so its own key: opening one never opens another, even with the same words. */
 function storedKey(id){
   var l=listInfo(id),k=store.get('key:'+id,null);
   if(!l||!l.lock||!k||k.kid!==l.lock.kid)return Promise.resolve(null);
-  return importKey(b64d(k.k)).then(function(key){return checkKey(id,key).then(function(ok){return ok?key:null})},function(){return null})}
+  return importKey(b64d(k.k)).then(function(key){return checkKey(id,l.lock,key).then(function(ok){return ok?key:null})},function(){return null})}
 
 /* ── sheets ── */
 var openSheet=null,lastFocus=null,passDone=null;
@@ -309,19 +352,24 @@ function hideSheet(){
   setTimeout(function(){if(openSheet!==el)el.hidden=true},360);
   if(lastFocus&&lastFocus.focus)lastFocus.focus();
   if(el.id==='sheet-pass'&&passDone){var f=passDone;passDone=null;f(null)}}
-function askPasscode(id){
+var passFor=null;
+function askSecret(o){
   return new Promise(function(res){
-    passDone=res;$('pass-p').textContent=fullLabel(id)+' is locked. Enter the passcode your department shared.';
+    passDone=res;passFor=o;$('pass-h').textContent=o.title;$('pass-p').textContent=o.text;$('pc-lab').textContent=o.label;
+    $('pc').type=o.hidden?'password':'text';$('pc').placeholder=o.hint;
     $('pc').value='';$('pc').classList.remove('invalid');$('pc-err').hidden=true;$('pc-go').disabled=false;$('pc-go').textContent='Unlock';
-    $('pass-form').dataset.dept=id;showSheet($('sheet-pass'),$('pc'))})}
+    showSheet($('sheet-pass'),$('pc'))})}
+function askPasscode(id){
+  return askSecret({tag:id,lock:listInfo(id).lock,keep:'key:'+id,title:'Passcode',label:'Passcode',hint:'From your department',
+    text:fullLabel(id)+' is locked. Enter the passcode your department shared.',wrong:'That passcode did not open this department. Check it with your department and try again.'})}
 function submitPass(ev){
-  ev.preventDefault();var id=$('pass-form').dataset.dept,l=listInfo(id),v=$('pc').value;if(!normPass(v))return;
+  ev.preventDefault();var o=passFor,v=$('pc').value;if(!o||!normPass(v))return;
   $('pc-go').disabled=true;$('pc-go').textContent='Checking';
-  deriveRaw(v,l.lock).then(function(raw){return importKey(raw).then(function(key){return checkKey(id,key).then(function(ok){
-    if(!ok)throw new Error('wrong');store.set('key:'+id,{kid:l.lock.kid,k:b64e(raw)});var f=passDone;passDone=null;hideSheet();if(f)f(key)})})
+  deriveRaw(v,o.lock).then(function(raw){return importKey(raw).then(function(key){return checkKey(o.tag,o.lock,key).then(function(ok){
+    if(!ok)throw new Error('wrong');store.set(o.keep,{kid:o.lock.kid,k:b64e(raw)});var f=passDone;passDone=null;hideSheet();if(f)f(key)})})
   }).catch(function(){
     $('pc-go').disabled=false;$('pc-go').textContent='Unlock';$('pc').classList.add('invalid');
-    $('pc-err').textContent='That passcode did not open this list. Check it with your department and try again.';$('pc-err').hidden=false;$('pc').focus()})}
+    $('pc-err').textContent=o.wrong;$('pc-err').hidden=false;$('pc').focus()})}
 
 /* ── department picker ── */
 function show(view){$('v-dept').hidden=view!=='dept';$('v-main').hidden=view!=='main'}
@@ -357,9 +405,9 @@ function onDeptClick(ev){
 /* ── entering a department ── */
 function enter(id){
   var l=listInfo(id);
-  var openIt=function(key){S.dept=id;store.set('dept',id);S.key=key;S.months={};S.tab='month';
+  var openIt=function(key){S.dept=id;store.set('dept',id);S.key=key;S.months={};S.ups=null;S.tab='month';
     var cd=callDayISO(),r=reach();S.ym=r.indexOf(ymOf(cd))>=0?ymOf(cd):ymOf(todayISO());S.sel=null;show('main');return loadShow()};
-  if(!l||!Object.keys(l.months).length)return openIt(null);        /* no list yet: nothing to unlock */
+  if(!l||!l.lock)return openIt(null);
   return storedKey(id).then(function(key){return key||askPasscode(id)}).then(function(key){if(key)return openIt(key)})}
 function loadMonth(ym){
   var l=listInfo(S.dept),info=l&&l.months[ym];
@@ -379,7 +427,9 @@ function split(n){var x=/^(.+)\s([A-Z]{1,3})$/.exec(n);return x?{sur:x[1],ini:x[
 function norm(s){return String(s).trim().toLowerCase().replace(/\s+/g,' ')}
 function me(){return norm(store.get('me:'+S.dept,''))}
 function isMe(n){var m=me();return !!m&&norm(n)===m}
-function myDays(m){var k=m.tiers.map(function(t){return t.id});return Object.keys(m.days).filter(function(d){return k.some(function(t){return (m.days[d][t]||[]).some(isMe)})})}
+/* the tiers you are on that day, leaving out one role (the month cell already shows the main tiers by name) */
+function myTiers(m,row,except){return m.tiers.filter(function(t){return t.role!==except&&(row[t.id]||[]).some(isMe)})}
+function myDays(m){return Object.keys(m.days).filter(function(d){return m.tiers.some(function(t){return (m.days[d][t.id]||[]).some(isMe)})})}
 
 /* ── main view ── */
 function loadShow(){
@@ -389,29 +439,33 @@ function loadShow(){
     renderChrome();renderBody(m)},function(){state('offline')})}
 function state(kind){
   var el=$('p-state');
-  $('p-month').hidden=true;$('p-list').hidden=true;el.hidden=false;$('foot-cap').textContent='';
+  $('p-month').hidden=true;$('p-list').hidden=true;$('p-updates').hidden=true;el.hidden=false;$('foot-cap').textContent='';
   if(kind==='offline')el.innerHTML='<h2>The list did not load</h2><p>You may be offline. Open CalledB once with signal and the list is kept on this phone.</p><button class="btn btn-primary" id="st-retry">Try again</button>';
   else el.innerHTML='<h2>No call list yet</h2><p>'+esc(fullLabel(S.dept))+' has no list on CalledB. Ask the host to add it.</p><button class="btn btn-primary" id="st-change">Change department</button>'}
 function renderChrome(){
   var r=reach(),i=r.indexOf(S.ym);
   $('dept-tag').textContent=shortLabel(S.dept);$('month-title').textContent=monthName(S.ym);
   $('prev').disabled=i<=0;$('next').disabled=i<0||i>=r.length-1;
-  $('tab-month').classList.toggle('active',S.tab==='month');$('tab-list').classList.toggle('active',S.tab==='list');
-  $('tab-month').setAttribute('aria-selected',S.tab==='month');$('tab-list').setAttribute('aria-selected',S.tab==='list')}
+  ['month','list','updates'].forEach(function(t){$('tab-'+t).classList.toggle('active',S.tab===t);$('tab-'+t).setAttribute('aria-selected',S.tab===t)});
+  var l=listInfo(S.dept),n=l&&l.updates?l.updates.n-store.get('seen:'+S.dept,0):0;
+  $('up-badge').hidden=!(n>0);$('up-badge').textContent=n>0?n:'';
+  $('tab-updates').setAttribute('aria-label',n>0?'Updates, '+n+' new':'Updates')}
 function renderBody(m){
   var l=listInfo(S.dept);
   if(!l||!Object.keys(l.months).length){state('none');return}
-  $('p-state').hidden=true;$('p-month').hidden=S.tab!=='month';$('p-list').hidden=S.tab!=='list';
-  if(S.tab==='month')renderMonth(m);else renderList(m);
-  var info=l.months[S.ym];
-  $('foot-cap').innerHTML=!m?'':S.tab==='month'?esc(m.mains.slice().reverse().map(function(t){return t.short}).join(', '))+' call, top to bottom':
-    esc(MONTHS[+S.ym.slice(5)-1].slice(0,3))+' list'+(info&&info.rev?' · rev <span class="num">'+esc(info.rev)+'</span>':'')}
+  $('p-state').hidden=true;$('p-month').hidden=S.tab!=='month';$('p-list').hidden=S.tab!=='list';$('p-updates').hidden=S.tab!=='updates';
+  if(S.tab==='month')renderMonth(m);else if(S.tab==='list')renderList(m);else showUpdates();
+  $('foot-cap').innerHTML=m?versionText(S.ym):''}
+/* the version of the list on screen: month, the department's revision if it prints one, else the day it was added */
+function versionText(ym){
+  var l=listInfo(S.dept),info=l&&l.months[ym];if(!info)return '';
+  return esc(MONTHS[+ym.slice(5)-1].slice(0,3))+' list · '+(info.rev?'rev <span class="num">'+esc(info.rev)+'</span>':'added <span class="num">'+esc(dmy(info.added))+'</span>')}
 function hol(d){return S.index.holidays&&S.index.holidays[d]}
 
 function nameLine(names,m,cls){
   var first=names.filter(isMe)[0]||names[0],p=split(first),mine=isMe(first),more=names.length>1?'<u>+</u>':'';
-  var full=esc(p.sur)+(p.ini?' <i>'+esc(p.ini)+'</i>':'')+more,short=p.ini&&m.surCount[p.sur]===1?esc(p.sur)+more:'';
-  return '<span class="'+cls+'"'+(short?' data-short="'+esc(short)+'"':'')+'><span class="in'+(mine?' cat c1':'')+'">'+full+'</span></span>'}
+  var full=esc(p.sur)+(p.ini?' <i>'+esc(p.ini)+'</i>':'')+more,short=p.ini&&(mine||m.surCount[p.sur]===1)?esc(p.sur)+more:'';
+  return '<span class="'+cls+(mine?' mine':'')+'"'+(short?' data-short="'+esc(short)+'"':'')+'><span class="in'+(mine?' cat c1':'')+'">'+full+'</span></span>'}
 function renderMonth(m){
   var cal=$('cal'),empty=$('month-empty'),card=$('card');
   if(!m){
@@ -425,9 +479,11 @@ function renderMonth(m){
   var order=m.mains.slice().reverse();
   for(d=1;d<=n;d++){
     var id=iso(y,mo,d),row=m.days[id]||{},dw=(first+d-1)%7,ph=hol(id);
-    var say=WD3[dw]+' '+d+' '+MONTHS[mo-1]+(ph?', public holiday':'')+': '+order.map(function(t){return t.short+' '+((row[t.id]||[]).join(' and ')||'none')}).join(', ');
+    var say=(id===td?'Today, ':'')+WD3[dw]+' '+d+' '+MONTHS[mo-1]+(ph?', public holiday':'')+': '+order.map(function(t){return t.short+' '+((row[t.id]||[]).join(' and ')||'none')}).join(', ');
+    var mine=myTiers(m,row,'main'),mk=mine.length?'<span class="mk cat c1'+(id===td?' bare':'')+'">'+esc(mine[0].short)+(mine.length>1?'+':'')+'</span>':'';
+    if(mine.length)say+=', you: '+mine.map(function(t){return t.label}).join(' and ');
     h+='<button class="d'+(dw===0||dw===6?' we':'')+(ph?' ph c7':'')+(id===td?' today':'')+(id===S.sel?' sel':'')+'" data-d="'+id+'" aria-pressed="'+(id===S.sel)+'" aria-label="'+esc(say)+'">'+
-       '<span class="dtop"><span class="dn">'+d+'</span>'+(ph?'<span class="phm">PH</span>':'')+'</span><span class="box">'+
+       '<span class="dtop"><span class="dn" data-n="'+d+'">'+(id===td?'Today':d)+'</span>'+(ph&&!mk?'<span class="phm">PH</span>':'')+mk+'</span><span class="box">'+
        order.map(function(t){return row[t.id]?nameLine(row[t.id],m,'nm'):'<span class="nm"></span>'}).join('')+'</span></button>'}
   for(i=(first+n)%7;i&&i<7;i++)h+='<div class="d off"></div>';
   cal.style.setProperty('--rows',rows);cal.innerHTML=h;renderCard(m);layout()}
@@ -440,7 +496,11 @@ function renderCard(m){
     cols.push({lab:(on.length?on:m.seniors).map(function(t){return t.label}).join(' / '),names:[].concat.apply([],on.map(function(t){return row[t.id]}))})}
   $('card').innerHTML='<div class="th"><span class="tag">'+title+'</span><span class="cap">'+when+'</span></div><div class="tg" style="grid-template-columns:repeat('+cols.length+',minmax(0,1fr))">'+
     cols.map(function(c){return '<div><span class="cap">'+esc(c.lab)+'</span>'+(c.names.length?c.names.map(function(n){
-      return '<span class="tn"><span class="in'+(isMe(n)?' cat c1':'')+'">'+esc(n)+'</span></span>'}).join(''):'<span class="tn">—</span>')+'</div>'}).join('')+'</div>'}
+      return '<span class="tn"><span class="in'+(isMe(n)?' cat c1':'')+'">'+esc(n)+'</span></span>'}).join(''):'<span class="tn">—</span>')+'</div>'}).join('')+'</div>'+
+    (m.extras.some(function(t){return row[t.id]})?'<span class="sub tx">'+subLine(m.extras,row)+'</span>':'')}
+function subLine(tiers,row){
+  return tiers.filter(function(t){return row[t.id]}).map(function(t){return '<em>'+esc(t.short)+'</em>'+row[t.id].map(function(n){
+    return isMe(n)?'<span class="cat-text c1" style="font-weight:600">'+esc(n)+'</span>':esc(n)}).join(' / ')}).join('<s>·</s>')}
 /* Fit a name to its cell: as printed, then tightened sideways (never below 86 %), then the surname alone when
    nobody else in the department shares it, then cut with an ellipsis. */
 function fit(el){
@@ -455,7 +515,12 @@ function layout(){
   pane.classList.remove('tight','roomy');
   var cell=$('cal').querySelector('.d[data-d]');if(!cell)return;
   if(cell.offsetHeight<62){pane.classList.add('tight');if(cell.offsetHeight<56)pane.classList.add('roomy')}
-  pane.querySelectorAll('.nm,.tn').forEach(function(el){if(el.dataset.shortened){el.firstElementChild.innerHTML=el.dataset.full;delete el.dataset.shortened}fit(el)})}
+  pane.querySelectorAll('.nm,.tn').forEach(function(el){if(el.dataset.shortened){el.firstElementChild.innerHTML=el.dataset.full;delete el.dataset.shortened}fit(el)});
+  /* Today beside a PH or a call mark: close the letters up a little; on a very narrow phone fall back to the date, still bold */
+  var top=$('cal').querySelector('.d.today .dtop'),dn=top&&top.querySelector('.dn');
+  if(dn){dn.textContent='Today';dn.style.letterSpacing='';
+    var over=top.scrollWidth-top.clientWidth;
+    if(over>0){if(over<=4)dn.style.letterSpacing=(-over/5).toFixed(2)+'px';else dn.textContent=dn.dataset.n}}}
 
 function renderList(m){
   var el=$('list');
@@ -464,8 +529,7 @@ function renderList(m){
   var h='<div class="r h"><span></span>'+m.mains.map(function(t){return '<span class="tag">'+esc(t.label)+'</span>'}).join('')+'</div>';
   for(var d=1;d<=n;d++){
     var id=iso(y,mo,d),row=m.days[id]||{},dw=dowOf(id),ph=hol(id);
-    var sub=second.filter(function(t){return row[t.id]}).map(function(t){return '<em>'+esc(t.short)+'</em>'+row[t.id].map(function(n){
-      return isMe(n)?'<span class="cat-text c1" style="font-weight:600">'+esc(n)+'</span>':esc(n)}).join(' / ')}).join('<s>·</s>');
+    var sub=subLine(second,row);
     h+='<div class="r'+(second.length?' x':'')+(dw===0||dw===6?' we':'')+(ph?' ph c7':'')+(id===cd?' td':'')+'" data-d="'+id+'"'+(ph?' title="'+esc(ph)+'"':'')+'>'+
       '<span class="dc"><span class="cap">'+(id===td?'Today':WD3[dw])+(ph?' · PH':'')+'</span><span class="num">'+pad(d)+'</span></span>'+
       m.mains.map(function(t,i){var ns=row[t.id]||[];return '<span class="n'+(i===0?' lead':'')+(ns.length>1?' two':'')+'">'+(ns.length?ns.map(function(n){
@@ -473,6 +537,26 @@ function renderList(m){
       (second.length?'<span class="sub">'+sub+'</span>':'')+'</div>'}
   el.style.setProperty('--cols',m.mains.length);el.innerHTML=h;
   var cur=el.querySelector('.r.td');if(cur)cur.scrollIntoView({block:'center'});else $('p-list').scrollTop=0}
+
+/* ── updates: what is new in this department's lists ── */
+function showUpdates(){
+  var l=listInfo(S.dept),el=$('updates');
+  if(!l||!l.updates){el.innerHTML='<p class="none">Nothing new yet. When a list is added or revised, it shows here.</p>';return}
+  var done=function(log){S.ups=log;renderUpdates(log);store.set('seen:'+S.dept,log.length);renderChrome()};
+  if(S.ups){done(S.ups);return}
+  el.innerHTML='<p class="none">Loading</p>';
+  getJSON('./'+l.updates.file).then(function(box){return unseal(S.key,box,'calledb|'+S.dept+'|updates').then(JSON.parse)})
+    .then(done,function(){el.innerHTML='<p class="none">Updates did not load. You may be offline.</p>'})}
+function who(a){return a.length?a.map(function(n){return isMe(n)?'<span class="cat-text c1" style="font-weight:600">'+esc(n)+'</span>':esc(n)}).join(' / '):'nobody'}
+function renderUpdates(log){
+  var seen=store.get('seen:'+S.dept,0);
+  $('updates').innerHTML=log.map(function(u,i){
+    var mine=u.changes.some(function(c){return c.from.concat(c.to).some(isMe)});
+    return '<article class="up"><div class="up-h"><span class="tag">'+esc(dmy(u.at))+'</span><span class="cap">'+(i>=seen?'New':'')+(i>=seen&&u.rev?' · ':'')+(u.rev?'rev <span class="num">'+esc(u.rev)+'</span>':'')+'</span></div>'+
+      '<h3>'+esc(monthName(u.month))+' list '+(u.kind==='added'?'added':'revised')+(mine?'<span class="cat c1 you">You</span>':'')+'</h3>'+
+      (u.kind!=='revised'?'':u.changes.length?'<ul>'+u.changes.map(function(c){
+        return '<li><span><span class="num">'+c.d.slice(8)+'/'+c.d.slice(5,7)+'</span> '+WD3[dowOf(c.d)]+'</span><span>'+esc(c.tier)+' call: <span class="was">'+who(c.from)+'</span> → '+who(c.to)+'</span></li>'}).join('')+'</ul>':
+        '<p class="cap" style="margin:6px 0 0">The revision changed; no call did.</p>')+'</article>'}).reverse().join('')}
 
 /* ── settings ── */
 function openSettings(){
@@ -482,7 +566,44 @@ function openSettings(){
   $('set-dept').textContent=fullLabel(S.dept);
   $('set-list-row').hidden=!info;if(info)$('set-list').innerHTML=esc(monthName(S.ym))+(info.rev?' · rev <span class="num">'+esc(info.rev)+'</span>':'')+' · added <span class="num">'+esc(dmy(info.added))+'</span>';
   $('about-off').textContent=('serviceWorker' in navigator&&navigator.serviceWorker.controller)?'· offline ready':'';
+  $('dev-state').textContent=devOn()?'On':'Off';$('dev-btn').textContent=devOn()?'Open':'Unlock';$('dev-btn').hidden=!S.index.dev;
+  $('reset-row').hidden=false;$('reset-ask').hidden=true;
   meMsg();showSheet($('sheet-set'),null)}
+
+/* ── dev build: how this phone and this list are set up. A hidden panel, not a second lock: nothing secret sits behind it. ── */
+function devOn(){var d=store.get('dev',null);return !!(d&&S.index&&S.index.dev&&d.kid===S.index.dev.kid)}
+function askDev(){
+  return askSecret({tag:'dev',lock:S.index.dev,keep:'dev',hidden:true,title:'Dev build',label:'Developer password',hint:'',
+    text:'For the host. It shows how this phone and this list are set up.',wrong:'That is not the developer password.'})}
+function devInfo(){
+  var l=listInfo(S.dept)||{months:{}},m=S.months[S.ym],cal=$('cal'),cell=cal.querySelector('.d[data-d]'),out=[];
+  var uniq=function(sel,f){var o={};cal.querySelectorAll(sel).forEach(function(e){if(!f||f(e))o[e.textContent]=1});return Object.keys(o).join(', ')||'none'};
+  var unlocked=[],i,k;try{for(i=0;i<localStorage.length;i++){k=localStorage.key(i);if(k.indexOf('calledb:key:')===0)unlocked.push(k.slice(12))}}catch(e){}
+  var pr=document.createElement('div');pr.style.cssText='position:fixed;visibility:hidden;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)';document.body.appendChild(pr);
+  var cs=getComputedStyle(pr),safe=parseInt(cs.paddingTop)+' / '+parseInt(cs.paddingBottom);pr.remove();
+  var home=!!(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true;
+  out.push(['App',[['Version','v'+VERSION],['Built',BUILT],['Opened as',home?'Home Screen app':'Browser tab'],['Signal',navigator.onLine?'Online':'Offline'],
+    ['Offline copy',('serviceWorker' in navigator&&navigator.serviceWorker.controller)?'Ready':'Not yet'],['Screen',innerWidth+' × '+innerHeight+' px, safe areas '+safe]]]);
+  out.push(['Lists',[['Index updated',dmy(S.index.updated)],['Hospitals',S.index.hospitals.length],['Departments',S.index.departments.length],
+    ['With a list',Object.keys(S.index.lists).filter(function(d){return Object.keys(S.index.lists[d].months).length}).join(', ')||'none']]]);
+  out.push(['This department',[['Id',S.dept],['Lock',l.lock?l.lock.kid:'none'],['Call day starts',l.changeover||'not set'],
+    ['Months',Object.keys(l.months).map(function(ym){var x=l.months[ym];return ym+(x.rev?' rev '+x.rev:'')+', added '+dmy(x.added)}).join('; ')||'none'],['Updates',l.updates?l.updates.n:0]]]);
+  if(m)out.push([monthName(S.ym),[['Read from',m.source.file],['Sheet title',m.source.title],['Read on',dmy(m.source.read)],
+    ['Tiers',m.tiers.map(function(t){return t.short+' ('+t.role+')'}).join(', ')],['People',m.people.length],
+    ['Month row',cell&&cell.offsetHeight?cell.offsetHeight+' px'+($('p-month').classList.contains('tight')?', tight':'')+($('p-month').classList.contains('roomy')?', scrolling':''):'open the Month tab to measure'],
+    ['Names tightened',uniq('.nm',function(e){return e.firstElementChild&&e.firstElementChild.style.transform})],
+    ['Surname only',uniq('.nm[data-shortened]')],['Names cut',uniq('.nm.cut')],
+    ['Reader notes',(m.notes&&m.notes.length)?m.notes.join('; '):'none']]]);
+  out.push(['This phone',[['Unlocked',unlocked.join(', ')||'none'],['Pinned',S.pins.join(', ')||'none'],['Your name',store.get('me:'+S.dept,'')||'not set']]]);
+  return out}
+function openDev(){
+  $('dev-body').innerHTML=devInfo().map(function(sec){return '<section><h3>'+esc(sec[0])+'</h3><dl class="kv">'+sec[1].map(function(r){
+    return '<div><dt>'+esc(r[0])+'</dt><dd>'+esc(r[1])+'</dd></div>'}).join('')+'</dl></section>'}).join('');
+  $('dev-copy').textContent='Copy diagnostics';showSheet($('sheet-dev'),null)}
+function resetAll(){
+  try{var ks=[],i,k;for(i=0;i<localStorage.length;i++){k=localStorage.key(i);if(k.indexOf('calledb:')===0||k==='eds-theme')ks.push(k)}
+    ks.forEach(function(x){localStorage.removeItem(x)})}catch(e){}
+  location.reload()}
 function meMsg(){
   var m=S.months[S.ym],el=$('me-msg'),v=me();el.className='hint';
   if(!v||!m){el.textContent=v?'':'Your call days are marked once your name matches the list.';return}
@@ -506,6 +627,22 @@ function wire(){
   $('next').addEventListener('click',function(){var r=reach(),i=r.indexOf(S.ym);if(i>=0&&i<r.length-1)go(r[i+1])});
   $('tab-month').addEventListener('click',function(){S.tab='month';renderChrome();renderBody(S.months[S.ym])});
   $('tab-list').addEventListener('click',function(){S.tab='list';renderChrome();renderBody(S.months[S.ym])});
+  $('tab-updates').addEventListener('click',function(){S.tab='updates';renderChrome();renderBody(S.months[S.ym])});
+  $('dev-btn').addEventListener('click',function(){
+    hideSheet();if(devOn())openDev();else askDev().then(function(key){if(key)openDev()})});
+  $('dev-off').addEventListener('click',function(){try{localStorage.removeItem('calledb:dev')}catch(e){}hideSheet()});
+  $('dev-copy').addEventListener('click',function(){
+    var t=devInfo().map(function(sec){return sec[0]+'\n'+sec[1].map(function(r){return '  '+r[0]+': '+r[1]}).join('\n')}).join('\n'),b=this;
+    var ok=function(){b.textContent='Copied'},no=function(){b.textContent='Copy failed'};
+    if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(ok,no);else no()});
+  $('dev-cache').addEventListener('click',function(){
+    var b=this;b.disabled=true;b.textContent='Clearing';
+    var c=window.caches?caches.keys().then(function(ks){return Promise.all(ks.filter(function(k){return k.indexOf('calledb-')===0}).map(function(k){return caches.delete(k)}))}):Promise.resolve();
+    var w=('serviceWorker' in navigator)?navigator.serviceWorker.getRegistrations().then(function(rs){return Promise.all(rs.map(function(r){return r.unregister()}))}):Promise.resolve();
+    Promise.all([c,w]).then(function(){location.reload()},function(){location.reload()})});
+  $('reset-btn').addEventListener('click',function(){$('reset-row').hidden=true;$('reset-ask').hidden=false;$('reset-no').focus()});
+  $('reset-no').addEventListener('click',function(){$('reset-ask').hidden=true;$('reset-row').hidden=false});
+  $('reset-yes').addEventListener('click',resetAll);
   $('cal').addEventListener('click',function(ev){
     var c=ev.target.closest('.d[data-d]');if(!c)return;S.sel=c.dataset.d;
     $('cal').querySelectorAll('.d[data-d]').forEach(function(x){var on=x===c;x.classList.toggle('sel',on);x.setAttribute('aria-pressed',on)});
