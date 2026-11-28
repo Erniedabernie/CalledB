@@ -173,8 +173,11 @@ body{overflow:hidden;overscroll-behavior:none}
 .hl-foot{flex:none;display:flex;flex-direction:column;gap:12px}
 .hl-foot .btn{width:100%;justify-content:center;min-height:48px;font-size:16px}
 
-/* sheets: --kb lifts a sheet above the on-screen keyboard */
-.sheet{display:flex;flex-direction:column;gap:16px;bottom:var(--kb,0px)}
+/* sheets and the on-screen keyboard: --kb lifts a sheet above the keyboard, --vvh is the height still on show.
+   A sheet is never taller than what is on show, so its top (where the fields are) stays on screen and the rest scrolls inside it. */
+.sheet{display:flex;flex-direction:column;gap:16px;bottom:var(--kb,0px);max-height:calc(var(--vvh,100vh) - 12px - var(--safe-top));overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.sheet>*{flex:none}
+.kb .sheet{padding-bottom:var(--space-4)}
 .sheet .grab{flex:none;margin-bottom:-4px}
 .sheet-h{margin-bottom:0}
 .sheet p{margin:0;color:var(--muted-text)}
@@ -323,7 +326,7 @@ body{overflow:hidden;overscroll-behavior:none}
   <div class="set-row"><div><span class="cap">Dev build</span><span id="dev-state">Off</span></div><button class="btn btn-ghost" id="dev-btn">Unlock</button></div>
   <div class="set-row" id="reset-row"><div><span class="cap">Reset</span><span>Forget everything on this phone</span></div><button class="btn btn-ghost" id="reset-btn">Reset to default</button></div>
   <div class="alert warn" id="reset-ask" role="alertdialog" aria-labelledby="reset-q" hidden><span id="reset-q" style="flex:1 1 100%">This forgets your department, passcodes, name, pins and theme on this phone. The lists themselves are not touched.</span><button class="btn btn-ghost" id="reset-no">Cancel</button><button class="btn btn-primary" id="reset-yes">Reset</button></div>
-  <div class="about"><span class="mark"><svg viewBox="20 35 434 158" aria-hidden="true"><use href="#edb-mark"/></svg></span><span class="num">v0.4.0</span><span>© Ernest Tung</span><span id="about-off"></span></div>
+  <div class="about"><span class="mark"><svg viewBox="20 35 434 158" aria-hidden="true"><use href="#edb-mark"/></svg></span><span class="num">v0.4.1</span><span>© Ernest Tung</span><span id="about-off"></span></div>
 </div>
 
 <div class="sheet" id="sheet-dev" role="dialog" aria-modal="true" aria-labelledby="dev-h" hidden>
@@ -338,7 +341,7 @@ body{overflow:hidden;overscroll-behavior:none}
 <script>
 (function(){
 'use strict';
-var VERSION='0.4.0',BUILT='27/11/2026';
+var VERSION='0.4.1',BUILT='28/11/2026';
 var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
 var WD3=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'], WD1=['S','M','T','W','T','F','S'];
 function $(id){return document.getElementById(id)}
@@ -747,9 +750,15 @@ function wire(){
   var saved='dark';try{saved=localStorage.getItem('eds-theme')||'dark'}catch(e){}
   document.querySelectorAll('.segmented [data-mode]').forEach(function(b){b.classList.toggle('active',b.dataset.mode===saved);b.setAttribute('aria-pressed',b.dataset.mode===saved)});
   var rt;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(layout,80)});
-  if(window.visualViewport){var vv=window.visualViewport,kb=function(){
-    document.documentElement.style.setProperty('--kb',Math.max(0,Math.round(window.innerHeight-vv.height-vv.offsetTop))+'px')};
-    vv.addEventListener('resize',kb);vv.addEventListener('scroll',kb)}
+  /* the field being typed in stays on show inside its sheet */
+  var keep=function(){var a=document.activeElement,sh=a&&a.closest&&a.closest('.sheet');if(!sh||!/^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName))return;
+    var f=a.closest('.field')||a,r=f.getBoundingClientRect(),b=sh.getBoundingClientRect();
+    if(r.top<b.top+8)sh.scrollTop-=b.top+8-r.top;else if(r.bottom>b.bottom-8)sh.scrollTop+=Math.min(r.bottom-(b.bottom-8),r.top-(b.top+8))};
+  if(window.visualViewport){var vv=window.visualViewport,de=document.documentElement,kb=function(){
+    var k=Math.max(0,Math.round(window.innerHeight-vv.height-vv.offsetTop));
+    de.style.setProperty('--kb',k+'px');de.style.setProperty('--vvh',Math.round(vv.height)+'px');de.classList.toggle('kb',k>80);keep()};
+    vv.addEventListener('resize',kb);vv.addEventListener('scroll',kb);kb()}
+  document.addEventListener('focusin',function(){setTimeout(keep,80)});
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(layout);
   /* the call day rolls over while the app is open: redraw when it comes back to the front */
   document.addEventListener('visibilitychange',function(){
