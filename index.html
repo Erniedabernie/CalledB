@@ -62,26 +62,27 @@ body{overflow:hidden;overscroll-behavior:none}
 .cal .d.sel{border-color:var(--success-text);box-shadow:inset 0 0 0 1px var(--success-text)}
 .cal .d:focus-visible{outline:none;box-shadow:var(--focus-ring)}
 .d .dtop{flex:none;display:flex;align-items:center;gap:2px;height:14px;padding:0 3px;overflow:hidden;white-space:nowrap}
-.d.today .dtop{padding:0 2px}
 .d .dtop .dn{margin-right:auto}
 .cal .dn{color:var(--muted-text);line-height:14px}
 .d .phm{font-size:11px;font-weight:600;line-height:14px}
-/* today is the word Today in bold where the date would be; a holiday keeps its red */
-.cal .d.today{border-color:var(--border)}
+/* today: an ink band across the top of the day, the word Today in it. Ink is the one colour here that means nothing else:
+   green is the selected day, Sky is you, red is a holiday. */
+.cal .d.today{border-color:var(--border);padding-top:0}
 .cal .d.today.sel{border-color:var(--success-text)}
-.cal .d.today .dn{font-family:var(--font-ui);font-weight:700;letter-spacing:0;color:var(--text)}
+.cal .d.today .dtop{height:17px;background:var(--text)}
+.cal .d.today .dn{font-family:var(--font-ui);font-weight:700;letter-spacing:0;color:var(--bg)}
 .cal .d.ph .dn,.d .phm{color:var(--cat-text)}
-.d .mk{flex:none;padding:0 4px;border:0;font-size:11px;font-weight:600;line-height:14px;letter-spacing:0}
-.d .mk.bare{padding:0;background:none;color:var(--cat-text)}
+.cal .d.today.ph .dn,.cal .d.today .phm{color:var(--bg)}
+.d .mk{flex:none;padding:0 4px;border:0;border-radius:var(--radius-sm,2px);font-size:11px;font-weight:600;line-height:14px;letter-spacing:0}
 .box{flex:1;min-height:0;min-width:0;width:100%;display:flex;flex-direction:column;justify-content:space-evenly}
 .nm{display:block;min-height:0;height:15px;line-height:15px;padding:0 2px;overflow:hidden;white-space:nowrap;font-size:11px;letter-spacing:-.1px;color:var(--text)}
 .nm .in,.tn .in{display:inline-block;transform-origin:0 50%;white-space:nowrap}
 .nm i{font-style:normal;color:var(--muted-text)}
 .nm u{text-decoration:none;color:var(--muted-text);margin-left:1px}
 .nm.cut .in,.tn.cut .in{display:block;overflow:hidden;text-overflow:ellipsis}
-.nm.mine{padding:0}
-.nm .in.cat{padding:0 4px;border:0;font-size:11px;font-weight:600;line-height:15px;letter-spacing:0}
-.nm .in.cat i{color:inherit}
+/* your own call: a Sky band across the day with your name in it */
+.nm.mine{background:var(--cat-fill);color:var(--cat-ink);font-weight:600;letter-spacing:0}
+.nm.mine i,.nm.mine u{color:inherit}
 .month-empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;color:var(--muted-text);padding:24px}
 .month-empty p{margin:0;max-width:34ch}
 
@@ -93,7 +94,7 @@ body{overflow:hidden;overscroll-behavior:none}
 .tg{display:grid;gap:6px;min-height:55px}
 .tg>div{display:flex;flex-direction:column;gap:3px;min-width:0}
 .tn{display:block;height:17px;line-height:17px;overflow:hidden;white-space:nowrap;font-size:14px;font-weight:600}
-.tn .in.cat{padding:0 7px;border:0;font-size:13px;line-height:17px}
+.tn .in.cat{padding:0 7px;border:0;border-radius:var(--radius-sm,2px);font-size:13px;line-height:17px}
 .month.tight .tc{padding:6px 10px}
 .month.tight .th{margin-bottom:4px}
 .month.tight .tg{min-height:0}
@@ -117,7 +118,7 @@ body{overflow:hidden;overscroll-behavior:none}
 .n.lead{font-weight:600}
 .n.two{font-size:13px;line-height:1.25}
 .n>span{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.n .cat{padding:3px 9px;border:0;font-size:13px}
+.n .cat{padding:3px 9px;border:0;border-radius:var(--radius-sm,2px);font-size:13px}
 .sub{grid-column:2 / -1;font-size:11px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sub em{font-style:normal;color:var(--muted-text);margin-right:3px}
 .sub s{text-decoration:none;color:var(--muted-text);margin:0 5px}
@@ -131,7 +132,7 @@ body{overflow:hidden;overscroll-behavior:none}
 .up li{display:grid;grid-template-columns:74px minmax(0,1fr);gap:8px;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;line-height:1.35}
 .up li:last-child{border-bottom:0;padding-bottom:0}
 .up li .was{color:var(--muted-text);text-decoration:line-through}
-.up .you{margin-left:6px;padding:1px 7px;border:0;font-size:11px}
+.up .you{margin-left:6px;padding:1px 7px;border:0;border-radius:var(--radius-sm,2px);font-size:11px}
 .ups .none{color:var(--muted-text);text-align:center;padding:32px 16px}
 
 /* department */
@@ -326,7 +327,7 @@ body{overflow:hidden;overscroll-behavior:none}
   <div class="set-row"><div><span class="cap">Dev build</span><span id="dev-state">Off</span></div><button class="btn btn-ghost" id="dev-btn">Unlock</button></div>
   <div class="set-row" id="reset-row"><div><span class="cap">Reset</span><span>Forget everything on this phone</span></div><button class="btn btn-ghost" id="reset-btn">Reset to default</button></div>
   <div class="alert warn" id="reset-ask" role="alertdialog" aria-labelledby="reset-q" hidden><span id="reset-q" style="flex:1 1 100%">This forgets your department, passcodes, name, pins and theme on this phone. The lists themselves are not touched.</span><button class="btn btn-ghost" id="reset-no">Cancel</button><button class="btn btn-primary" id="reset-yes">Reset</button></div>
-  <div class="about"><span class="mark"><svg viewBox="20 35 434 158" aria-hidden="true"><use href="#edb-mark"/></svg></span><span class="num">v0.4.1</span><span>© Ernest Tung</span><span id="about-off"></span></div>
+  <div class="about"><span class="mark"><svg viewBox="20 35 434 158" aria-hidden="true"><use href="#edb-mark"/></svg></span><span class="num">v0.5.0</span><span>© Ernest Tung</span><span id="about-off"></span></div>
 </div>
 
 <div class="sheet" id="sheet-dev" role="dialog" aria-modal="true" aria-labelledby="dev-h" hidden>
@@ -341,7 +342,7 @@ body{overflow:hidden;overscroll-behavior:none}
 <script>
 (function(){
 'use strict';
-var VERSION='0.4.1',BUILT='28/11/2026';
+var VERSION='0.5.0',BUILT='28/11/2026';
 var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
 var WD3=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'], WD1=['S','M','T','W','T','F','S'];
 function $(id){return document.getElementById(id)}
@@ -547,7 +548,7 @@ function hol(d){return S.index.holidays&&S.index.holidays[d]}
 function nameLine(names,m,cls){
   var first=names.filter(isMe)[0]||names[0],p=split(first),mine=isMe(first),more=names.length>1?'<u>+</u>':'';
   var full=esc(p.sur)+(p.ini?' <i>'+esc(p.ini)+'</i>':'')+more,short=p.ini&&(mine||m.surCount[p.sur]===1)?esc(p.sur)+more:'';
-  return '<span class="'+cls+(mine?' mine':'')+'"'+(short?' data-short="'+esc(short)+'"':'')+'><span class="in'+(mine?' cat c1':'')+'">'+full+'</span></span>'}
+  return '<span class="'+cls+(mine?' mine c1':'')+'"'+(short?' data-short="'+esc(short)+'"':'')+'><span class="in">'+full+'</span></span>'}
 function renderMonth(m){
   var cal=$('cal'),empty=$('month-empty'),card=$('card');
   if(!m){
@@ -562,7 +563,7 @@ function renderMonth(m){
   for(d=1;d<=n;d++){
     var id=iso(y,mo,d),row=m.days[id]||{},dw=(first+d-1)%7,ph=hol(id);
     var say=(id===td?'Today, ':'')+WD3[dw]+' '+d+' '+MONTHS[mo-1]+(ph?', public holiday':'')+': '+order.map(function(t){return t.short+' '+((row[t.id]||[]).join(' and ')||'none')}).join(', ');
-    var mine=myTiers(m,row,'main'),mk=mine.length?'<span class="mk cat c1'+(id===td?' bare':'')+'">'+esc(mine[0].short)+(mine.length>1?'+':'')+'</span>':'';
+    var mine=myTiers(m,row,'main'),mk=mine.length?'<span class="mk cat c1">'+esc(mine[0].short)+(mine.length>1?'+':'')+'</span>':'';
     if(mine.length)say+=', you: '+mine.map(function(t){return t.label}).join(' and ');
     h+='<button class="d'+(dw===0||dw===6?' we':'')+(ph?' ph c7':'')+(id===td?' today':'')+(id===S.sel?' sel':'')+'" data-d="'+id+'" aria-pressed="'+(id===S.sel)+'" aria-label="'+esc(say)+'">'+
        '<span class="dtop"><span class="dn" data-n="'+d+'">'+(id===td?'Today':d)+'</span>'+(ph&&!mk?'<span class="phm">PH</span>':'')+mk+'</span><span class="box">'+
@@ -598,7 +599,7 @@ function layout(){
   var cell=$('cal').querySelector('.d[data-d]');if(!cell)return;
   if(cell.offsetHeight<62){pane.classList.add('tight');if(cell.offsetHeight<56)pane.classList.add('roomy')}
   pane.querySelectorAll('.nm,.tn').forEach(function(el){if(el.dataset.shortened){el.firstElementChild.innerHTML=el.dataset.full;delete el.dataset.shortened}fit(el)});
-  /* Today beside a PH or a call mark: close the letters up a little; on a very narrow phone fall back to the date, still bold */
+  /* Today beside a PH or a call mark: close the letters up a little; when that is not enough the band shows the date instead, still bold */
   var top=$('cal').querySelector('.d.today .dtop'),dn=top&&top.querySelector('.dn');
   if(dn){dn.textContent='Today';dn.style.letterSpacing='';
     var over=top.scrollWidth-top.clientWidth;
