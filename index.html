@@ -98,8 +98,13 @@ body{overflow:hidden;overscroll-behavior:none}
 .month.tight .tc{padding:6px 10px}
 .month.tight .th{margin-bottom:4px}
 .month.tight .tg{min-height:0}
-.tc .tx{display:block;margin-top:6px}
-.month.tight .tc .tx{margin-top:3px}
+/* part-calls (HO, 0.5, 1.5, 2.5 ...) sit straight under the call they belong to; the card keeps the height of the month's fullest column */
+.tg.x{min-height:calc(17px + var(--crows,2) * 20px)}
+.tc .tx{display:flex;flex-direction:column;gap:3px;min-width:0;margin-top:2px}
+.xn{display:flex;align-items:baseline;gap:4px;height:17px;line-height:17px;min-width:0;white-space:nowrap}
+.xn em{flex:none;font-style:normal;font-size:11px;color:var(--muted-text)}
+.xn .tn{flex:1;min-width:0;font-size:13px;font-weight:500}
+.month.tight .tg.x{min-height:calc(15px + var(--crows,2) * 20px)}
 
 /* list */
 .list{overflow:auto;-webkit-overflow-scrolling:touch;padding:0 max(12px,var(--safe-right)) calc(44px + var(--safe-bottom)) max(12px,var(--safe-left))}
@@ -186,6 +191,12 @@ body{overflow:hidden;overscroll-behavior:none}
 .sheet .btn-primary{justify-content:center;min-height:44px}
 .field .lab{font-size:12px;color:var(--muted-text)}
 .hint{display:flex;align-items:center;gap:6px;min-height:18px;font-size:12px;color:var(--muted-text)}
+/* names that match what is being typed, to tap */
+.sug{display:flex;flex-direction:column;max-height:226px;overflow:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;background:var(--surface-high);border:1px solid var(--border);border-radius:var(--radius-md);box-shadow:var(--shadow-raised)}
+.sug button{flex:none;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;padding:0 12px;background:none;border:0;border-bottom:1px solid var(--border);border-radius:0;font:inherit;font-size:16px;color:var(--text);text-align:left;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.sug button:last-child{border-bottom:0}
+.sug button[aria-selected="true"]{background:var(--surface)}
+.sug button .cap{flex:none}
 .hint.ok{color:var(--success-text)}
 .set-row{display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid var(--border);padding-top:12px}
 .set-row>div{display:flex;flex-direction:column;gap:2px;min-width:0}
@@ -313,8 +324,8 @@ body{overflow:hidden;overscroll-behavior:none}
   <div class="sheet-h"><h2 id="set-h">Settings</h2><button class="icon-btn" data-close aria-label="Close"><svg class="icon" aria-hidden="true"><use href="#ph-x"/></svg></button></div>
   <div class="field">
     <label for="me">Your name, as the list prints it</label>
-    <input class="input" id="me" type="text" list="me-list" autocomplete="off" autocapitalize="words" autocorrect="off" spellcheck="false" placeholder="For example, Chan TM">
-    <datalist id="me-list"></datalist>
+    <input class="input" id="me" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="me-sug" autocomplete="off" autocapitalize="words" autocorrect="off" spellcheck="false" placeholder="Start with your surname">
+    <div class="sug" id="me-sug" role="listbox" aria-label="Names on this list" hidden></div>
     <span class="hint" id="me-msg"></span>
   </div>
   <div class="field">
@@ -327,7 +338,7 @@ body{overflow:hidden;overscroll-behavior:none}
   <div class="set-row"><div><span class="cap">Dev build</span><span id="dev-state">Off</span></div><button class="btn btn-ghost" id="dev-btn">Unlock</button></div>
   <div class="set-row" id="reset-row"><div><span class="cap">Reset</span><span>Forget everything on this phone</span></div><button class="btn btn-ghost" id="reset-btn">Reset to default</button></div>
   <div class="alert warn" id="reset-ask" role="alertdialog" aria-labelledby="reset-q" hidden><span id="reset-q" style="flex:1 1 100%">This forgets your department, passcodes, name, pins and theme on this phone. The lists themselves are not touched.</span><button class="btn btn-ghost" id="reset-no">Cancel</button><button class="btn btn-primary" id="reset-yes">Reset</button></div>
-  <div class="about"><span class="mark"><svg viewBox="20 35 434 158" aria-hidden="true"><use href="#edb-mark"/></svg></span><span class="num">v0.5.0</span><span>© Ernest Tung</span><span id="about-off"></span></div>
+  <div class="about"><span class="mark"><svg viewBox="20 35 434 158" aria-hidden="true"><use href="#edb-mark"/></svg></span><span class="num">v0.6.0</span><span>© Ernest Tung</span><span id="about-off"></span></div>
 </div>
 
 <div class="sheet" id="sheet-dev" role="dialog" aria-modal="true" aria-labelledby="dev-h" hidden>
@@ -342,7 +353,7 @@ body{overflow:hidden;overscroll-behavior:none}
 <script>
 (function(){
 'use strict';
-var VERSION='0.5.0',BUILT='28/11/2026';
+var VERSION='0.6.0',BUILT='28/11/2026';
 var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
 var WD3=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'], WD1=['S','M','T','W','T','F','S'];
 function $(id){return document.getElementById(id)}
@@ -500,6 +511,13 @@ function loadMonth(ym){
     return unseal(S.key,box,'calledb|'+S.dept+'|'+ym).then(JSON.parse)}).then(function(m){prep(m);S.months[ym]=m;return m})}
 function prep(m){
   m.mains=m.tiers.filter(function(t){return t.role==='main'});m.seniors=m.tiers.filter(function(t){return t.role==='senior'});m.extras=m.tiers.filter(function(t){return t.role==='extra'});
+  /* a part-call sits under the call it belongs to: 2.5 under 2nd, 1.5 under 1st; 0.5, HO and anything unnumbered under the first */
+  m.extras.forEach(function(t){var n=parseFloat(t.short),k=isFinite(n)?Math.max(1,Math.floor(n)):1,i=-1;
+    m.mains.forEach(function(mt,j){if(parseInt(mt.short,10)===k)i=j});t.col=i>=0?i:Math.min(Math.max(m.mains.length-1,0),k-1)});
+  /* the fullest column of the month: names on a call plus the part-calls under it (the senior column is the last one) */
+  m.crows=Math.max.apply(null,[2].concat(Object.keys(m.days).map(function(d){var r=m.days[d],per=m.mains.map(function(t){return Math.max(1,(r[t.id]||[]).length)});
+    per.push(Math.max(1,m.seniors.reduce(function(a,t){return a+(r[t.id]||[]).length},0)));
+    m.extras.forEach(function(t){if(r[t.id])per[t.col]++});return Math.max.apply(null,per)})));
   var count={},people={};
   Object.keys(m.days).forEach(function(d){var r=m.days[d];Object.keys(r).forEach(function(k){r[k].forEach(function(n){people[n]=1})})});
   m.people=Object.keys(people).sort();
@@ -577,10 +595,12 @@ function renderCard(m){
   var cols=m.mains.map(function(t){return {lab:t.label,names:row[t.id]||[]}});
   if(m.seniors.length){var on=m.seniors.filter(function(t){return row[t.id]});
     cols.push({lab:(on.length?on:m.seniors).map(function(t){return t.label}).join(' / '),names:[].concat.apply([],on.map(function(t){return row[t.id]}))})}
-  $('card').innerHTML='<div class="th"><span class="tag">'+title+'</span><span class="cap">'+when+'</span></div><div class="tg" style="grid-template-columns:repeat('+cols.length+',minmax(0,1fr))">'+
-    cols.map(function(c){return '<div><span class="cap">'+esc(c.lab)+'</span>'+(c.names.length?c.names.map(function(n){
-      return '<span class="tn"><span class="in'+(isMe(n)?' cat c1':'')+'">'+esc(n)+'</span></span>'}).join(''):'<span class="tn">—</span>')+'</div>'}).join('')+'</div>'+
-    (m.extras.some(function(t){return row[t.id]})?'<span class="sub tx">'+subLine(m.extras,row)+'</span>':'')}
+  var xs=function(i){var ts=m.extras.filter(function(t){return row[t.id]&&t.col===i});
+    return ts.length?'<span class="tx">'+ts.map(function(t){
+      return '<span class="xn"><em>'+esc(t.short)+'</em><span class="tn"><span class="in'+(row[t.id].some(isMe)?' cat c1':'')+'">'+row[t.id].map(esc).join(' / ')+'</span></span></span>'}).join('')+'</span>':''};
+  $('card').innerHTML='<div class="th"><span class="tag">'+title+'</span><span class="cap">'+when+'</span></div><div class="tg'+(m.extras.length?' x':'')+'" style="--crows:'+m.crows+';grid-template-columns:repeat('+cols.length+',minmax(0,1fr))">'+
+    cols.map(function(c,i){return '<div><span class="cap">'+esc(c.lab)+'</span>'+(c.names.length?c.names.map(function(n){
+      return '<span class="tn"><span class="in'+(isMe(n)?' cat c1':'')+'">'+esc(n)+'</span></span>'}).join(''):'<span class="tn">—</span>')+xs(i)+'</div>'}).join('')+'</div>'}
 function subLine(tiers,row){
   return tiers.filter(function(t){return row[t.id]}).map(function(t){return '<em>'+esc(t.short)+'</em>'+row[t.id].map(function(n){
     return isMe(n)?'<span class="cat-text c1" style="font-weight:600">'+esc(n)+'</span>':esc(n)}).join(' / ')}).join('<s>·</s>')}
@@ -630,7 +650,20 @@ function showUpdates(){
   el.innerHTML='<p class="none">Loading</p>';
   getJSON('./'+l.updates.file).then(function(box){return unseal(S.key,box,'calledb|'+S.dept+'|updates').then(JSON.parse)})
     .then(done,function(){el.innerHTML='<p class="none">Updates did not load. You may be offline.</p>'})}
-function who(a){return a.length?a.map(function(n){return isMe(n)?'<span class="cat-text c1" style="font-weight:600">'+esc(n)+'</span>':esc(n)}).join(' / '):'nobody'}
+/* What changed in one slot, name by name. Only a name that was swapped out is struck through; a name that stays is never struck,
+   so a second name joining or leaving a paired call cannot read as a swap. */
+function changeText(c){
+  var nm=function(n){return isMe(n)?'<span class="cat-text c1" style="font-weight:600">'+esc(n)+'</span>':esc(n)};
+  var and=function(a){a=a.map(nm);return a.length>1?a.slice(0,-1).join(', ')+' and '+a[a.length-1]:a.join('')};
+  var kept=c.to.filter(function(n){return c.from.indexOf(n)>=0}),out=c.from.filter(function(n){return c.to.indexOf(n)<0}),inn=c.to.filter(function(n){return c.from.indexOf(n)<0});
+  var k=Math.min(out.length,inn.length),parts=[],i;
+  for(i=0;i<k;i++)parts.push('<del class="was">'+nm(out[i])+'</del> → '+nm(inn[i]));
+  var more=inn.slice(k),gone=out.slice(k);
+  if(more.length)parts.push(and(more)+(kept.length&&!k?(more.length>1?' join ':' joins ')+and(kept):' added'));
+  if(gone.length)parts.push(and(gone)+(gone.length>1?' come off':' comes off'));
+  if(kept.length&&(k||gone.length))parts.push(and(kept)+(kept.length>1?' stay':' stays'));
+  if(!c.to.length)parts.push('nobody on');
+  return parts.join('; ')}
 function renderUpdates(log){
   var seen=store.get('seen:'+S.dept,0);
   $('updates').innerHTML=log.map(function(u,i){
@@ -638,14 +671,14 @@ function renderUpdates(log){
     return '<article class="up"><div class="up-h"><span class="tag">'+esc(dmy(u.at))+'</span><span class="cap">'+(i>=seen?'New':'')+(i>=seen&&u.rev?' · ':'')+(u.rev?'rev <span class="num">'+esc(u.rev)+'</span>':'')+'</span></div>'+
       '<h3>'+esc(monthName(u.month))+' list '+(u.kind==='added'?'added':'revised')+(mine?'<span class="cat c1 you">You</span>':'')+'</h3>'+
       (u.kind!=='revised'?'':u.changes.length?'<ul>'+u.changes.map(function(c){
-        return '<li><span><span class="num">'+c.d.slice(8)+'/'+c.d.slice(5,7)+'</span> '+WD3[dowOf(c.d)]+'</span><span>'+esc(c.tier)+' call: <span class="was">'+who(c.from)+'</span> → '+who(c.to)+'</span></li>'}).join('')+'</ul>':
+        return '<li><span><span class="num">'+c.d.slice(8)+'/'+c.d.slice(5,7)+'</span> '+WD3[dowOf(c.d)]+'</span><span>'+esc(c.tier)+' call: '+changeText(c)+'</span></li>'}).join('')+'</ul>':
         '<p class="cap" style="margin:6px 0 0">The revision changed; no call did.</p>')+'</article>'}).reverse().join('')}
 
 /* ── settings ── */
 function openSettings(){
   var m=S.months[S.ym],l=listInfo(S.dept),info=l&&l.months[S.ym];
   $('me').value=store.get('me:'+S.dept,'');
-  $('me-list').innerHTML=(m?m.people:[]).map(function(n){return '<option value="'+esc(n)+'">'}).join('');
+  suggest(false);
   $('set-dept').textContent=fullLabel(S.dept);
   $('set-list-row').hidden=!info;if(info)$('set-list').innerHTML=esc(monthName(S.ym))+(info.rev?' · rev <span class="num">'+esc(info.rev)+'</span>':'')+' · added <span class="num">'+esc(dmy(info.added))+'</span>';
   $('about-off').textContent=('serviceWorker' in navigator&&navigator.serviceWorker.controller)?'· offline ready':'';
@@ -688,6 +721,22 @@ function resetAll(){
   try{var ks=[],i,k;for(i=0;i<localStorage.length;i++){k=localStorage.key(i);if(k.indexOf('calledb:')===0||k==='eds-theme')ks.push(k)}
     ks.forEach(function(x){localStorage.removeItem(x)})}catch(e){}
   location.reload()}
+/* the field being typed in stays on show inside its sheet */
+function keepField(){var a=document.activeElement,sh=a&&a.closest&&a.closest('.sheet');if(!sh||!/^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName))return;
+  var f=a.closest('.field')||a,r=f.getBoundingClientRect(),b=sh.getBoundingClientRect();
+  if(r.top<b.top+8)sh.scrollTop-=b.top+8-r.top;else if(r.bottom>b.bottom-8)sh.scrollTop+=Math.min(r.bottom-(b.bottom-8),r.top-(b.top+8))}
+/* the drop-down under the name field: surnames that start with what is typed first, then names with any word that does */
+function sugNames(){var seen={},out=[];Object.keys(S.months).forEach(function(ym){(S.months[ym].people||[]).forEach(function(n){if(!seen[n]){seen[n]=1;out.push(n)}})});return out.sort()}
+function suggest(open){
+  var el=$('me-sug'),inp=$('me'),q=norm(inp.value),m=S.months[S.ym],hits=[];
+  if(open&&q){var all=sugNames().filter(function(n){return norm(n)!==q});
+    hits=all.filter(function(n){return norm(n).indexOf(q)===0});
+    hits=hits.concat(all.filter(function(n){return hits.indexOf(n)<0&&norm(n).split(' ').some(function(w){return w.indexOf(q)===0})}))}
+  el.innerHTML=hits.map(function(n,i){var c=m?Object.keys(m.days).filter(function(d){return m.tiers.some(function(t){return (m.days[d][t.id]||[]).indexOf(n)>=0})}).length:0;
+    return '<button type="button" role="option" id="me-o'+i+'" aria-selected="false" data-name="'+esc(n)+'"><span>'+esc(n)+'</span><span class="cap"><span class="num">'+c+'</span> call'+(c===1?'':'s')+'</span></button>'}).join('');
+  el.hidden=!hits.length;el.scrollTop=0;inp.setAttribute('aria-expanded',!!hits.length);inp.removeAttribute('aria-activedescendant');
+  if(hits.length){if(!m||!myDays(m).length){$('me-msg').className='hint';$('me-msg').textContent='Tap your name in the list.'}keepField()}}
+function setMe(v){$('me').value=v;store.set('me:'+S.dept,v);meMsg();renderBody(S.months[S.ym])}
 function meMsg(){
   var m=S.months[S.ym],el=$('me-msg'),v=me();el.className='hint';
   if(!v||!m){el.textContent=v?'':'Your call days are marked once your name matches the list.';return}
@@ -742,7 +791,18 @@ function wire(){
     var t=ev.target;if(t.id==='st-retry')loadShow();else if(t.id==='st-change')showDept();else if(t.id==='st-reload')location.reload();else if(t.id==='go-latest')go(t.dataset.ym)});
   $('gear').addEventListener('click',openSettings);
   $('set-change').addEventListener('click',function(){hideSheet();showDept()});
-  $('me').addEventListener('input',function(){store.set('me:'+S.dept,this.value);meMsg();renderBody(S.months[S.ym])});
+  $('me').addEventListener('input',function(){store.set('me:'+S.dept,this.value);meMsg();renderBody(S.months[S.ym]);suggest(true)});
+  $('me').addEventListener('focus',function(){suggest(true)});
+  $('me').addEventListener('blur',function(){setTimeout(function(){suggest(false)},150)});
+  $('me-sug').addEventListener('pointerdown',function(ev){ev.preventDefault()});       /* a tap on a name must not close the list first */
+  $('me-sug').addEventListener('click',function(ev){var o=ev.target.closest('[data-name]');if(!o)return;setMe(o.dataset.name);suggest(false);$('me').blur()});
+  $('me').addEventListener('keydown',function(ev){
+    var os=[].slice.call($('me-sug').querySelectorAll('[role="option"]')),i=os.findIndex(function(o){return o.getAttribute('aria-selected')==='true'});
+    if(ev.key==='Escape'&&os.length){ev.stopPropagation();suggest(false);return}
+    if(!os.length||['ArrowDown','ArrowUp','Enter'].indexOf(ev.key)<0)return;
+    if(ev.key==='Enter'){if(i>=0){ev.preventDefault();setMe(os[i].dataset.name);suggest(false)}return}
+    ev.preventDefault();var j=ev.key==='ArrowDown'?(i+1)%os.length:(i<=0?os.length-1:i-1);
+    os.forEach(function(o,x){o.setAttribute('aria-selected',x===j)});this.setAttribute('aria-activedescendant',os[j].id);os[j].scrollIntoView({block:'nearest'})});
   $('pass-form').addEventListener('submit',submitPass);
   $('scrim').addEventListener('click',hideSheet);
   document.querySelectorAll('[data-close]').forEach(function(b){b.addEventListener('click',hideSheet)});
@@ -751,10 +811,7 @@ function wire(){
   var saved='dark';try{saved=localStorage.getItem('eds-theme')||'dark'}catch(e){}
   document.querySelectorAll('.segmented [data-mode]').forEach(function(b){b.classList.toggle('active',b.dataset.mode===saved);b.setAttribute('aria-pressed',b.dataset.mode===saved)});
   var rt;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(layout,80)});
-  /* the field being typed in stays on show inside its sheet */
-  var keep=function(){var a=document.activeElement,sh=a&&a.closest&&a.closest('.sheet');if(!sh||!/^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName))return;
-    var f=a.closest('.field')||a,r=f.getBoundingClientRect(),b=sh.getBoundingClientRect();
-    if(r.top<b.top+8)sh.scrollTop-=b.top+8-r.top;else if(r.bottom>b.bottom-8)sh.scrollTop+=Math.min(r.bottom-(b.bottom-8),r.top-(b.top+8))};
+  var keep=keepField;
   if(window.visualViewport){var vv=window.visualViewport,de=document.documentElement,kb=function(){
     var k=Math.max(0,Math.round(window.innerHeight-vv.height-vv.offsetTop));
     de.style.setProperty('--kb',k+'px');de.style.setProperty('--vvh',Math.round(vv.height)+'px');de.classList.toggle('kb',k>80);keep()};
