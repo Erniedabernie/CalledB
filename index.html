@@ -137,6 +137,7 @@ body{overflow:hidden;overscroll-behavior:none}
 .up li{display:grid;grid-template-columns:74px minmax(0,1fr);gap:8px;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;line-height:1.35}
 .up li:last-child{border-bottom:0;padding-bottom:0}
 .up li .was{color:var(--muted-text);text-decoration:line-through}
+.up li .cap{display:block;margin-top:2px}
 .up .you{margin-left:6px;padding:1px 7px;border:0;border-radius:var(--radius-sm,2px);font-size:11px}
 .ups .none{color:var(--muted-text);text-align:center;padding:32px 16px}
 
@@ -338,7 +339,7 @@ body{overflow:hidden;overscroll-behavior:none}
   <div class="set-row"><div><span class="cap">Dev build</span><span id="dev-state">Off</span></div><button class="btn btn-ghost" id="dev-btn">Unlock</button></div>
   <div class="set-row" id="reset-row"><div><span class="cap">Reset</span><span>Forget everything on this phone</span></div><button class="btn btn-ghost" id="reset-btn">Reset to default</button></div>
   <div class="alert warn" id="reset-ask" role="alertdialog" aria-labelledby="reset-q" hidden><span id="reset-q" style="flex:1 1 100%">This forgets your department, passcodes, name, pins and theme on this phone. The lists themselves are not touched.</span><button class="btn btn-ghost" id="reset-no">Cancel</button><button class="btn btn-primary" id="reset-yes">Reset</button></div>
-  <div class="about"><span class="mark"><svg viewBox="20 35 434 158" aria-hidden="true"><use href="#edb-mark"/></svg></span><span class="num">v0.6.0</span><span>© Ernest Tung</span><span id="about-off"></span></div>
+  <div class="about"><span class="mark"><svg viewBox="20 35 434 158" aria-hidden="true"><use href="#edb-mark"/></svg></span><span class="num">v0.7.0</span><span>© Ernest Tung</span><span id="about-off"></span></div>
 </div>
 
 <div class="sheet" id="sheet-dev" role="dialog" aria-modal="true" aria-labelledby="dev-h" hidden>
@@ -353,7 +354,7 @@ body{overflow:hidden;overscroll-behavior:none}
 <script>
 (function(){
 'use strict';
-var VERSION='0.6.0',BUILT='28/11/2026';
+var VERSION='0.7.0',BUILT='28/11/2026';
 var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
 var WD3=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'], WD1=['S','M','T','W','T','F','S'];
 function $(id){return document.getElementById(id)}
@@ -650,11 +651,20 @@ function showUpdates(){
   el.innerHTML='<p class="none">Loading</p>';
   getJSON('./'+l.updates.file).then(function(box){return unseal(S.key,box,'calledb|'+S.dept+'|updates').then(JSON.parse)})
     .then(done,function(){el.innerHTML='<p class="none">Updates did not load. You may be offline.</p>'})}
+/* A revision's changes as rows. Two slots that exchange one name each (X out and Y in here, Y out and X in there) are one swap and one row. */
+function swapRows(changes){
+  var ps=changes.map(function(c){return {c:c,out:c.from.filter(function(n){return c.to.indexOf(n)<0}),inn:c.to.filter(function(n){return c.from.indexOf(n)<0}),used:false}}),rows=[];
+  ps.forEach(function(p,i){
+    if(p.used)return;p.used=true;var q=null;
+    if(p.out.length===1&&p.inn.length===1)for(var j=i+1;j<ps.length&&!q;j++){var t=ps[j];
+      if(!t.used&&t.out.length===1&&t.inn.length===1&&t.out[0]===p.inn[0]&&t.inn[0]===p.out[0])q=t}
+    if(q){q.used=true;rows.push({a:p.c,b:q.c,x:p.out[0],y:p.inn[0]})}else rows.push({a:p.c})});
+  return rows}
 /* What changed in one slot, name by name. Only a name that was swapped out is struck through; a name that stays is never struck,
    so a second name joining or leaving a paired call cannot read as a swap. */
+function upName(n){return isMe(n)?'<span class="cat-text c1" style="font-weight:600">'+esc(n)+'</span>':esc(n)}
 function changeText(c){
-  var nm=function(n){return isMe(n)?'<span class="cat-text c1" style="font-weight:600">'+esc(n)+'</span>':esc(n)};
-  var and=function(a){a=a.map(nm);return a.length>1?a.slice(0,-1).join(', ')+' and '+a[a.length-1]:a.join('')};
+  var nm=upName,and=function(a){a=a.map(nm);return a.length>1?a.slice(0,-1).join(', ')+' and '+a[a.length-1]:a.join('')};
   var kept=c.to.filter(function(n){return c.from.indexOf(n)>=0}),out=c.from.filter(function(n){return c.to.indexOf(n)<0}),inn=c.to.filter(function(n){return c.from.indexOf(n)<0});
   var k=Math.min(out.length,inn.length),parts=[],i;
   for(i=0;i<k;i++)parts.push('<del class="was">'+nm(out[i])+'</del> → '+nm(inn[i]));
@@ -670,8 +680,13 @@ function renderUpdates(log){
     var mine=u.changes.some(function(c){return c.from.concat(c.to).some(isMe)});
     return '<article class="up"><div class="up-h"><span class="tag">'+esc(dmy(u.at))+'</span><span class="cap">'+(i>=seen?'New':'')+(i>=seen&&u.rev?' · ':'')+(u.rev?'rev <span class="num">'+esc(u.rev)+'</span>':'')+'</span></div>'+
       '<h3>'+esc(monthName(u.month))+' list '+(u.kind==='added'?'added':'revised')+(mine?'<span class="cat c1 you">You</span>':'')+'</h3>'+
-      (u.kind!=='revised'?'':u.changes.length?'<ul>'+u.changes.map(function(c){
-        return '<li><span><span class="num">'+c.d.slice(8)+'/'+c.d.slice(5,7)+'</span> '+WD3[dowOf(c.d)]+'</span><span>'+esc(c.tier)+' call: '+changeText(c)+'</span></li>'}).join('')+'</ul>':
+      (u.kind!=='revised'?'':u.changes.length?'<ul>'+swapRows(u.changes).map(function(r){
+        var day=function(d){return '<span class="num">'+d.slice(8)+'/'+d.slice(5,7)+'</span>'},when=function(d){return day(d)+' '+WD3[dowOf(d)]},a=r.a,b=r.b;
+        if(!b)return '<li><span>'+when(a.d)+'</span><span>'+esc(a.tier)+' call: '+changeText(a)+'</span></li>';
+        /* two people exchanging calls: one row, in words, nothing struck */
+        var X=upName(r.x),Y=upName(r.y),same=a.tier===b.tier,call=function(c){return same?'':esc(c.tier)+' call '};
+        return '<li class="sw"><span>'+when(a.d)+'<br>'+when(b.d)+'</span><span>'+(same?esc(a.tier)+' call: ':'')+X+' and '+Y+' swap'+(same?'':': '+esc(a.tier)+' call for '+esc(b.tier)+' call')+
+          '<span class="cap">'+Y+' now '+call(a)+day(a.d)+', '+X+' now '+call(b)+day(b.d)+'</span></span></li>'}).join('')+'</ul>':
         '<p class="cap" style="margin:6px 0 0">The revision changed; no call did.</p>')+'</article>'}).reverse().join('')}
 
 /* ── settings ── */
